@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProVAIN — XAIber-Lab</title>
+<meta name="description" content="ProVAIN — an attack-and-defense demonstration tool built on MITRE ATT&CK and D3FEND.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="../index.html" class="logo">XAIber<span class="accent">-Lab</span></a>
+    <nav class="site-nav">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <ul id="nav-menu">
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../members.html">Members</a></li>
+        <li><a href="../publications.html">Publications</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ STANDARD PROJECT HEADER ============
+       Every project page opens with: thumbnail, title, status,
+       one-line position/summary, and external links. -->
+  <section class="project-hero">
+    <div class="wrap project-header">
+
+      <!-- PLACEHOLDER: replace with a real screenshot or diagram -->
+      <div class="project-thumb-lg" aria-hidden="true"></div>
+
+      <div class="project-info-block">
+        <p class="section-tag">[projects]</p>
+        <h1>ProVAIN</h1>
+        <span class="tag status-active">status: active</span>
+        <p class="profile-position">Attack &amp; defense simulation tool &mdash; MITRE ATT&amp;CK / D3FEND</p>
+
+        <p class="placeholder">
+          Template note: this page uses illustrative details about ProVAIN
+          to demonstrate the project-page structure. The content below is
+          not the lab's finalized project description &mdash; treat it as a
+          worked example to adapt for ProVAIN itself and for other projects.
+        </p>
+
+        <p>ProVAIN generates and visualizes network attack-and-defense demonstration scenarios, mapping offensive techniques to MITRE ATT&amp;CK and defensive countermeasures to D3FEND within realistic network topologies.</p>
+
+        <div class="link-row">
+          <a class="link-chip" href="#" target="_blank" rel="noopener"><!-- PLACEHOLDER: add repository link -->Repository</a>
+          <a class="link-chip" href="#" target="_blank" rel="noopener"><!-- PLACEHOLDER: add documentation link -->Documentation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPTIONAL EXTENDED SECTIONS ============ -->
+
+  <section class="teaser">
+    <div class="wrap">
+      <p class="section-tag">[screenshots]</p>
+      <h2>Screenshots</h2>
+      <div class="gallery-grid">
+        <div>
+          <div class="gallery-item" aria-hidden="true"></div>
+          <p class="gallery-caption"><!-- PLACEHOLDER caption -->Network topology view</p>
+        </div>
+        <div>
+          <div class="gallery-item" aria-hidden="true"></div>
+          <p class="gallery-caption"><!-- PLACEHOLDER caption -->Attack path overlay</p>
+        </div>
+        <div>
+          <div class="gallery-item" aria-hidden="true"></div>
+          <p class="gallery-caption"><!-- PLACEHOLDER caption -->Generation GUI</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaser alt">
+    <div class="wrap">
+      <p class="section-tag">[about]</p>
+      <h2>About the project</h2>
+      <p>ProVAIN builds network attack-and-defense demonstration scenarios set inside fictional military network topologies, used to walk through how an attacker's path maps onto MITRE ATT&amp;CK techniques and how corresponding defenses map onto D3FEND countermeasures.</p>
+      <p>Network topologies are generated in a range of structures (ring, mesh, zig-zag, star) and enriched with CVEs across a diverse set of ATT&amp;CK techniques, so that each scenario reflects a plausible, technically-grounded attack surface rather than a purely illustrative diagram.</p>
+      <p>A companion GUI tool supports both local inference (via Ollama) and cloud inference (via the Google Gemini API), with automated repair of generated network-topology data and CVE enrichment built into the generation pipeline.</p>
+    </div>
+  </section>
+
+  <section class="teaser">
+    <div class="wrap">
+      <p class="section-tag">[team]</p>
+      <h2>Team</h2>
+      <div class="link-row">
+        <a class="link-chip" href="../members/tiziano-sammarone.html">Tiziano Sammarone</a>
+        <!-- Unlinked: no member page exists yet for this person -->
+        <span class="link-chip">Full Name</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="teaser alt">
+    <div class="wrap">
+      <p class="section-tag">[related publications]</p>
+      <h2>Related Publications</h2>
+      <p class="hero-sub" style="font-style: italic; color: var(--slate); font-size: 1rem;">No publication is linked to this project yet &mdash; when one is published, it will be listed here.</p>
+    </div>
+  </section>
+
+  <section class="teaser">
+    <div class="wrap">
+      <p class="section-tag">[frameworks &amp; data]</p>
+      <h2>Frameworks &amp; Data</h2>
+      <div class="tag-row">
+        <span class="tag">mitre att&amp;ck</span>
+        <span class="tag">d3fend</span>
+        <span class="tag">cve enrichment</span>
+        <span class="tag">local llm inference (ollama)</span>
+        <span class="tag">google gemini api</span>
+        <span class="tag">synthetic network topologies</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <a class="back-link" href="../projects.html">&larr; Back to projects</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <p><strong>XAIber-Lab</strong><br>
+      Placeholder affiliation / department / university.<br>
+      <a href="mailto:placeholder@example.edu">placeholder@example.edu</a></p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../members.html">Members</a></li>
+      <li><a href="../publications.html">Publications</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

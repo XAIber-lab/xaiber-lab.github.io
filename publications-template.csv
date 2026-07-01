@@ -1,0 +1,10 @@
+Title,Authors,Date,Venue,URL,Abstract,Type,Conference Name,Conference Date,Conference Location,Thumbnail URL,BibTeX,Repository URL
+A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library,"Sammarone, T., Angelini, M.",2026-01-20,IEEE International Conference on Cyber Humanities (IEEE CH),https://doi.org/10.1109/IEEE-CH65308.2025.11279411,Replace with the paper's actual abstract.,Conference paper,IEEE International Conference on Cyber Humanities,"September 8-10, 2025","Florence, Italy",,"@inproceedings{sammarone2025humanai,
+  author = {Sammarone, Tiziano and Angelini, Marco},
+  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},
+  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},
+  year = {2025},
+  address = {Florence, Italy},
+  doi = {10.1109/IEEE-CH65308.2025.11279411}
+}",
+Example Journal Article Title,"Author One, Author Two",2025,Journal Name,https://doi.org/10.xxxx/example,One or two sentence abstract summarizing the contribution.,Journal article,,,,,,https://github.com/example/example-repo
