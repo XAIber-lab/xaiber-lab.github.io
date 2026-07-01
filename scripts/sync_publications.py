@@ -14,6 +14,7 @@ import csv
 import io
 import json
 import os
+import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -25,6 +26,19 @@ def normalize_key(key):
     return "".join(str(key or "").strip().lower().split()).replace("-", "").replace("_", "")
 
 
+def normalize_url(raw):
+    v = (raw or "").strip()
+    if not v or v == "#":
+        return "#"
+    if v.lower().startswith("http://") or v.lower().startswith("https://") or v.lower().startswith("mailto:"):
+        return v
+    if re.match(r"^10\.\d{4,9}/\S+$", v):
+        return "https://doi.org/" + v
+    if v.lower().startswith("www."):
+        return "https://" + v
+    return "https://" + v  # assume a domain/path just missing its scheme
+
+
 def normalize_row(raw):
     out = {normalize_key(k): (v or "").strip() for k, v in raw.items()}
     return {
@@ -32,7 +46,7 @@ def normalize_row(raw):
         "authors": out.get("authors", ""),
         "date": out.get("date") or out.get("publicationdate", ""),
         "venue": out.get("venue") or out.get("sourcepublisher") or out.get("publisher") or out.get("source", ""),
-        "url": out.get("url") or out.get("doihtml") or out.get("doi") or out.get("link") or "#",
+        "url": normalize_url(out.get("url") or out.get("doihtml") or out.get("doi") or out.get("link") or "#"),
         "abstract": out.get("abstract") or out.get("descriptionabstract") or out.get("description", ""),
         "type": out.get("type", ""),
         "conferencename": out.get("conferencename", ""),

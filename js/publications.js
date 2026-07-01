@@ -55,17 +55,29 @@
     });
   }
 
-  function metaLine(pub) {
+  function normalizeUrl(raw) {
+    var v = String(raw || "").trim();
+    if (!v || v === "#") return "#";
+    if (/^https?:\/\//i.test(v) || /^mailto:/i.test(v)) return v;
+    if (/^10\.\d{4,9}\/\S+$/.test(v)) return "https://doi.org/" + v; // bare DOI, e.g. "10.1109/..."
+    if (/^www\./i.test(v)) return "https://" + v;
+    return "https://" + v; // assume a domain/path just missing its scheme
+  }
+
+  function venueLine(pub) {
     if (pub.conferencename) {
       var parts = [pub.conferencename];
       if (pub.conferencelocation) parts.push(pub.conferencelocation);
-      if (pub.conferencedate) parts.push(pub.conferencedate);
       return parts.join(" · ");
     }
-    var parts2 = [];
-    if (pub.venue) parts2.push(pub.venue);
-    if (pub.date) parts2.push(pub.date);
-    return parts2.join(" · ");
+    return pub.venue || "";
+  }
+
+  function dateLine(pub) {
+    var parts = [];
+    if (pub.conferencename && pub.conferencedate) parts.push("Presented " + pub.conferencedate);
+    if (pub.date) parts.push("Published " + pub.date);
+    return parts.join(" · ");
   }
 
   /* --- rendering --- */
@@ -96,16 +108,21 @@
         '<div style="clear:both;">' + escapeHTML(pub.bibtex) + "</div></div>"
       : "";
 
+    var fixedUrl = normalizeUrl(pub.url);
+    var vLine = venueLine(pub);
+    var dLine = dateLine(pub);
+
     wrapper.innerHTML =
       '<div class="pub-card-thumb" aria-hidden="true">' + thumbHTML + "</div>" +
       "<div>" +
       typeTag +
-      '<p class="pub-card-title"><a href="' + escapeHTML(pub.url) + '" target="_blank" rel="noopener">' + escapeHTML(pub.title || "Untitled") + "</a></p>" +
-      '<p class="pub-card-meta">' + escapeHTML(metaLine(pub)) + "</p>" +
+      '<p class="pub-card-title"><a href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">' + escapeHTML(pub.title || "Untitled") + "</a></p>" +
+      (vLine ? '<p class="pub-card-meta">' + escapeHTML(vLine) + "</p>" : "") +
+      (dLine ? '<p class="pub-card-meta pub-card-date">' + escapeHTML(dLine) + "</p>" : "") +
       '<p class="pub-card-authors">' + escapeHTML(pub.authors) + "</p>" +
       (pub.abstract ? '<p class="pub-card-abstract">' + escapeHTML(pub.abstract) + "</p>" : "") +
       '<div class="pub-card-actions">' +
-      '<a class="link-chip" href="' + escapeHTML(pub.url) + '" target="_blank" rel="noopener">View publication ↗</a>' +
+      '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
       repoChip +
       bibtexControls +
       "</div>" +
