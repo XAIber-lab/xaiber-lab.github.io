@@ -553,6 +553,31 @@ p { margin: 0 0 1em; }
 .tag.status-active { color: var(--teal); border-color: var(--teal); background: var(--teal-dim); }
 .tag.status-completed { color: var(--slate); }
 
+.card-status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.card-status-row .tag { margin-bottom: 0; }
+.card-timespan { font-family: var(--font-mono); font-size: 0.78rem; color: var(--slate); }
+.card-keywords { margin: 10px 0 14px; }
+
+.funding-line { font-size: 0.95rem; color: var(--slate); margin-bottom: 14px; }
+.funding-line strong { color: var(--ink); }
+
+.mini-gallery { display: flex; gap: 12px; margin: 16px 0; }
+.mini-gallery-item {
+  width: 110px;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.team-row { display: flex; gap: 28px; flex-wrap: wrap; }
+a.member-mini { text-decoration: none; }
+a.member-mini:hover h3 { color: var(--teal); }
+
+@media (max-width: 640px) {
+  .mini-gallery-item { width: 88px; }
+}
+
 /* --- Individual project hero --- */
 .project-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--line); }
 .project-header { display: flex; gap: 36px; align-items: flex-start; flex-wrap: wrap; }
