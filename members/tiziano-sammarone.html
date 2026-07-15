@@ -31,9 +31,10 @@
 <main id="main">
 
   <!-- ============ STANDARD PROFILE BLOCK ============
-       This block follows the required structure for every
-       member page: photo, position, research theme, short bio,
-       and links (Scholar / LinkedIn / ResearchGate / site / email). -->
+       Template structure for every member page:
+       photo, role (alone), institution, descriptive bio,
+       personal site (prominent, separated) + icon-linked
+       social row (Scholar / LinkedIn / ResearchGate / Email). -->
   <section class="profile-hero">
     <div class="wrap profile-header">
 
@@ -43,31 +44,87 @@
       <div class="profile-info-block">
         <p class="section-tag">[people]</p>
         <h1>Tiziano Sammarone</h1>
-        <p class="profile-position">PhD Candidate — Human Sciences for Innovation, Inclusion &amp; Sustainability (41st Cycle), Universit&agrave; degli Studi Link</p>
-        <p class="profile-theme">Integrating AI into the cyber risk management lifecycle, with human oversight kept central throughout.</p>
 
-        <p>Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD research develops a framework for applying AI across the full risk management lifecycle &mdash; from identification and assessment to mitigation and continuous monitoring &mdash; while keeping human oversight and ethical standards central to the process.</p>
+        <p class="profile-title">PhD Candidate</p>
+        <p class="profile-institution">Università degli Studi Link &mdash; Human Sciences for Innovation, Inclusion &amp; Sustainability, 41st Cycle</p>
 
-        <div class="link-row">
-          <a class="link-chip" href="https://www.linkedin.com/in/tiziano-sammarone-5b03373ab/" target="_blank" rel="noopener">LinkedIn</a>
+        <p>Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD, funded by ACN (Italy's National Cybersecurity Agency) and supervised by Prof. Marco Angelini, develops a framework for applying generative AI across the full cyber risk management lifecycle &mdash; from identifying and assessing risk through to mitigation and continuous monitoring. A central thread of the work is a bidirectional methodology that maps controls from high-level policy down to technical implementation and traces back up again, paired with a formal notation system built to support that translation. He holds a Master's degree in Cybersecurity (110/110) from Università degli Studi di Roma "La Sapienza", and is a member of XAIber-Lab, where his work spans attack-graph analysis, generative AI tooling, and human&ndash;AI collaboration in security decision-making.</p>
+
+        <!-- Personal site: pulled out front and visually separated from the social row -->
+        <!-- PLACEHOLDER: add personal website link -->
+        <a class="profile-primary-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V10"/>
+            <path d="M9 2h5v5"/>
+            <path d="M14 2L7 9"/>
+          </svg>
+          Personal site
+        </a>
+
+        <div class="profile-social-row">
+          <a class="social-chip" href="https://www.linkedin.com/in/tiziano-sammarone-5b03373ab/" target="_blank" rel="noopener">
+            <span class="icon-badge" aria-hidden="true">in</span> LinkedIn
+          </a>
           <!-- PLACEHOLDER: add Google Scholar profile link -->
-          <a class="link-chip" href="#" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="social-chip" href="#" target="_blank" rel="noopener">
+            <span class="icon-badge" aria-hidden="true">GS</span> Google Scholar
+          </a>
           <!-- PLACEHOLDER: add ResearchGate profile link -->
-          <a class="link-chip" href="#" target="_blank" rel="noopener">ResearchGate</a>
-          <!-- PLACEHOLDER: add personal website link -->
-          <a class="link-chip" href="#" target="_blank" rel="noopener">Personal site</a>
-          <a class="link-chip" href="mailto:tiziano.sammarone@linkstudents.it">Email</a>
+          <a class="social-chip" href="#" target="_blank" rel="noopener">
+            <span class="icon-badge" aria-hidden="true">RG</span> ResearchGate
+          </a>
+          <a class="social-chip" href="mailto:tiziano.sammarone@linkstudents.it">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="1.5" y="3" width="13" height="10" rx="1.5"/>
+              <path d="M2 4l6 5 6-5"/>
+            </svg>
+            Email
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ EXTENDED SECTION (optional per member) ============ -->
-
+  <!-- ============ CURRENTLY (what they're engaged in now + a
+       collapsible highlight reel of latest work) ============ -->
   <section class="teaser">
     <div class="wrap">
-      <p class="section-tag">[experience]</p>
-      <h2>Professional Experience</h2>
+      <p class="section-tag">[currently]</p>
+      <h2>Currently</h2>
+      <!-- PLACEHOLDER: keep this short and current — update as things move on -->
+      <p>Developing a PhD-level research framework for AI-integrated cyber risk management, including the bidirectional control-mapping methodology and its formal notation. In parallel, building out XAIber-Lab's own website and contributing to ProVAIN, the lab's attack-and-defense demonstration tool.</p>
+
+      <div class="collapsible" id="latest-work">
+        <button type="button" class="collapsible-toggle" aria-expanded="false" aria-controls="latest-work-panel">
+          Latest work
+          <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
+        </button>
+        <div class="collapsible-panel" id="latest-work-panel">
+          <ul class="showcase-list">
+            <!-- PLACEHOLDER: swap in whatever's actually most recent -->
+            <li>
+              <p class="showcase-title">XAIber-Lab website</p>
+              <p class="showcase-desc">Built and maintain the lab's public site — this one.</p>
+            </li>
+            <li>
+              <p class="showcase-title">ProVAIN</p>
+              <p class="showcase-desc">Attack-and-defense demonstration tool built on MITRE ATT&amp;CK and D3FEND.</p>
+            </li>
+            <li>
+              <p class="showcase-title">IEEE CH 2025 paper</p>
+              <p class="showcase-desc">A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS, TEACHING & HOBBIES (stack — newest first) ============ -->
+  <section class="teaser alt">
+    <div class="wrap">
+      <p class="section-tag">[activities]</p>
+      <h2>Projects, Teaching &amp; Hobbies</h2>
 
       <div class="timeline-item">
         <div class="timeline-meta">May 2025 &ndash;<br>Nov 2025</div>
@@ -96,24 +153,19 @@
           </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="teaser alt">
-    <div class="wrap">
-      <p class="section-tag">[education]</p>
-      <h2>Education</h2>
-
+      <!-- PLACEHOLDER: teaching entry — add real ones as they happen -->
       <div class="timeline-item">
-        <div class="timeline-meta">Sep 2022 &ndash;<br>Jan 2025</div>
+        <div class="timeline-meta">&nbsp;</div>
         <div>
-          <h4>Master's Degree in Cybersecurity</h4>
-          <p class="org">Universit&agrave; degli Studi di Roma &ldquo;La Sapienza&rdquo; &middot; Grade: 110/110</p>
+          <h4>Teaching / hobbies placeholder</h4>
+          <p class="org">This is where teaching assignments or hobbies can go &mdash; e.g. a course TA'd, a workshop run, or a non-academic interest worth sharing.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ============ PUBLICATIONS ============ -->
   <section class="teaser">
     <div class="wrap">
       <p class="section-tag">[publications]</p>
@@ -132,6 +184,7 @@
     </div>
   </section>
 
+  <!-- ============ RESEARCH INTERESTS ============ -->
   <section class="teaser alt">
     <div class="wrap">
       <p class="section-tag">[research interests]</p>

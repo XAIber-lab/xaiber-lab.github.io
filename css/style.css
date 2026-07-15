@@ -411,6 +411,8 @@ p { margin: 0 0 1em; }
 }
 .profile-info-block { flex: 1; min-width: 260px; }
 .profile-position { font-family: var(--font-mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 8px; }
+.profile-title { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; color: var(--teal); margin-bottom: 4px; }
+.profile-institution { font-family: var(--font-body); font-size: 0.92rem; color: var(--slate); margin-bottom: 16px; }
 .profile-theme { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--slate); margin-bottom: 16px; }
 
 .link-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
@@ -423,6 +425,84 @@ p { margin: 0 0 1em; }
   color: var(--ink);
 }
 .link-chip:hover { border-color: var(--teal); color: var(--teal); text-decoration: none; }
+
+/* Personal site: pulled out front, visually distinct from the social row below */
+.profile-primary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: var(--white);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.profile-primary-link:hover { background: #0d5f5b; color: var(--white); text-decoration: none; }
+.profile-primary-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.profile-social-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.social-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+.social-chip:hover { border-color: var(--teal); color: var(--teal); text-decoration: none; }
+.social-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* --- Collapsible "latest work" showcase --- */
+.collapsible { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); overflow: hidden; margin-top: 20px; }
+.collapsible-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  text-align: left;
+}
+.collapsible-toggle:hover { color: var(--teal); }
+.collapsible-toggle .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+.collapsible.open .chevron { transform: rotate(180deg); }
+.collapsible-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.collapsible.open .collapsible-panel { max-height: 800px; }
+.showcase-list { list-style: none; margin: 0; padding: 0 18px 18px; }
+.showcase-list li { padding: 12px 0; border-top: 1px solid var(--line); }
+.showcase-list li:first-child { border-top: 1px solid var(--line); }
+.showcase-title { font-weight: 600; margin-bottom: 2px; }
+.showcase-desc { color: var(--slate); font-size: 0.9rem; }
+
+@media (max-width: 640px) {
+  .profile-primary-link, .profile-social-row { justify-content: center; }
+  .profile-social-row { display: flex; }
+}
 
 .back-link { font-family: var(--font-mono); font-size: 0.85rem; display: inline-block; margin: 32px 0; }
 
