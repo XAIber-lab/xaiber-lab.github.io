@@ -691,19 +691,51 @@ a.member-mini:hover h3 { color: var(--teal); }
   cursor: pointer;
 }
 
-.year-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 28px; }
-.year-filter-btn {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
+.year-filter-control { position: relative; margin: 4px 0 28px; }
+.year-filter-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.year-filter-panel {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 16px;
-  background: none;
-  cursor: pointer;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+.year-filter-panel.open { display: flex; }
+.year-filter-panel label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-right: 4px;
+}
+.year-filter-panel select {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 8px;
+  background: var(--white);
   color: var(--ink);
 }
-.year-filter-btn:hover { border-color: var(--teal); color: var(--teal); }
-.year-filter-btn.active { border-color: var(--teal); background: var(--teal); color: var(--white); }
+.year-filter-reset {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--teal);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* Chevron on toggle buttons (Abstract / BibTeX / year filter):
+   points down when closed, flips to point up when open. */
+.chevron-char { display: inline-block; transition: transform 0.2s ease; }
+.text-toggle.open .chevron-char,
+.year-filter-toggle.open .chevron-char { transform: rotate(180deg); }
 
 .toggle-block {
   margin-top: 14px;

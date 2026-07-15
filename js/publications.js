@@ -100,18 +100,18 @@
     var dLine = dateLine(pub);
 
     var repoChip = pub.repositoryurl
-      ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository</a>'
+      ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository ↗</a>'
       : "";
 
     var abstractToggle = pub.abstract
-      ? '<button type="button" class="link-chip text-toggle" data-target="abstract-' + index + '">Abstract</button>'
+      ? '<button type="button" class="link-chip text-toggle" data-target="abstract-' + index + '">Abstract <span class="chevron-char">▾</span></button>'
       : "";
     var abstractBlock = pub.abstract
       ? '<div class="toggle-block" id="abstract-' + index + '">' + escapeHTML(pub.abstract) + "</div>"
       : "";
 
     var bibtexToggle = pub.bibtex
-      ? '<button type="button" class="link-chip text-toggle" data-target="bibtex-' + index + '">BibTeX</button>'
+      ? '<button type="button" class="link-chip text-toggle" data-target="bibtex-' + index + '">BibTeX <span class="chevron-char">▾</span></button>'
       : "";
     var bibtexBlock = pub.bibtex
       ? '<div class="toggle-block mono" id="bibtex-' + index + '">' +
@@ -128,10 +128,10 @@
       (dLine ? '<p class="pub-card-meta pub-card-date">' + escapeHTML(dLine) + "</p>" : "") +
       '<p class="pub-card-authors">' + escapeHTML(pub.authors) + "</p>" +
       '<div class="pub-card-actions">' +
-      '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
       abstractToggle +
-      repoChip +
       bibtexToggle +
+      '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
+      repoChip +
       "</div>" +
       abstractBlock +
       bibtexBlock +
@@ -162,6 +162,7 @@
       if (toggleBtn) {
         var block = document.getElementById(toggleBtn.dataset.target);
         if (block) block.classList.toggle("open");
+        toggleBtn.classList.toggle("open");
         return;
       }
       var copyBtn = e.target.closest(".copy-btn");
@@ -180,37 +181,85 @@
 
   /* --- rendering: year filter row (built once per full data load) --- */
 
-  function renderYearFilter(container, years, onSelect) {
-    var row = document.createElement("div");
-    row.className = "year-filter-row";
+  function renderYearFilter(container, years, onRangeChange) {
+    if (!years.length) return;
 
-    var allBtn = document.createElement("button");
-    allBtn.type = "button";
-    allBtn.className = "year-filter-btn active";
-    allBtn.textContent = "All";
-    allBtn.dataset.year = "all";
-    row.appendChild(allBtn);
+    var maxYear = years[0];              // years arrives sorted descending
+    var minYear = years[years.length - 1];
+    var ascYears = years.slice().sort(function (a, b) { return a - b; });
 
-    years.forEach(function (y) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "year-filter-btn";
-      b.textContent = String(y);
-      b.dataset.year = String(y);
-      row.appendChild(b);
+    var wrap = document.createElement("div");
+    wrap.className = "year-filter-control";
+
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "link-chip year-filter-toggle";
+    wrap.appendChild(toggle);
+
+    var panel = document.createElement("div");
+    panel.className = "year-filter-panel";
+
+    var fromLabel = document.createElement("label");
+    fromLabel.textContent = "From";
+    var fromSelect = document.createElement("select");
+    var toLabel = document.createElement("label");
+    toLabel.textContent = "To";
+    var toSelect = document.createElement("select");
+
+    ascYears.forEach(function (y) {
+      var o1 = document.createElement("option");
+      o1.value = y; o1.textContent = y;
+      fromSelect.appendChild(o1);
+      var o2 = document.createElement("option");
+      o2.value = y; o2.textContent = y;
+      toSelect.appendChild(o2);
+    });
+    fromSelect.value = minYear;
+    toSelect.value = maxYear;
+
+    var resetBtn = document.createElement("button");
+    resetBtn.type = "button";
+    resetBtn.className = "year-filter-reset";
+    resetBtn.textContent = "Show all";
+
+    panel.appendChild(fromLabel);
+    panel.appendChild(fromSelect);
+    panel.appendChild(toLabel);
+    panel.appendChild(toSelect);
+    panel.appendChild(resetBtn);
+
+    wrap.appendChild(panel);
+    container.appendChild(wrap);
+
+    function updateToggleLabel() {
+      var f = fromSelect.value, t = toSelect.value;
+      var label = (f === String(minYear) && t === String(maxYear))
+        ? "Filter by year"
+        : (f === t ? "Year: " + f : "Years: " + f + "\u2013" + t);
+      toggle.innerHTML = escapeHTML(label) + ' <span class="chevron-char">\u25BE</span>';
+    }
+
+    function applyFilter() {
+      var f = parseInt(fromSelect.value, 10);
+      var t = parseInt(toSelect.value, 10);
+      if (f > t) { var tmp = f; f = t; t = tmp; }
+      updateToggleLabel();
+      onRangeChange(f, t);
+    }
+
+    toggle.addEventListener("click", function () {
+      var isOpen = panel.classList.toggle("open");
+      toggle.classList.toggle("open", isOpen);
+    });
+    fromSelect.addEventListener("change", applyFilter);
+    toSelect.addEventListener("change", applyFilter);
+    resetBtn.addEventListener("click", function () {
+      fromSelect.value = minYear;
+      toSelect.value = maxYear;
+      applyFilter();
     });
 
-    row.addEventListener("click", function (e) {
-      var btn = e.target.closest(".year-filter-btn");
-      if (!btn) return;
-      row.querySelectorAll(".year-filter-btn").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      btn.classList.add("active");
-      onSelect(btn.dataset.year);
-    });
-
-    container.appendChild(row);
+    updateToggleLabel();
   }
 
   /* --- top-level render: filter row + list, given a full dataset --- */
@@ -239,10 +288,11 @@
 
     var listWrap = document.createElement("div");
 
-    renderYearFilter(container, years, function (yearStr) {
-      var filtered = yearStr === "all"
-        ? state.all
-        : state.all.filter(function (p) { return String(extractYear(p.date)) === String(yearStr); });
+    renderYearFilter(container, years, function (fromYear, toYear) {
+      var filtered = state.all.filter(function (p) {
+        var y = extractYear(p.date);
+        return y >= fromYear && y <= toYear;
+      });
       populateList(listWrap, filtered);
     });
 
