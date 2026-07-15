@@ -63,6 +63,11 @@ a:hover { text-decoration: underline; }
   margin: 0 auto;
   padding: 0 28px;
 }
+.wrap-narrow {
+  max-width: var(--wrap-narrow);
+  margin: 0 auto;
+  padding: 0 28px;
+}
 
 .visually-hidden {
   position: absolute;
@@ -139,9 +144,17 @@ p { margin: 0 0 1em; }
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .logo:hover { text-decoration: none; }
 .logo .accent { color: var(--teal); }
+.logo-mark { flex-shrink: 0; }
+.logo-mark .node { fill: var(--teal); }
+.logo-mark .node-highlight { fill: var(--amber); }
+.logo-mark .edge { stroke: var(--line); stroke-width: 1.6; }
+.logo-mark .edge-active { stroke: var(--amber); stroke-width: 1.8; }
 
 .site-nav ul {
   list-style: none;
@@ -203,6 +216,46 @@ p { margin: 0 0 1em; }
 .hero-graphic .node { fill: var(--teal); }
 .hero-graphic .edge { stroke: var(--line); stroke-width: 1.4; }
 .hero-graphic .edge-active { stroke: var(--amber); stroke-width: 1.6; }
+
+/* --- Hero image carousel (now occupies the space the graphic used to) --- */
+.hero-carousel-wrap { justify-self: end; width: 100%; max-width: 380px; }
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px dashed var(--line);
+}
+.hero-carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  background-color: var(--paper-alt);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B9BDB7' stroke-width='1.3'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Ccircle cx='8' cy='10' r='1.5'/%3E%3Cpath d='M2 16l5-5 4 4 5-5 6 6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 44px 44px;
+}
+.hero-carousel-slide.active { opacity: 1; }
+.hero-carousel-caption {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--slate);
+  text-align: center;
+  margin-top: 10px;
+}
+.hero-carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+.hero-carousel-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.hero-carousel-dot.active { background: var(--teal); }
 
 /* --- Teaser sections --- */
 .teaser { padding: 64px 0; border-bottom: 1px solid var(--line); }
@@ -340,6 +393,7 @@ p { margin: 0 0 1em; }
 @media (max-width: 880px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-graphic { justify-self: start; max-width: 220px; order: -1; }
+  .hero-carousel-wrap { justify-self: start; max-width: 260px; order: -1; }
   .card-grid { grid-template-columns: 1fr 1fr; }
   .member-grid { grid-template-columns: 1fr 1fr; }
 }
