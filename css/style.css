@@ -64,6 +64,18 @@ a:hover { text-decoration: underline; }
   padding: 0 28px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0; padding: 0; margin: -1px;
+}
+
+.letter-reel { color: inherit; }
+.letter-reel span { color: inherit; }
+
 .skip-link {
   position: absolute;
   left: -9999px;
