@@ -30,6 +30,8 @@
     }
   ];
 
+  var state = { all: [] };
+
   /* --- helpers --- */
 
   function escapeHTML(str) {
@@ -40,6 +42,15 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  function normalizeUrl(raw) {
+    var v = String(raw || "").trim();
+    if (!v || v === "#") return "#";
+    if (/^https?:\/\//i.test(v) || /^mailto:/i.test(v)) return v;
+    if (/^10\.\d{4,9}\/\S+$/.test(v)) return "https://doi.org/" + v;
+    if (/^www\./i.test(v)) return "https://" + v;
+    return "https://" + v;
   }
 
   function extractYear(dateStr) {
@@ -55,15 +66,6 @@
     });
   }
 
-  function normalizeUrl(raw) {
-    var v = String(raw || "").trim();
-    if (!v || v === "#") return "#";
-    if (/^https?:\/\//i.test(v) || /^mailto:/i.test(v)) return v;
-    if (/^10\.\d{4,9}\/\S+$/.test(v)) return "https://doi.org/" + v; // bare DOI, e.g. "10.1109/..."
-    if (/^www\./i.test(v)) return "https://" + v;
-    return "https://" + v; // assume a domain/path just missing its scheme
-  }
-
   function venueLine(pub) {
     if (pub.conferencename) {
       var parts = [pub.conferencename];
@@ -73,14 +75,13 @@
     return pub.venue || "";
   }
 
+  // Year only — no "Presented", no full date.
   function dateLine(pub) {
-    var parts = [];
-    if (pub.conferencename && pub.conferencedate) parts.push("Presented " + pub.conferencedate);
-    if (pub.date) parts.push("Published " + pub.date);
-    return parts.join(" · ");
+    var year = extractYear(pub.date);
+    return year ? "Published " + year : "";
   }
 
-  /* --- rendering --- */
+  /* --- rendering: one entry --- */
 
   function createCardEl(pub, index) {
     var wrapper = document.createElement("article");
@@ -94,23 +95,29 @@
       ? '<span class="tag">' + escapeHTML(pub.type) + "</span>"
       : "";
 
+    var fixedUrl = normalizeUrl(pub.url);
+    var vLine = venueLine(pub);
+    var dLine = dateLine(pub);
+
     var repoChip = pub.repositoryurl
       ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository</a>'
       : "";
 
-    var bibtexControls = pub.bibtex
-      ? '<button type="button" class="link-chip bibtex-toggle" data-index="' + index + '">BibTeX</button>'
+    var abstractToggle = pub.abstract
+      ? '<button type="button" class="link-chip text-toggle" data-target="abstract-' + index + '">Abstract</button>'
+      : "";
+    var abstractBlock = pub.abstract
+      ? '<div class="toggle-block" id="abstract-' + index + '">' + escapeHTML(pub.abstract) + "</div>"
       : "";
 
+    var bibtexToggle = pub.bibtex
+      ? '<button type="button" class="link-chip text-toggle" data-target="bibtex-' + index + '">BibTeX</button>'
+      : "";
     var bibtexBlock = pub.bibtex
-      ? '<div class="bibtex-block" id="bibtex-' + index + '">' +
-        '<button type="button" class="link-chip copy-btn" data-index="' + index + '" style="float:right; margin-bottom:8px;">Copy</button>' +
+      ? '<div class="toggle-block mono" id="bibtex-' + index + '">' +
+        '<button type="button" class="link-chip copy-btn" data-target="bibtex-' + index + '" style="float:right; margin-bottom:8px;">Copy</button>' +
         '<div style="clear:both;">' + escapeHTML(pub.bibtex) + "</div></div>"
       : "";
-
-    var fixedUrl = normalizeUrl(pub.url);
-    var vLine = venueLine(pub);
-    var dLine = dateLine(pub);
 
     wrapper.innerHTML =
       '<div class="pub-card-thumb" aria-hidden="true">' + thumbHTML + "</div>" +
@@ -120,17 +127,93 @@
       (vLine ? '<p class="pub-card-meta">' + escapeHTML(vLine) + "</p>" : "") +
       (dLine ? '<p class="pub-card-meta pub-card-date">' + escapeHTML(dLine) + "</p>" : "") +
       '<p class="pub-card-authors">' + escapeHTML(pub.authors) + "</p>" +
-      (pub.abstract ? '<p class="pub-card-abstract">' + escapeHTML(pub.abstract) + "</p>" : "") +
       '<div class="pub-card-actions">' +
       '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
+      abstractToggle +
       repoChip +
-      bibtexControls +
+      bibtexToggle +
       "</div>" +
+      abstractBlock +
       bibtexBlock +
       "</div>";
 
     return wrapper;
   }
+
+  /* --- rendering: the list itself (re-run on every filter change) --- */
+
+  function populateList(listWrap, data) {
+    listWrap.innerHTML = "";
+
+    if (!data.length) {
+      listWrap.innerHTML = '<p class="pub-empty">No publications for this year.</p>';
+      return;
+    }
+
+    var list = document.createElement("div");
+    list.className = "pub-card-list";
+    data.forEach(function (pub, i) {
+      list.appendChild(createCardEl(pub, i));
+    });
+    listWrap.appendChild(list);
+
+    list.addEventListener("click", function (e) {
+      var toggleBtn = e.target.closest(".text-toggle");
+      if (toggleBtn) {
+        var block = document.getElementById(toggleBtn.dataset.target);
+        if (block) block.classList.toggle("open");
+        return;
+      }
+      var copyBtn = e.target.closest(".copy-btn");
+      if (copyBtn) {
+        var block2 = document.getElementById(copyBtn.dataset.target);
+        if (block2 && navigator.clipboard) {
+          var text = block2.querySelector("div").textContent;
+          navigator.clipboard.writeText(text).then(function () {
+            copyBtn.textContent = "Copied";
+            setTimeout(function () { copyBtn.textContent = "Copy"; }, 1500);
+          });
+        }
+      }
+    });
+  }
+
+  /* --- rendering: year filter row (built once per full data load) --- */
+
+  function renderYearFilter(container, years, onSelect) {
+    var row = document.createElement("div");
+    row.className = "year-filter-row";
+
+    var allBtn = document.createElement("button");
+    allBtn.type = "button";
+    allBtn.className = "year-filter-btn active";
+    allBtn.textContent = "All";
+    allBtn.dataset.year = "all";
+    row.appendChild(allBtn);
+
+    years.forEach(function (y) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "year-filter-btn";
+      b.textContent = String(y);
+      b.dataset.year = String(y);
+      row.appendChild(b);
+    });
+
+    row.addEventListener("click", function (e) {
+      var btn = e.target.closest(".year-filter-btn");
+      if (!btn) return;
+      row.querySelectorAll(".year-filter-btn").forEach(function (b) {
+        b.classList.remove("active");
+      });
+      btn.classList.add("active");
+      onSelect(btn.dataset.year);
+    });
+
+    container.appendChild(row);
+  }
+
+  /* --- top-level render: filter row + list, given a full dataset --- */
 
   function render(data, opts) {
     opts = opts || {};
@@ -148,32 +231,23 @@
     }
 
     var sorted = sortByDateDesc(data);
-    var list = document.createElement("div");
-    list.className = "pub-card-list";
-    sorted.forEach(function (pub, i) {
-      list.appendChild(createCardEl(pub, i));
-    });
-    container.appendChild(list);
+    state.all = sorted;
 
-    list.addEventListener("click", function (e) {
-      var toggleBtn = e.target.closest(".bibtex-toggle");
-      if (toggleBtn) {
-        var block = document.getElementById("bibtex-" + toggleBtn.dataset.index);
-        if (block) block.classList.toggle("open");
-        return;
-      }
-      var copyBtn = e.target.closest(".copy-btn");
-      if (copyBtn) {
-        var block2 = document.getElementById("bibtex-" + copyBtn.dataset.index);
-        if (block2 && navigator.clipboard) {
-          var text = block2.querySelector("div").textContent;
-          navigator.clipboard.writeText(text).then(function () {
-            copyBtn.textContent = "Copied";
-            setTimeout(function () { copyBtn.textContent = "Copy"; }, 1500);
-          });
-        }
-      }
+    var years = Array.from(
+      new Set(sorted.map(function (p) { return extractYear(p.date); }).filter(Boolean))
+    ).sort(function (a, b) { return b - a; });
+
+    var listWrap = document.createElement("div");
+
+    renderYearFilter(container, years, function (yearStr) {
+      var filtered = yearStr === "all"
+        ? state.all
+        : state.all.filter(function (p) { return String(extractYear(p.date)) === String(yearStr); });
+      populateList(listWrap, filtered);
     });
+
+    container.appendChild(listWrap);
+    populateList(listWrap, sorted);
   }
 
   /* --- init --- */

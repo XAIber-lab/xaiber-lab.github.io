@@ -691,19 +691,37 @@ a.member-mini:hover h3 { color: var(--teal); }
   cursor: pointer;
 }
 
-.bibtex-block {
+.year-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 28px; }
+.year-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 16px;
+  background: none;
+  cursor: pointer;
+  color: var(--ink);
+}
+.year-filter-btn:hover { border-color: var(--teal); color: var(--teal); }
+.year-filter-btn.active { border-color: var(--teal); background: var(--teal); color: var(--white); }
+
+.toggle-block {
   margin-top: 14px;
   background: var(--paper-alt);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 14px 16px;
+  font-size: 0.92rem;
+  color: var(--ink);
+  display: none;
+}
+.toggle-block.open { display: block; }
+.toggle-block.mono {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   white-space: pre-wrap;
   word-break: break-word;
-  display: none;
 }
-.bibtex-block.open { display: block; }
 
 .pub-empty, .pub-loading {
   color: var(--slate);

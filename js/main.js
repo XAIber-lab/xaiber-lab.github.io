@@ -11,13 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Generic collapsible widget (e.g. the "latest work" showcase on member pages)
-  document.querySelectorAll('.collapsible').forEach(function (box) {
-    var btn = box.querySelector('.collapsible-toggle');
+  // Generic collapsible widget (e.g. the "latest work" showcase on member pages).
+  // Uses event delegation so it also works for content added dynamically
+  // after page load (not just what's present at DOMContentLoaded).
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.collapsible-toggle');
     if (!btn) return;
-    btn.addEventListener('click', function () {
-      var isOpen = box.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
+    var box = btn.closest('.collapsible');
+    if (!box) return;
+    var isOpen = box.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 });
