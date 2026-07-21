@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 """
-Fetches the published Google Sheet (CSV) of member profiles and:
+Fetches two published Google Sheets (CSV) — Members and Member
+Activities — and:
 
- 1. Creates or updates each member's personal page at
-    members/<slug>.html — but ONLY the sheet-managed "profile
-    block" (the region between the SHEET:PROFILE:START/END
-    markers: header photo/name/badge/bio/links, Research
-    Interests, the Publications reference, and PhD Topic).
-    Everything else on an existing page (Projects/Teaching/
-    Hobbies — genuinely hand-authored prose) is left completely
-    untouched. Brand-new members get a full page scaffolded,
-    with that section pre-filled with editable placeholders.
+ 1. Fully generates each member's personal page at
+    members/<slug>.html, including the Projects/Teaching/Hobbies
+    sections (built from the Activities sheet). Every part of the
+    page comes from the sheets; adding a member means adding a row,
+    nothing else.
 
- 2. Fully regenerates members.html, since every bit of that page
-    is sheet-derived — safe to rewrite from scratch each run.
+ 2. Fully regenerates members.html, grouped by rank.
 
-Requires the MEMBERS_SHEET_CSV_URL environment variable, set to a
-Google Sheets "Publish to web" CSV URL.
+Because everything is now sheet-derived, both files are rewritten
+from scratch on every run — same philosophy as data/publications.json.
+Hand-editing a generated page directly will be overwritten on the
+next sync; make changes in the sheets instead.
+
+Requires two environment variables, each a Google Sheets "Publish to
+web" CSV URL:
+  MEMBERS_SHEET_CSV_URL            — one row per member
+  MEMBER_ACTIVITIES_SHEET_CSV_URL  — one row per timeline entry
 
 Standard library only, so the GitHub Action needs no pip install.
 """
@@ -24,16 +27,12 @@ Standard library only, so the GitHub Action needs no pip install.
 import csv
 import io
 import os
-import re
 import sys
 import urllib.request
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 MEMBERS_DIR = os.path.join(ROOT, "members")
 MEMBERS_HTML_PATH = os.path.join(ROOT, "members.html")
-
-MARKER_START = "<!-- SHEET:PROFILE:START -->"
-MARKER_END = "<!-- SHEET:PROFILE:END -->"
 
 RANK_ORDER = ["director", "professor", "phd", "collaborator"]
 RANK_SECTION_TITLES = {
@@ -42,6 +41,9 @@ RANK_SECTION_TITLES = {
     "phd": "PhD Candidates",
     "collaborator": "Collaborators",
 }
+
+ACTIVITY_SECTIONS = ["projects", "teaching", "hobbies"]
+ACTIVITY_SECTION_TITLES = {"projects": "Projects", "teaching": "Teaching", "hobbies": "Hobbies"}
 
 LOGO_MARK = (
     '<svg class="logo-mark" viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">'
@@ -79,7 +81,16 @@ def obfuscate_email(email):
     return local.replace(".", " dot ") + " at " + domain.replace(".", " dot ")
 
 
-def normalize_row(raw):
+def fetch_csv_rows(url, label):
+    print("Fetching " + label + ": " + url)
+    req = urllib.request.Request(url, headers={"User-Agent": "xaiber-lab-members-sync"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        raw_bytes = resp.read()
+    csv_text = raw_bytes.decode("utf-8-sig")
+    return list(csv.DictReader(io.StringIO(csv_text)))
+
+
+def normalize_member_row(raw):
     out = {normalize_key(k): (v or "").strip() for k, v in raw.items()}
     keywords = [w.strip() for w in out.get("keywords", "").split(",") if w.strip()]
     name = out.get("name", "")
@@ -104,6 +115,20 @@ def normalize_row(raw):
         "researchsummary": out.get("researchsummary", ""),
         "phdtopictitle": out.get("phdtopictitle", ""),
         "phdtopicdescription": out.get("phdtopicdescription", ""),
+    }
+
+
+def normalize_activity_row(raw):
+    out = {normalize_key(k): (v or "").strip() for k, v in raw.items()}
+    bullets = [b.strip() for b in out.get("bullets", "").replace("\r\n", "\n").split("\n") if b.strip()]
+    return {
+        "memberslug": out.get("memberslug", ""),
+        "section": out.get("section", "").lower(),
+        "daterange": out.get("daterange", ""),
+        "title": out.get("title", ""),
+        "orgline": out.get("orgline", ""),
+        "description": out.get("description", ""),
+        "bullets": bullets,
     }
 
 
@@ -162,12 +187,10 @@ def render_profile_block(m):
             '      <p>' + esc(m["phdtopicdescription"]) + '</p>\n    </div>\n  </section>'
         )
 
-    return MARKER_START + '''
-  <!-- ============ STANDARD PROFILE BLOCK ============
-       Generated from the Members sheet by scripts/sync_members.py —
-       edit there, not here. Everything below this marked region
-       (Projects/Teaching/Hobbies) is hand-authored and is left
-       completely untouched whenever this runs again. -->
+    return '''  <!-- ============ STANDARD PROFILE BLOCK ============
+       Generated from the Members sheet by scripts/sync_members.py.
+       Edit in the sheet, not here — this whole page is rewritten
+       on every sync. -->
   <section class="profile-hero">
     <div class="wrap profile-header">
 
@@ -213,61 +236,66 @@ def render_profile_block(m):
         <p class="pub-loading">Loading publications&hellip;</p>
       </div>
     </div>
-  </section>''' + phd_section + '''
-  ''' + MARKER_END
+  </section>''' + phd_section
 
 
-ACTIVITIES_SCAFFOLD = '''
-  <!-- ============ PROJECTS ============ -->
-  <section class="teaser alt">
-    <div class="wrap">
-      <p class="section-tag">[projects]</p>
-      <h2>Projects</h2>
-      <!-- PLACEHOLDER: add real project or research-role entries -->
+def render_activity_entry(a):
+    date_html = esc(a["daterange"]) if a["daterange"] else "&nbsp;"
+    org_html = ('<p class="org">' + esc(a["orgline"]) + "</p>") if a["orgline"] else ""
+    desc_html = ("<p>" + esc(a["description"]) + "</p>") if a["description"] else ""
+    bullets_html = ""
+    if a["bullets"]:
+        items = "\n            ".join("<li>" + esc(b) + "</li>" for b in a["bullets"])
+        bullets_html = "\n          <ul>\n            " + items + "\n          </ul>"
+
+    return ('''      <div class="timeline-item">
+        <div class="timeline-meta">''' + date_html + '''</div>
+        <div>
+          <h4>''' + esc(a["title"]) + '''</h4>
+          ''' + org_html + '''
+          ''' + desc_html + bullets_html + '''
+        </div>
+      </div>''')
+
+
+def render_activities_sections(slug, activities_by_key):
+    alt_toggle = [True]  # first section (Projects) is teaser-alt, alternating from there
+
+    sections = []
+    for key in ACTIVITY_SECTIONS:
+        entries = activities_by_key.get((slug, key), [])
+        css_class = "teaser alt" if alt_toggle[0] else "teaser"
+        alt_toggle[0] = not alt_toggle[0]
+
+        if entries:
+            items_html = "\n\n".join(render_activity_entry(a) for a in entries)
+        else:
+            items_html = ('''      <!-- PLACEHOLDER: add ''' + key + ''' entries in the Member Activities sheet -->
       <div class="timeline-item">
         <div class="timeline-meta">&nbsp;</div>
         <div>
-          <h4>Project placeholder</h4>
-          <p class="org">Add a real project or research role entry here.</p>
+          <h4>''' + ACTIVITY_SECTION_TITLES[key] + ''' placeholder</h4>
+          <p class="org">Add a row in the Member Activities sheet (Member Slug=''' + esc(slug) + ''', Section=''' + key + ''') to fill this in.</p>
         </div>
-      </div>
-    </div>
-  </section>
+      </div>''')
 
-  <!-- ============ TEACHING ============ -->
-  <section class="teaser">
+        sections.append(
+            '\n\n  <!-- ============ ' + ACTIVITY_SECTION_TITLES[key].upper() + ''' ============ -->
+  <section class="''' + css_class + '''">
     <div class="wrap">
-      <p class="section-tag">[teaching]</p>
-      <h2>Teaching</h2>
-      <!-- PLACEHOLDER: teaching entry — add real ones as they happen -->
-      <div class="timeline-item">
-        <div class="timeline-meta">&nbsp;</div>
-        <div>
-          <h4>Teaching placeholder</h4>
-          <p class="org">This is where teaching assignments go &mdash; e.g. a course TA'd, a workshop run, or a guest lecture given.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOBBIES ============ -->
-  <section class="teaser alt">
-    <div class="wrap">
-      <p class="section-tag">[hobbies]</p>
-      <h2>Hobbies</h2>
-      <!-- PLACEHOLDER: hobbies entry — add real ones whenever useful -->
-      <div class="timeline-item">
-        <div class="timeline-meta">&nbsp;</div>
-        <div>
-          <h4>Hobbies placeholder</h4>
-          <p class="org">This is where a non-academic interest worth sharing goes.</p>
-        </div>
-      </div>
+      <p class="section-tag">[''' + key + ''']</p>
+      <h2>''' + ACTIVITY_SECTION_TITLES[key] + '''</h2>
+''' + items_html + '''
     </div>
   </section>'''
+        )
+    return "".join(sections)
 
 
-def render_new_page(m, profile_block):
+def render_member_page(m, activities_by_key):
+    profile_block = render_profile_block(m)
+    activities_block = render_activities_sections(m["slug"], activities_by_key)
+
     return '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -301,8 +329,7 @@ def render_new_page(m, profile_block):
 
 <main id="main">
 
-''' + profile_block + '''
-''' + ACTIVITIES_SCAFFOLD + '''
+''' + profile_block + activities_block + '''
 
   <div class="wrap">
     <a class="back-link" href="../members.html">&larr; Back to members</a>
@@ -332,30 +359,6 @@ def render_new_page(m, profile_block):
 </body>
 </html>
 '''
-
-
-def sync_member_page(m):
-    path = os.path.join(MEMBERS_DIR, m["slug"] + ".html")
-    profile_block = render_profile_block(m)
-
-    if os.path.exists(path):
-        with open(path, encoding="utf-8") as f:
-            content = f.read()
-        pattern = re.compile(re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END), re.DOTALL)
-        if pattern.search(content):
-            new_content = pattern.sub(lambda _m: profile_block, content)
-            action = "updated (profile section only)"
-        else:
-            print("WARNING: markers not found in " + path + " — leaving file untouched.", file=sys.stderr)
-            return "skipped (no markers)"
-    else:
-        new_content = render_new_page(m, profile_block)
-        action = "created"
-
-    os.makedirs(MEMBERS_DIR, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(new_content)
-    return action
 
 
 def render_card(m):
@@ -469,29 +472,35 @@ def render_members_html(members):
 
 
 def main():
-    sheet_url = os.environ.get("MEMBERS_SHEET_CSV_URL", "").strip()
-    if not sheet_url.startswith("http"):
-        print(
-            "MEMBERS_SHEET_CSV_URL is not set to a valid URL.\n"
-            "Set it as a repository variable in Settings -> Secrets and "
-            "variables -> Actions -> Variables.",
-            file=sys.stderr,
-        )
+    members_url = os.environ.get("MEMBERS_SHEET_CSV_URL", "").strip()
+    activities_url = os.environ.get("MEMBER_ACTIVITIES_SHEET_CSV_URL", "").strip()
+
+    if not members_url.startswith("http"):
+        print("MEMBERS_SHEET_CSV_URL is not set to a valid URL.", file=sys.stderr)
+        sys.exit(1)
+    if not activities_url.startswith("http"):
+        print("MEMBER_ACTIVITIES_SHEET_CSV_URL is not set to a valid URL.", file=sys.stderr)
         sys.exit(1)
 
-    print("Fetching: " + sheet_url)
-    req = urllib.request.Request(sheet_url, headers={"User-Agent": "xaiber-lab-members-sync"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        raw_bytes = resp.read()
-
-    csv_text = raw_bytes.decode("utf-8-sig")
-    reader = csv.DictReader(io.StringIO(csv_text))
-    members = [normalize_row(r) for r in reader]
+    member_rows = fetch_csv_rows(members_url, "Members sheet")
+    members = [normalize_member_row(r) for r in member_rows]
     members = [m for m in members if m["name"] and m["slug"]]
 
+    activity_rows = fetch_csv_rows(activities_url, "Member Activities sheet")
+    activities = [normalize_activity_row(r) for r in activity_rows]
+    activities = [a for a in activities if a["memberslug"] and a["section"] in ACTIVITY_SECTIONS]
+
+    activities_by_key = {}
+    for a in activities:
+        key = (a["memberslug"], a["section"])
+        activities_by_key.setdefault(key, []).append(a)
+
+    os.makedirs(MEMBERS_DIR, exist_ok=True)
     for m in members:
-        result = sync_member_page(m)
-        print("  " + m["slug"] + ": " + result)
+        path = os.path.join(MEMBERS_DIR, m["slug"] + ".html")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(render_member_page(m, activities_by_key))
+        print("  " + m["slug"] + ": generated")
 
     with open(MEMBERS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(render_members_html(members))
