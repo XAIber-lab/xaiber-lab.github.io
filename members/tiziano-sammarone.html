@@ -56,6 +56,11 @@
 
         <p>Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD, funded by ACN (Italy's National Cybersecurity Agency) and supervised by Prof. Marco Angelini, develops a framework for applying generative AI across the full cyber risk management lifecycle &mdash; from identifying and assessing risk through to mitigation and continuous monitoring. A central thread of the work is a bidirectional methodology that maps controls from high-level policy down to technical implementation and traces back up again, paired with a formal notation system built to support that translation. He holds a Master's degree in Cybersecurity (110/110) from Università degli Studi di Roma "La Sapienza", and is a member of XAIber-Lab, where his work spans attack-graph analysis, generative AI tooling, and human&ndash;AI collaboration in security decision-making.</p>
 
+        <!-- Email spelled out in plain text (not a live mailto: link) as
+             a simple anti-scraping measure — the Email button below
+             remains the actual clickable way to reach him. -->
+        <p class="email-plain">tiziano dot sammarone at linkstudents dot it</p>
+
         <!-- Personal site: pulled out front and visually separated from the social row -->
         <!-- PLACEHOLDER: add personal website link -->
         <a class="profile-primary-link" href="#" target="_blank" rel="noopener">
@@ -119,22 +124,19 @@
     </div>
   </section>
 
-  <!-- ============ PUBLICATIONS ============ -->
+  <!-- ============ PUBLICATIONS ============
+       Not hand-duplicated: this fetches ../data/publications.json
+       (the same data the sitewide Publications page uses) and shows
+       only entries tagged with this member's slug in "Member Slugs".
+       Edit publications only via the sheet/Publications page — this
+       view updates itself automatically. -->
   <section class="teaser alt">
     <div class="wrap">
       <p class="section-tag">[publications]</p>
       <h2>Publications</h2>
-
-      <ul class="pub-list">
-        <li class="pub-item">
-          <span class="pub-meta">2025<br>IEEE&nbsp;CH</span>
-          <div>
-            <p class="pub-title">A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library</p>
-            <p class="pub-authors">Sammarone, T., Angelini, M. &mdash; IEEE International Conference on Cyber Humanities, Florence, Italy</p>
-            <p><a href="https://doi.org/10.1109/IEEE-CH65308.2025.11279411" target="_blank" rel="noopener">doi.org/10.1109/IEEE-CH65308.2025.11279411</a></p>
-          </div>
-        </li>
-      </ul>
+      <div id="member-pub-container" data-member-slug="tiziano-sammarone">
+        <p class="pub-loading">Loading publications…</p>
+      </div>
     </div>
   </section>
 
@@ -241,6 +243,8 @@
   </div>
 </footer>
 
+<script src="../js/pub-card-shared.js"></script>
+<script src="../js/member-publications.js"></script>
 <script src="../js/main.js"></script>
 </body>
 </html>

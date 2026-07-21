@@ -55,6 +55,11 @@ def normalize_row(raw):
         "thumbnailurl": out.get("thumbnailurl") or out.get("thumbnail") or out.get("paperthumbnail") or out.get("coverimage", ""),
         "bibtex": out.get("bibtex", ""),
         "repositoryurl": out.get("repositoryurl") or out.get("repository") or out.get("repo", ""),
+        # Comma-separated member page slugs (e.g. "tiziano-sammarone"),
+        # used to show a filtered set of these same cards on each
+        # member's own personal page. Leave blank if nobody with a
+        # page yet is an author.
+        "memberslugs": out.get("memberslugs") or out.get("members") or "",
     }
 
 
