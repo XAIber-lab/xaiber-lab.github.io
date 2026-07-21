@@ -25,7 +25,7 @@
 
         var tags = Array.from(source.querySelectorAll(".tag")).map(function (t) {
           return t.textContent.trim();
-        });
+        }).slice(0, 3);
         if (!tags.length) return;
 
         container.innerHTML = "";
