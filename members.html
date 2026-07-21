@@ -56,6 +56,12 @@
           <h3>Marco Angelini</h3>
           <p class="role">Director</p>
           <p class="bio-snippet">Directs XAIber-Lab and supervises the group's PhD and postgraduate research.</p>
+          <!-- PLACEHOLDER: manual keywords, since there's no personal
+               page yet to fetch them from -->
+          <div class="tag-row card-keywords">
+            <span class="tag">keyword one</span>
+            <span class="tag">keyword two</span>
+          </div>
           <span class="card-link" style="color: var(--slate);"><!-- PLACEHOLDER: add a personal page and link when one exists -->No profile page yet</span>
         </article>
       </div>
@@ -68,6 +74,12 @@
           <h3>Full Name</h3>
           <p class="role">Full Professor</p>
           <p class="bio-snippet">One or two sentence placeholder bio describing this member's role and focus.</p>
+          <!-- PLACEHOLDER: manual keywords, since there's no personal
+               page yet to fetch them from -->
+          <div class="tag-row card-keywords">
+            <span class="tag">keyword one</span>
+            <span class="tag">keyword two</span>
+          </div>
           <a class="card-link" href="#"><!-- PLACEHOLDER: link to this member's personal page -->View profile &rarr;</a>
         </article>
       </div>
@@ -80,6 +92,9 @@
           <h3>Tiziano Sammarone</h3>
           <p class="role">PhD Candidate</p>
           <p class="bio-snippet">Researcher at the intersection of AI, cybersecurity, and risk management, focused on human&ndash;AI collaboration across the risk management lifecycle.</p>
+          <!-- Fetched live from his own page's #member-keywords at
+               load time — edit the keywords there, not here. -->
+          <div class="tag-row card-keywords" data-keywords-source="members/tiziano-sammarone.html"></div>
           <a class="card-link" href="members/tiziano-sammarone.html">View profile &rarr;</a>
         </article>
 
@@ -89,6 +104,10 @@
           <h3>Full Name</h3>
           <p class="role">PhD Candidate</p>
           <p class="bio-snippet">One or two sentence placeholder bio describing this member's role and focus.</p>
+          <div class="tag-row card-keywords">
+            <span class="tag">keyword one</span>
+            <span class="tag">keyword two</span>
+          </div>
           <a class="card-link" href="#"><!-- PLACEHOLDER: link to this member's personal page -->View profile &rarr;</a>
         </article>
       </div>
@@ -101,6 +120,10 @@
           <h3>Full Name</h3>
           <p class="role">Collaborator</p>
           <p class="bio-snippet">One or two sentence placeholder bio describing this member's role and focus.</p>
+          <div class="tag-row card-keywords">
+            <span class="tag">keyword one</span>
+            <span class="tag">keyword two</span>
+          </div>
           <a class="card-link" href="#"><!-- PLACEHOLDER: link to this member's personal page -->View profile &rarr;</a>
         </article>
       </div>
@@ -126,6 +149,7 @@
   </div>
 </footer>
 
+<script src="js/member-keywords.js"></script>
 <script src="js/members-summary.js"></script>
 <script src="js/main.js"></script>
 </body>

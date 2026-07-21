@@ -46,6 +46,12 @@
         <p class="section-tag">[people]</p>
         <h1>Tiziano Sammarone</h1>
 
+        <!-- The personalized "what does the X become for you" badge —
+             a direct, readable substitution rather than trying to
+             preserve the "XAI" wordplay literally, since that only
+             happens to work for "cyber." -->
+        <p class="identity-badge">XAIber-Lab &rarr; <strong>Cyber-Lab</strong></p>
+
         <p class="profile-title">PhD Candidate</p>
         <p class="profile-institution">Università degli Studi Link &mdash; Human Sciences for Innovation, Inclusion &amp; Sustainability, 41st Cycle</p>
 
@@ -118,7 +124,11 @@
       <p class="section-tag">[research interests]</p>
       <h2>Research Interests</h2>
       <p>Working across generative AI, explainable AI, and risk governance, with a focus on methodologies that keep human oversight central to security decision-making.</p>
-      <div class="tag-row">
+      <!-- This is the canonical source of Tiziano's keywords — the
+           members.html list page fetches this exact element by id
+           and mirrors its tags, so editing them here is the only
+           place that needs updating. -->
+      <div class="tag-row" id="member-keywords">
         <span class="tag">generative ai for cybersecurity</span>
         <span class="tag">explainable ai (xai)</span>
         <span class="tag">frugal ai</span>
@@ -129,38 +139,14 @@
     </div>
   </section>
 
-  <!-- ============ CURRENTLY (what they're engaged in now + a
-       collapsible highlight reel of latest work) ============ -->
+  <!-- ============ PHD TOPIC (PhD-candidate-specific — only
+       relevant for members whose rank is PhD candidate) ============ -->
   <section class="teaser">
     <div class="wrap">
-      <p class="section-tag">[currently]</p>
-      <h2>Currently</h2>
-      <!-- PLACEHOLDER: keep this short and current — update as things move on -->
-      <p>Developing a PhD-level research framework for AI-integrated cyber risk management, including the bidirectional control-mapping methodology and its formal notation. In parallel, building out XAIber-Lab's own website and contributing to ProVAIN, the lab's attack-and-defense demonstration tool.</p>
-
-      <div class="collapsible" id="latest-work">
-        <button type="button" class="collapsible-toggle" aria-expanded="false" aria-controls="latest-work-panel">
-          Latest work
-          <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>
-        </button>
-        <div class="collapsible-panel" id="latest-work-panel">
-          <ul class="showcase-list">
-            <!-- PLACEHOLDER: swap in whatever's actually most recent -->
-            <li>
-              <p class="showcase-title">XAIber-Lab website</p>
-              <p class="showcase-desc">Built and maintain the lab's public site — this one.</p>
-            </li>
-            <li>
-              <p class="showcase-title">ProVAIN</p>
-              <p class="showcase-desc">Attack-and-defense demonstration tool built on MITRE ATT&amp;CK and D3FEND.</p>
-            </li>
-            <li>
-              <p class="showcase-title">IEEE CH 2025 paper</p>
-              <p class="showcase-desc">A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <p class="section-tag">[phd topic]</p>
+      <h2>PhD Topic</h2>
+      <p class="profile-theme" style="margin-bottom: 14px;">Integrating Generative AI into the Cyber Risk Management Process: A Human&ndash;AI Collaboration Approach</p>
+      <p>Tiziano's PhD develops a bidirectional methodology for mapping cybersecurity controls from high-level policy down to technical implementation and back, integrating generative AI throughout the cyber risk management lifecycle while keeping a human decision-maker central to the process.</p>
     </div>
   </section>
 
