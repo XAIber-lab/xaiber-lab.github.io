@@ -497,6 +497,13 @@ p { margin: 0 0 1em; }
   background: var(--teal-dim);
 }
 
+.email-plain {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--slate);
+  margin-bottom: 4px;
+}
+
 .link-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 .link-chip {
   font-family: var(--font-mono);

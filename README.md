@@ -66,7 +66,16 @@ a published Google Sheet. Here's the one-time setup:
 Import `publications-template.csv` into a new Google Sheet (File → Import).
 It has the exact header row the sync script expects:
 `Title, Authors, Date, Venue, URL, Abstract, Type, Conference Name,
-Conference Date, Conference Location, Thumbnail URL, BibTeX, Repository URL`.
+Conference Date, Conference Location, Thumbnail URL, BibTeX, Repository URL,
+Member Slugs`.
+
+**Member Slugs** is what links a publication to a member's own personal
+page: a comma-separated list of member page filenames without the
+`.html` (e.g. `tiziano-sammarone`). Any publication tagged with a
+member's slug automatically shows up in a compact version of the same
+box on that member's page — nothing is duplicated by hand, and it stays
+current whenever the sheet updates. Leave it blank for anyone without a
+page yet.
 Everything except `Title, Authors, Date, Venue, URL, Abstract` is optional —
 leave a cell blank and that piece just won't render for that row.
 
@@ -98,3 +107,67 @@ notice ("showing seed/example data…") whenever `data/publications.json`
 has `"source": "seed"` (i.e. the sync has never run) or when the file
 fails to load entirely. Once the Action has run successfully at least
 once, `"source"` becomes `"google-sheets"` and the notice disappears.
+
+## Setting up the live Members sync
+
+Same idea as Publications, replicated for the member roster — a sheet,
+a sync script, a GitHub Action — but with one important difference:
+**member pages have hand-written prose** (the Projects/Teaching/Hobbies
+sections) that a sheet can't reasonably capture, so the system only
+manages part of each page.
+
+**How it works:** `scripts/sync_members.py` fetches the Members sheet
+and, for each row:
+- If `members/<slug>.html` already exists, it replaces **only** the
+  content between the `<!-- SHEET:PROFILE:START -->` and
+  `<!-- SHEET:PROFILE:END -->` markers (the header photo/name/badge/bio/
+  links, Research Interests, the Publications reference, and PhD Topic).
+  Everything below that — Projects, Teaching, Hobbies — is left exactly
+  as it was, untouched, no matter how many times the sync runs.
+- If the file doesn't exist yet, it creates the whole page: the
+  sheet-managed section plus a starter Projects/Teaching/Hobbies
+  section full of editable placeholders.
+- `members.html` itself is fully rewritten every run, since every bit
+  of that page comes from the sheet — there's nothing hand-authored on
+  it to protect.
+
+**Sheet columns:** `Name, Slug, Rank, Role, Institution, Bio,
+Bio Snippet, Avatar Initials, Photo URL, Badge Word, Email, LinkedIn,
+Google Scholar, ResearchGate, Personal Site, Keywords, Research Summary,
+PhD Topic Title, PhD Topic Description`.
+
+- **Slug** becomes the filename (`members/<slug>.html`) and is what
+  Publications' "Member Slugs" column matches against — keep them
+  consistent between the two sheets.
+- **Rank** must be exactly one of `director`, `professor`, `phd`,
+  `collaborator` (lowercase) — it controls which group a member lands
+  in on `members.html`, in that order.
+- **Bio** is the long version on the personal page; **Bio Snippet** is
+  the short version shown on the members-list card — they're
+  deliberately separate fields.
+- **Keywords** is comma-separated; the personal page shows all of them,
+  the members-list card shows only the first three (kept short on
+  purpose).
+- **PhD Topic Title/Description** only render when Rank is `phd`, and
+  only if at least one of them is filled in.
+- Any blank field (Photo URL, Badge Word, social links, PhD Topic) is
+  simply omitted from the page rather than shown broken.
+
+**One-time setup** (same pattern as Publications):
+1. Import `members-template.csv` into a new Google Sheet — it's
+   pre-filled with the current 5 members, including your own real data.
+2. File → Share → Publish to web → that sheet/tab → CSV format → Publish.
+3. Add the URL as repository variable `MEMBERS_SHEET_CSV_URL`.
+4. Push this site, then run "Sync Members" manually once from the
+   Actions tab to confirm it works, same as with Publications.
+5. It then runs daily on its own (see the `cron` line in
+   `.github/workflows/sync-members.yml`), or trigger it manually
+   any time after editing the sheet.
+
+This workflow reuses the same `PUBLICATIONS_PUSH_TOKEN` secret already
+set up for Publications — no second token needed.
+
+**If you ever want to hand-edit something in the profile section**
+(outside of Projects/Teaching/Hobbies), do it in the sheet, not the
+HTML — the next sync will overwrite that region with whatever the
+sheet says.
