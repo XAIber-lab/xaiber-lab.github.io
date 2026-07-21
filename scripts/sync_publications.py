@@ -60,6 +60,14 @@ def normalize_row(raw):
         # member's own personal page. Leave blank if nobody with a
         # page yet is an author.
         "memberslugs": out.get("memberslugs") or out.get("members") or "",
+        # Full URL to a downloadable PDF (GitHub-hosted in a papers/
+        # folder, or a Google Drive direct-download link). Must be a
+        # full URL, not a relative path — these cards render both at
+        # the site root and one folder down on member pages.
+        "pdfurl": normalize_url(out.get("pdfurl") or out.get("pdf") or "") if (out.get("pdfurl") or out.get("pdf")) else "",
+        # A verified, human-written APA-format citation string —
+        # not auto-generated, so it's never subtly wrong.
+        "apacitation": out.get("apacitation") or out.get("apa", ""),
     }
 
 

@@ -85,6 +85,10 @@ window.PubCard = (function () {
       ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository ↗</a>'
       : "";
 
+    var pdfChip = pub.pdfurl
+      ? '<a class="link-chip" href="' + escapeHTML(normalizeUrl(pub.pdfurl)) + '" target="_blank" rel="noopener" download>Download PDF ⬇</a>'
+      : "";
+
     var abstractToggle = pub.abstract
       ? '<button type="button" class="link-chip text-toggle" data-target="abstract-' + index + '">Abstract <span class="chevron-char">▾</span></button>'
       : "";
@@ -101,6 +105,15 @@ window.PubCard = (function () {
         '<div style="clear:both;">' + escapeHTML(pub.bibtex) + "</div></div>"
       : "";
 
+    var apaToggle = pub.apacitation
+      ? '<button type="button" class="link-chip text-toggle" data-target="apa-' + index + '">APA Citation <span class="chevron-char">▾</span></button>'
+      : "";
+    var apaBlock = pub.apacitation
+      ? '<div class="toggle-block" id="apa-' + index + '">' +
+        '<button type="button" class="link-chip copy-btn" data-target="apa-' + index + '" style="float:right; margin-bottom:8px;">Copy</button>' +
+        '<div style="clear:both;">' + escapeHTML(pub.apacitation) + "</div></div>"
+      : "";
+
     wrapper.innerHTML =
       '<div class="pub-card-thumb" aria-hidden="true">' + thumbHTML + "</div>" +
       "<div>" +
@@ -112,11 +125,14 @@ window.PubCard = (function () {
       '<div class="pub-card-actions">' +
       abstractToggle +
       bibtexToggle +
+      apaToggle +
       '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
       repoChip +
+      pdfChip +
       "</div>" +
       abstractBlock +
       bibtexBlock +
+      apaBlock +
       "</div>";
 
     return wrapper;
