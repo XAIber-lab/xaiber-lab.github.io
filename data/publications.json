@@ -1,37 +1,21 @@
 {
-  "generatedAt": "2026-07-21T09:10:35.239312+00:00",
-  "source": "seed",
+  "generatedAt": "2026-07-21T13:47:48.465090+00:00",
+  "source": "google-sheets",
   "publications": [
     {
       "title": "A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library",
-      "authors": "Sammarone, T., Angelini, M.",
+      "authors": "Tiziano Sammarone and Marco Angelini",
       "date": "2026-01-20",
-      "venue": "IEEE International Conference on Cyber Humanities (IEEE CH)",
+      "venue": "2025 IEEE International Conference on Cyber Humanities (IEEE-CH)",
       "url": "https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
-      "abstract": "Replace with the paper's actual abstract.",
+      "abstract": "Security frameworks are important tools to govern organizations’ cybersecurity, but their creation and update require significant time and human effort to avoid leaving organizations with fragmented regulations. This work proposes a methodology to use Generative AI to assist the risk assessor, using AI to analyze documents and recommend useful excerpts, transforming them into controls and assisting in results review. The methodology was validated over 55 documents, half of which were analyzed by a human expert, with the results compared using the AI model to tune it. The second half is analyzed by the model, and the expert reviewed the results. The AI provides a degree of confidence in the analysis and automatically annotates the document excerpts. These tests demonstrated comparable accuracy and a significant reduction in analysis time. Two controls libraries were generated as case study. One for the NIST Cybersecurity Framework 2.0 regarding cybersecurity of generative AI, the other for the NIS 2 directive.",
       "type": "Conference paper",
-      "conferencename": "IEEE International Conference on Cyber Humanities",
-      "conferencedate": "September 8-10, 2025",
+      "conferencename": "2025 IEEE International Conference on Cyber Humanities (IEEE-CH)",
+      "conferencedate": "25-09-08",
       "conferencelocation": "Florence, Italy",
-      "thumbnailurl": "",
-      "bibtex": "@inproceedings{sammarone2025humanai,\n  author = {Sammarone, Tiziano and Angelini, Marco},\n  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},\n  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},\n  year = {2025},\n  address = {Florence, Italy},\n  doi = {10.1109/IEEE-CH65308.2025.11279411}\n}",
-      "repositoryurl": "",
-      "memberslugs": "tiziano-sammarone"
-    },
-    {
-      "title": "Placeholder Publication Title Two",
-      "authors": "Author One, Author Two",
-      "date": "2025",
-      "venue": "Journal Name",
-      "url": "#",
-      "abstract": "One or two sentence placeholder abstract describing this placeholder publication's contribution.",
-      "type": "Journal article",
-      "conferencename": "",
-      "conferencedate": "",
-      "conferencelocation": "",
-      "thumbnailurl": "",
-      "bibtex": "",
-      "repositoryurl": "",
+      "thumbnailurl": "https://ieeexplore.ieee.org/abstract/document/11279411",
+      "bibtex": "@INPROCEEDINGS{11279411,\r\n  author={Sammarone, Tiziano and Angelini, Marco},\r\n  booktitle={2025 IEEE International Conference on Cyber Humanities (IEEE-CH)}, \r\n  title={A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library}, \r\n  year={2025},\r\n  volume={},\r\n  number={},\r\n  pages={1-7},\r\n  keywords={Analytical models;Humanities;Generative AI;Reviews;Organizations;NIST;Libraries;Regulation;Risk management;Computer security;Cyber Risk Assessment;Generative AI;Human-Centered AI;LLM;Cybersecurity Framework},\r\n  doi={10.1109/IEEE-CH65308.2025.11279411}}",
+      "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
       "memberslugs": ""
     }
   ]
