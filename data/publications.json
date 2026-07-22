@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-22T07:52:50.036730+00:00",
-  "source": "seed",
+  "generatedAt": "2026-07-22T08:40:44.075800+00:00",
+  "source": "google-sheets",
   "publications": [
     {
       "title": "A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library",
@@ -8,37 +8,37 @@
       "date": "2026-01-20",
       "venue": "IEEE International Conference on Cyber Humanities (IEEE CH)",
       "url": "https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
-      "abstract": "Replace with the paper's actual abstract.",
+      "abstract": "Security frameworks are important tools to govern organizations’ cybersecurity, but their creation and update require significant time and human effort to avoid leaving organizations with fragmented regulations. This work proposes a methodology to use Generative AI to assist the risk assessor, using AI to analyze documents and recommend useful excerpts, transforming them into controls and assisting in results review. The methodology was validated over 55 documents, half of which were analyzed by a human expert, with the results compared using the AI model to tune it. The second half is analyzed by the model, and the expert reviewed the results. The AI provides a degree of confidence in the analysis and automatically annotates the document excerpts. These tests demonstrated comparable accuracy and a significant reduction in analysis time. Two controls libraries were generated as case study. One for the NIST Cybersecurity Framework 2.0 regarding cybersecurity of generative AI, the other for the NIS 2 directive.",
       "type": "Conference paper",
       "conferencename": "IEEE International Conference on Cyber Humanities",
       "conferencedate": "September 8-10, 2025",
       "conferencelocation": "Florence, Italy",
-      "thumbnailurl": "",
+      "thumbnailurl": "https://xaiber-lab.github.io/images/sammarone-IEEE-paper.png",
       "bibtex": "@inproceedings{sammarone2025humanai,\n  author = {Sammarone, Tiziano and Angelini, Marco},\n  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},\n  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},\n  year = {2025},\n  address = {Florence, Italy},\n  doi = {10.1109/IEEE-CH65308.2025.11279411}\n}",
-      "repositoryurl": "",
+      "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
       "memberslugs": "tiziano-sammarone",
-      "pdfurl": "",
-      "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
-      "projectslugs": ""
+      "projectslugs": "",
+      "pdfurl": "https://github.com/XAIber-lab/xaiber-lab.github.io/blob/main/papers/Sammarone_Paper_IEEE_CH.pdf",
+      "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
     },
     {
-      "title": "Placeholder Publication Title Two",
+      "title": "Example Journal Article Title",
       "authors": "Author One, Author Two",
       "date": "2025",
       "venue": "Journal Name",
-      "url": "#",
-      "abstract": "One or two sentence placeholder abstract describing this placeholder publication's contribution.",
+      "url": "https://doi.org/10.xxxx/example",
+      "abstract": "One or two sentence abstract summarizing the contribution.",
       "type": "Journal article",
       "conferencename": "",
       "conferencedate": "",
       "conferencelocation": "",
       "thumbnailurl": "",
       "bibtex": "",
-      "repositoryurl": "",
+      "repositoryurl": "https://github.com/example/example-repo",
       "memberslugs": "",
+      "projectslugs": "",
       "pdfurl": "",
-      "apacitation": "",
-      "projectslugs": ""
+      "apacitation": ""
     }
   ]
 }
