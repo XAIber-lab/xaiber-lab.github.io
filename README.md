@@ -88,12 +88,15 @@ Do this for each of the 4 slides you want to replace (or delete extra
 `<div>`s if you have fewer than 4 real photos, or copy the block for
 more).
 
-**Project thumbnails & mini-gallery** — hand-edited HTML.
-Projects aren't sheet-generated, so these are direct edits too. In
-`projects.html`, each card has a `<div class="card-thumb" aria-hidden="true"></div>`
-— give it the same `style="background-image:url('...'); background-size:cover; background-position:center;"`
-treatment as above. On a project's own page (e.g. `projects/faradai.html`),
-the equivalent spots are `.mini-gallery-item` divs under the title.
+**Project thumbnails & mini-gallery** — sheet-driven, no HTML editing.
+Paste URLs into the **Image 1/2/3 URL** columns on that project's row
+in the Projects sheet, then run "Sync Projects." Image 1 doubles as
+the card thumbnail on `projects.html`; all three (if filled in) appear
+in the mini-gallery on the project's own page. These use `contain`
+rather than `cover` — project images are more often screenshots or
+diagrams where cropping would cut off something that matters, so the
+whole image shows, letterboxed against the placeholder background if
+the proportions don't match exactly.
 
 **Logo / favicon** — the small network-graph mark in the header is
 hand-drawn SVG, not a photo; there's nothing to swap in unless you want
@@ -261,3 +264,60 @@ pattern to copy.
 
 This workflow reuses the same `PUBLICATIONS_PUSH_TOKEN` secret already
 set up for Publications — no second token needed.
+
+## Setting up the live Projects sync
+
+Same idea again, for projects — a sheet, `scripts/sync_projects.py`,
+and `.github/workflows/sync-projects.yml`. Two things make this one
+a little different from Members and Publications:
+
+**Team membership isn't a field on the Projects sheet at all.** It's
+derived automatically by cross-referencing the Member Activities
+sheet: anyone with an activity entry whose **Project Slug** matches
+this project is listed on the Team section, automatically, with no
+separate place to maintain the same fact twice. This means
+`sync_projects.py` also reads `MEMBERS_SHEET_CSV_URL` and
+`MEMBER_ACTIVITIES_SHEET_CSV_URL` (read-only) — both already set up
+from the Members sync, no new variables needed for this part.
+
+**Related Publications work the same way Member pages already do** —
+live, at runtime, not baked in at sync time. A publication shows up on
+a project's page if its **Project Slugs** column (in the Publications
+sheet — see that section above) includes this project's slug. Add
+that column to your existing Publications sheet if you haven't already.
+
+**Projects sheet columns:** `Title, Slug, Status, Time Span, Tagline,
+Funding Regions, Funding Line, Description, Official Site, Repository
+URL, Keywords, Image 1 URL, Image 2 URL, Image 3 URL, About`.
+
+- **Slug** becomes the filename (`projects/<slug>.html`) — and is
+  what Member Activities' **Project Slug** column links back to, and
+  what a publication's **Project Slugs** column links to.
+- **Status** must be `Active` or `Completed`.
+- **Funding Regions** is comma-separated (e.g. `European, Italian`) —
+  each becomes a small flag badge. Only `European` and `Italian` have
+  a real flag icon built in right now; anything else still shows as a
+  text badge without one. To add more, edit the `FLAG_SVGS` dict at
+  the top of `scripts/sync_projects.py`.
+- **Description** (short, shown in the header) and **About** (the
+  fuller section further down) can each hold multiple paragraphs —
+  put each on its own line within the cell, same as Bullets on the
+  Member Activities sheet.
+- **Image 1/2/3 URL** are optional. Image 1 doubles as the thumbnail
+  on the project's card in `projects.html`. Leave all three blank to
+  keep the placeholder "image goes here" boxes.
+- Everything except Title, Slug, Status, Time Span, and Tagline is
+  optional — leave a cell blank and that piece just won't render.
+
+**One-time setup:** same pattern as the others — import
+`projects-template.csv` (pre-filled with FaRADAI's real data) into a
+new sheet, publish it to web as CSV, add the URL as repository
+variable `PROJECTS_SHEET_CSV_URL`, push, then run "Sync Projects"
+manually once from the Actions tab to confirm it works. It reuses the
+same `PUBLICATIONS_PUSH_TOKEN` secret — no new token needed.
+
+**`projects/project-template.html` is no longer part of the live
+site** now that projects.html is fully generated — it stays in the
+repo purely as a structural reference for the HTML/CSS patterns this
+script produces, not linked from anywhere real.
+

@@ -60,6 +60,10 @@ def normalize_row(raw):
         # member's own personal page. Leave blank if nobody with a
         # page yet is an author.
         "memberslugs": out.get("memberslugs") or out.get("members") or "",
+        # Comma-separated project page slugs (e.g. "faradai"), same
+        # idea as Member Slugs but for linking a publication to a
+        # project's page instead of a member's.
+        "projectslugs": out.get("projectslugs") or out.get("projects") or "",
         # Full URL to a downloadable PDF (GitHub-hosted in a papers/
         # folder, or a Google Drive direct-download link). Must be a
         # full URL, not a relative path — these cards render both at

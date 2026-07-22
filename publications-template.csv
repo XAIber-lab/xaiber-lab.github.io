@@ -1,4 +1,4 @@
-Title,Authors,Date,Venue,URL,Abstract,Type,Conference Name,Conference Date,Conference Location,Thumbnail URL,BibTeX,Repository URL,Member Slugs,PDF URL,APA Citation
+Title,Authors,Date,Venue,URL,Abstract,Type,Conference Name,Conference Date,Conference Location,Thumbnail URL,BibTeX,Repository URL,Member Slugs,PDF URL,APA Citation,Project Slugs
 A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library,"Sammarone, T., Angelini, M.",2026-01-20,IEEE International Conference on Cyber Humanities (IEEE CH),https://doi.org/10.1109/IEEE-CH65308.2025.11279411,Replace with the paper's actual abstract.,Conference paper,IEEE International Conference on Cyber Humanities,"September 8-10, 2025","Florence, Italy",,"@inproceedings{sammarone2025humanai,
   author = {Sammarone, Tiziano and Angelini, Marco},
   title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},
@@ -6,5 +6,5 @@ A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls L
   year = {2025},
   address = {Florence, Italy},
   doi = {10.1109/IEEE-CH65308.2025.11279411}
-}",,tiziano-sammarone,,"Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
-Example Journal Article Title,"Author One, Author Two",2025,Journal Name,https://doi.org/10.xxxx/example,One or two sentence abstract summarizing the contribution.,Journal article,,,,,,https://github.com/example/example-repo,,https://xaiber-lab.github.io/papers/example-2025-title.pdf,"Author, A. A., & Author, B. B. (2025). Example journal article title. Journal Name, 12(3), 45–67. https://doi.org/10.xxxx/example"
+}",,tiziano-sammarone,,"Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
+Example Journal Article Title,"Author One, Author Two",2025,Journal Name,https://doi.org/10.xxxx/example,One or two sentence abstract summarizing the contribution.,Journal article,,,,,,https://github.com/example/example-repo,,https://xaiber-lab.github.io/papers/example-2025-title.pdf,"Author, A. A., & Author, B. B. (2025). Example journal article title. Journal Name, 12(3), 45–67. https://doi.org/10.xxxx/example",

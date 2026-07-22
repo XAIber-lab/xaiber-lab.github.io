@@ -65,6 +65,14 @@ window.PubCard = (function () {
     return list.map(function (s) { return s.trim().toLowerCase(); }).indexOf(slug.toLowerCase()) !== -1;
   }
 
+  // Same idea, for a publication's projectslugs field.
+  function belongsToProject(pub, slug) {
+    var raw = pub.projectslugs;
+    if (!raw) return false;
+    var list = Array.isArray(raw) ? raw : String(raw).split(",");
+    return list.map(function (s) { return s.trim().toLowerCase(); }).indexOf(slug.toLowerCase()) !== -1;
+  }
+
   function createCardEl(pub, index) {
     var wrapper = document.createElement("article");
     wrapper.className = "pub-card";
@@ -171,6 +179,7 @@ window.PubCard = (function () {
     venueLine: venueLine,
     dateLine: dateLine,
     belongsToMember: belongsToMember,
+    belongsToProject: belongsToProject,
     createCardEl: createCardEl,
     wireListEvents: wireListEvents
   };
