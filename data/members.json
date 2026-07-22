@@ -1,0 +1,49 @@
+{
+  "members": [
+    {
+      "name": "Marco Angelini",
+      "slug": "marco-angelini",
+      "rank": "director",
+      "role": "Director",
+      "biosnippet": "Directs XAIber-Lab and supervises the group's PhD and postgraduate research.",
+      "avatarinitials": "MA",
+      "photourl": ""
+    },
+    {
+      "name": "Full Name",
+      "slug": "full-name-professor",
+      "rank": "professor",
+      "role": "Full Professor",
+      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
+      "avatarinitials": "FN",
+      "photourl": ""
+    },
+    {
+      "name": "Tiziano Sammarone",
+      "slug": "tiziano-sammarone",
+      "rank": "phd",
+      "role": "PhD Candidate",
+      "biosnippet": "Researcher at the intersection of AI, cybersecurity, and risk management, focused on human-AI collaboration across the risk management lifecycle.",
+      "avatarinitials": "TS",
+      "photourl": ""
+    },
+    {
+      "name": "Full Name",
+      "slug": "full-name-phd",
+      "rank": "phd",
+      "role": "PhD Candidate",
+      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
+      "avatarinitials": "FN",
+      "photourl": ""
+    },
+    {
+      "name": "Full Name",
+      "slug": "full-name-collaborator",
+      "rank": "collaborator",
+      "role": "Collaborator",
+      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
+      "avatarinitials": "FN",
+      "photourl": ""
+    }
+  ]
+}

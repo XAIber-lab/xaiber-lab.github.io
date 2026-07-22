@@ -109,6 +109,32 @@ in each page's header (or asking me to help redesign it).
 2. ~~Build out `projects.html`~~ done.
 3. ~~Build out `publications.html`~~ done — see setup below.
 
+## The homepage teasers update themselves
+
+`index.html`'s three teaser sections (Projects, Members, Publications)
+are no longer static placeholders — `js/homepage-feed.js` fetches
+`data/projects.json`, `data/members.json`, and `data/publications.json`
+(the same feeds the sync scripts already produce) and renders the
+first few real entries:
+
+- **Projects**: first 3, in the order they appear in the Projects sheet.
+- **Members**: first 4, in rank order (Director → Professors → PhD
+  Candidates → Collaborators), matching the grouping on `members.html`.
+- **Publications**: the 3 most recent by date, same sort as the full
+  Publications page.
+
+There's nothing to configure — as soon as any of the three syncs run
+and update its data file, the homepage reflects it on next page load.
+If a data file is ever missing or fails to load, that teaser shows a
+plain "coming soon" message rather than breaking or reverting to fake
+placeholder content.
+
+`data/members.json` is written by `sync_members.py` and
+`data/projects.json` by `sync_projects.py`, alongside the HTML pages
+those scripts already generate — both are lightweight feeds (name,
+role, slug, etc.) rather than full page content, purely for this kind
+of cross-page summary use.
+
 ## Setting up the live Publications sync
 
 The Publications page reads `data/publications.json`. That file starts out

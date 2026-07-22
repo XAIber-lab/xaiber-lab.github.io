@@ -80,38 +80,12 @@
         <a class="section-link" href="projects.html">View all projects &rarr;</a>
       </div>
 
-      <div class="card-grid">
-
-        <!-- PLACEHOLDER card 1 -->
-        <article class="card">
-          <div class="card-thumb" aria-hidden="true"></div>
-          <div class="card-body">
-            <h3>Project Title One</h3>
-            <p>One-line placeholder description of the project and its aim.</p>
-            <a class="card-link" href="projects.html">Learn more &rarr;</a>
-          </div>
-        </article>
-
-        <!-- PLACEHOLDER card 2 -->
-        <article class="card">
-          <div class="card-thumb" aria-hidden="true"></div>
-          <div class="card-body">
-            <h3>Project Title Two</h3>
-            <p>One-line placeholder description of the project and its aim.</p>
-            <a class="card-link" href="projects.html">Learn more &rarr;</a>
-          </div>
-        </article>
-
-        <!-- PLACEHOLDER card 3 -->
-        <article class="card">
-          <div class="card-thumb" aria-hidden="true"></div>
-          <div class="card-body">
-            <h3>Project Title Three</h3>
-            <p>One-line placeholder description of the project and its aim.</p>
-            <a class="card-link" href="projects.html">Learn more &rarr;</a>
-          </div>
-        </article>
-
+      <!-- Populated by js/homepage-feed.js from data/projects.json,
+           which sync_projects.py regenerates from the Projects sheet.
+           Falls back to a friendly message if that feed is ever
+           unavailable — see the script for details. -->
+      <div class="card-grid" id="home-project-grid">
+        <p class="pub-loading">Loading projects&hellip;</p>
       </div>
     </div>
   </section>
@@ -125,32 +99,9 @@
         <a class="section-link" href="members.html">Meet the team &rarr;</a>
       </div>
 
-      <div class="member-grid">
-
-        <div class="member-mini">
-          <div class="avatar-placeholder">AB</div>
-          <h3>Full Name</h3>
-          <p class="role">Director</p>
-        </div>
-
-        <div class="member-mini">
-          <div class="avatar-placeholder">CD</div>
-          <h3>Full Name</h3>
-          <p class="role">PhD Candidate</p>
-        </div>
-
-        <div class="member-mini">
-          <div class="avatar-placeholder">EF</div>
-          <h3>Full Name</h3>
-          <p class="role">Professor</p>
-        </div>
-
-        <div class="member-mini">
-          <div class="avatar-placeholder">GH</div>
-          <h3>Full Name</h3>
-          <p class="role">Collaborator</p>
-        </div>
-
+      <!-- Populated by js/homepage-feed.js from data/members.json. -->
+      <div class="member-grid" id="home-member-grid">
+        <p class="pub-loading">Loading members&hellip;</p>
       </div>
     </div>
   </section>
@@ -164,32 +115,9 @@
         <a class="section-link" href="publications.html">View all publications &rarr;</a>
       </div>
 
-      <ul class="pub-list">
-
-        <li class="pub-item">
-          <span class="pub-meta">2026<br>Venue</span>
-          <div>
-            <p class="pub-title">Placeholder Publication Title Goes Here</p>
-            <p class="pub-authors">Author One, Author Two, Author Three</p>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-meta">2025<br>Venue</span>
-          <div>
-            <p class="pub-title">Placeholder Publication Title Goes Here</p>
-            <p class="pub-authors">Author One, Author Two</p>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-meta">2025<br>Venue</span>
-          <div>
-            <p class="pub-title">Placeholder Publication Title Goes Here</p>
-            <p class="pub-authors">Author One, Author Two, Author Three</p>
-          </div>
-        </li>
-
+      <!-- Populated by js/homepage-feed.js from data/publications.json. -->
+      <ul class="pub-list" id="home-pub-list">
+        <li><p class="pub-loading">Loading publications&hellip;</p></li>
       </ul>
     </div>
   </section>
@@ -214,6 +142,8 @@
 
 <script src="js/letter-reel.js"></script>
 <script src="js/hero-carousel.js"></script>
+<script src="js/pub-card-shared.js"></script>
+<script src="js/homepage-feed.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

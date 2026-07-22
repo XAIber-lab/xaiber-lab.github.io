@@ -33,6 +33,7 @@ Standard library only, so the GitHub Action needs no pip install.
 
 import csv
 import io
+import json
 import os
 import sys
 import urllib.request
@@ -40,6 +41,7 @@ import urllib.request
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 PROJECTS_DIR = os.path.join(ROOT, "projects")
 PROJECTS_HTML_PATH = os.path.join(ROOT, "projects.html")
+PROJECTS_JSON_PATH = os.path.join(ROOT, "data", "projects.json")
 
 LOGO_MARK = (
     '<svg class="logo-mark" viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">'
@@ -446,6 +448,17 @@ def main():
         with open(path, "w", encoding="utf-8") as f:
             f.write(render_project_page(p, team_members))
         print("  " + p["slug"] + ": generated (" + str(len(team_members)) + " team member(s))")
+
+    # --- data/projects.json, so the homepage (and anything else) can
+    # pull a lightweight feed instead of parsing generated HTML ---
+    projects_feed = [{
+        "title": p["title"], "slug": p["slug"], "status": p["status"], "timespan": p["timespan"],
+        "tagline": p["tagline"], "keywords": p["keywords"][:3], "image1url": p["image1url"],
+    } for p in projects]
+    os.makedirs(os.path.dirname(PROJECTS_JSON_PATH), exist_ok=True)
+    with open(PROJECTS_JSON_PATH, "w", encoding="utf-8") as f:
+        json.dump({"projects": projects_feed}, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
     with open(PROJECTS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(render_projects_html(projects))

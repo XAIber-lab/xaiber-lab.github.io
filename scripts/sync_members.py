@@ -26,6 +26,7 @@ Standard library only, so the GitHub Action needs no pip install.
 
 import csv
 import io
+import json
 import os
 import sys
 import urllib.request
@@ -33,6 +34,7 @@ import urllib.request
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 MEMBERS_DIR = os.path.join(ROOT, "members")
 MEMBERS_HTML_PATH = os.path.join(ROOT, "members.html")
+MEMBERS_JSON_PATH = os.path.join(ROOT, "data", "members.json")
 
 RANK_ORDER = ["director", "professor", "phd", "collaborator"]
 RANK_SECTION_TITLES = {
@@ -511,6 +513,21 @@ def main():
         with open(path, "w", encoding="utf-8") as f:
             f.write(render_member_page(m, activities_by_key))
         print("  " + m["slug"] + ": generated")
+
+    # --- data/members.json, so the homepage (and anything else) can
+    # pull a lightweight feed instead of parsing generated HTML ---
+    ordered = sorted(
+        members,
+        key=lambda m: RANK_ORDER.index(m["rank"]) if m["rank"] in RANK_ORDER else len(RANK_ORDER),
+    )
+    members_feed = [{
+        "name": m["name"], "slug": m["slug"], "rank": m["rank"], "role": m["role"],
+        "biosnippet": m["biosnippet"], "avatarinitials": m["avatarinitials"], "photourl": m["photourl"],
+    } for m in ordered]
+    os.makedirs(os.path.dirname(MEMBERS_JSON_PATH), exist_ok=True)
+    with open(MEMBERS_JSON_PATH, "w", encoding="utf-8") as f:
+        json.dump({"members": members_feed}, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
     with open(MEMBERS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(render_members_html(members))

@@ -1,0 +1,41 @@
+{
+  "projects": [
+    {
+      "title": "FaRADAI",
+      "slug": "faradai",
+      "status": "active",
+      "timespan": "2022–2026 (est.)",
+      "tagline": "Frugal and Robust AI for Defence Advanced Intelligence",
+      "keywords": [
+        "frugal ai",
+        "explainable ai",
+        "defence"
+      ],
+      "image1url": ""
+    },
+    {
+      "title": "Project Title Two",
+      "slug": "project-title-two",
+      "status": "completed",
+      "timespan": "2023–2024",
+      "tagline": "One-line placeholder description of the project and its aim.",
+      "keywords": [
+        "keyword one",
+        "keyword two"
+      ],
+      "image1url": ""
+    },
+    {
+      "title": "Project Title Three",
+      "slug": "project-title-three",
+      "status": "active",
+      "timespan": "2026–present",
+      "tagline": "One-line placeholder description of the project and its aim.",
+      "keywords": [
+        "keyword one",
+        "keyword two"
+      ],
+      "image1url": ""
+    }
+  ]
+}
