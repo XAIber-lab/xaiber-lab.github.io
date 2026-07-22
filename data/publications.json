@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "generatedAt": "2026-07-22T08:02:53.761219+00:00",
-  "source": "google-sheets",
-=======
   "generatedAt": "2026-07-22T07:52:50.036730+00:00",
   "source": "seed",
->>>>>>> 21e3e81 (Update site content and layout)
   "publications": [
     {
       "title": "A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library",
@@ -13,38 +8,33 @@
       "date": "2026-01-20",
       "venue": "IEEE International Conference on Cyber Humanities (IEEE CH)",
       "url": "https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
-      "abstract": "Security frameworks are important tools to govern organizations’ cybersecurity, but their creation and update require significant time and human effort to avoid leaving organizations with fragmented regulations. This work proposes a methodology to use Generative AI to assist the risk assessor, using AI to analyze documents and recommend useful excerpts, transforming them into controls and assisting in results review. The methodology was validated over 55 documents, half of which were analyzed by a human expert, with the results compared using the AI model to tune it. The second half is analyzed by the model, and the expert reviewed the results. The AI provides a degree of confidence in the analysis and automatically annotates the document excerpts. These tests demonstrated comparable accuracy and a significant reduction in analysis time. Two controls libraries were generated as case study. One for the NIST Cybersecurity Framework 2.0 regarding cybersecurity of generative AI, the other for the NIS 2 directive.",
+      "abstract": "Replace with the paper's actual abstract.",
       "type": "Conference paper",
       "conferencename": "IEEE International Conference on Cyber Humanities",
       "conferencedate": "September 8-10, 2025",
       "conferencelocation": "Florence, Italy",
-      "thumbnailurl": "https://xaiber-lab.github.io/images/sammarone-IEEE-paper.png",
+      "thumbnailurl": "",
       "bibtex": "@inproceedings{sammarone2025humanai,\n  author = {Sammarone, Tiziano and Angelini, Marco},\n  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},\n  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},\n  year = {2025},\n  address = {Florence, Italy},\n  doi = {10.1109/IEEE-CH65308.2025.11279411}\n}",
-      "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
+      "repositoryurl": "",
       "memberslugs": "tiziano-sammarone",
-<<<<<<< HEAD
-      "pdfurl": "https://github.com/XAIber-lab/xaiber-lab.github.io/blob/main/papers/Sammarone_Paper_IEEE_CH.pdf",
-      "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
-=======
       "pdfurl": "",
       "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411",
       "projectslugs": ""
->>>>>>> 21e3e81 (Update site content and layout)
     },
     {
-      "title": "Example Journal Article Title",
+      "title": "Placeholder Publication Title Two",
       "authors": "Author One, Author Two",
       "date": "2025",
       "venue": "Journal Name",
-      "url": "https://doi.org/10.xxxx/example",
-      "abstract": "One or two sentence abstract summarizing the contribution.",
+      "url": "#",
+      "abstract": "One or two sentence placeholder abstract describing this placeholder publication's contribution.",
       "type": "Journal article",
       "conferencename": "",
       "conferencedate": "",
       "conferencelocation": "",
       "thumbnailurl": "",
       "bibtex": "",
-      "repositoryurl": "https://github.com/example/example-repo",
+      "repositoryurl": "",
       "memberslugs": "",
       "pdfurl": "",
       "apacitation": "",
