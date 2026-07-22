@@ -93,17 +93,6 @@
     });
   }
 
-  function fitTitle(h1) {
-    if (!h1) return;
-    h1.style.transform = "none";
-    var scrollW = h1.scrollWidth;
-    var clientW = h1.clientWidth;
-    if (clientW > 0 && scrollW > clientW) {
-      var scale = clientW / scrollW;
-      h1.style.transform = "scale(" + scale.toFixed(3) + ")";
-    }
-  }
-
   function buildReel(el) {
     var lettersAttr = el.getAttribute("data-letters");
     var suffixesAttr = el.getAttribute("data-suffixes");
@@ -156,9 +145,6 @@
     });
     el.appendChild(track);
 
-    var h1 = el.closest("h1");
-    fitTitle(h1);
-
     if (reduceMotion) return; // stays on the first letter/suffix, fully static
 
     var lineHeight = track.children[0].getBoundingClientRect().height;
@@ -183,7 +169,6 @@
           var oldText = suffixEl.textContent;
           var newText = suffixes[targetIndex];
           scrambleTo(suffixEl, oldText, newText, function () {
-            fitTitle(h1);
             if (isLoopReset) {
               setTimeout(function () {
                 track.style.transition = "none";
