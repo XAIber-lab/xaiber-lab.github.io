@@ -49,6 +49,57 @@ On `index.html` specifically:
 - The hero's network-graph SVG is hand-authored inline in `index.html`;
   it's decorative (`aria-hidden="true"`) and purely a visual signature.
 
+## Where images go
+
+Every image on the site right now is a placeholder (a gray box, or a
+generic icon). Here's exactly where to add a real one for each type,
+and whether it goes through a sheet or needs direct HTML editing.
+
+**First, host the actual image file.** Two options, same as PDFs:
+- Add it to the `images/` folder in this repo (see `images/README.md`)
+  — simplest, no external accounts needed.
+- Or use Google Drive with the `export=view` URL format (also covered
+  in `images/README.md` — note this is different from the
+  `export=download` format used for PDFs).
+
+Either way, you end up with one **full URL** per image. What you do
+with that URL depends on where it's going:
+
+**Member photos** — sheet-driven, no HTML editing.
+Paste the URL into that member's **Photo URL** cell in the Members
+sheet, then run "Sync Members." It replaces the initials-circle with
+the real photo automatically, both on `members.html` and on their own
+page — nothing to touch by hand.
+
+**Publication thumbnails** — sheet-driven, no HTML editing.
+Same idea: paste the URL into that publication's **Thumbnail URL**
+cell in the Publications sheet, then run "Sync Publications."
+
+**Homepage hero carousel** — hand-edited HTML.
+Open `index.html`, find the `.hero-carousel-slide` divs (there are 4).
+Each one currently has no `background-image` of its own (it inherits
+the placeholder icon from CSS). Add a real one directly on the
+element, e.g.:
+```html
+<div class="hero-carousel-slide active" data-caption="Lab workshop"
+     style="background-image:url('https://xaiber-lab.github.io/images/workshop.jpg'); background-size:cover; background-position:center;"></div>
+```
+Do this for each of the 4 slides you want to replace (or delete extra
+`<div>`s if you have fewer than 4 real photos, or copy the block for
+more).
+
+**Project thumbnails & mini-gallery** — hand-edited HTML.
+Projects aren't sheet-generated, so these are direct edits too. In
+`projects.html`, each card has a `<div class="card-thumb" aria-hidden="true"></div>`
+— give it the same `style="background-image:url('...'); background-size:cover; background-position:center;"`
+treatment as above. On a project's own page (e.g. `projects/faradai.html`),
+the equivalent spots are `.mini-gallery-item` divs under the title.
+
+**Logo / favicon** — the small network-graph mark in the header is
+hand-drawn SVG, not a photo; there's nothing to swap in unless you want
+to replace the mark itself, which would mean editing the inline `<svg>`
+in each page's header (or asking me to help redesign it).
+
 ## Next steps (in order)
 
 1. ~~Build out `members.html`~~ done.
