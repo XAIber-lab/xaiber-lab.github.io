@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "generatedAt": "2026-07-21T15:45:34.243086+00:00",
-  "source": "google-sheets",
-=======
   "generatedAt": "2026-07-21T15:11:54.373873+00:00",
   "source": "seed",
->>>>>>> f78597d (Update site content and layout)
   "publications": [
     {
       "title": "A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library",
@@ -20,17 +15,10 @@
       "conferencelocation": "Florence, Italy",
       "thumbnailurl": "",
       "bibtex": "@inproceedings{sammarone2025humanai,\n  author = {Sammarone, Tiziano and Angelini, Marco},\n  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},\n  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},\n  year = {2025},\n  address = {Florence, Italy},\n  doi = {10.1109/IEEE-CH65308.2025.11279411}\n}",
-<<<<<<< HEAD
-      "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
-      "memberslugs": "tiziano-sammarone",
-      "pdfurl": "https://github.com/XAIber-lab/xaiber-lab.github.io/blob/main/papers/Sammarone_Paper_IEEE_CH.pdf",
-      "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411\r\n3\tExample Journal Article Title\tAuthor One, Author Two\t2025\tJournal Name\thttps://doi.org/10.xxxx/example\tOne or two sentence abstract summarizing the contribution.\tJournal article\t\t\t\t\t\thttps://github.com/example/example-repo\t\thttps://xaiber-lab.github.io/papers/example-2025-title.pdf\tAuthor, A. A., & Author, B. B. (2025). Example journal article title. Journal Name, 12(3), 45–67. https://doi.org/10.xxxx/example"
-=======
       "repositoryurl": "",
       "memberslugs": "tiziano-sammarone",
       "pdfurl": "",
       "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
->>>>>>> f78597d (Update site content and layout)
     },
     {
       "title": "Placeholder Publication Title Two",
@@ -45,11 +33,7 @@
       "conferencelocation": "",
       "thumbnailurl": "",
       "bibtex": "",
-<<<<<<< HEAD
-      "repositoryurl": "https://github.com/example/example-repo",
-=======
       "repositoryurl": "",
->>>>>>> f78597d (Update site content and layout)
       "memberslugs": "",
       "pdfurl": "",
       "apacitation": ""
