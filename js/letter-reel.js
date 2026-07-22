@@ -1,23 +1,30 @@
 /* =========================================================
    XAIber-Lab — letter reel + suffix decode effect
    The leading letter still slow-reels exactly as before (X, C, H,
-   V...). Once it lands, the rest of the title rapidly "decodes"
-   character-by-character into that letter's themed word — e.g.
-   landing on C decodes "AIber-Lab" into "yber-Lab", completing
-   "Cyber-Lab". Handles words of any length or word count, since it
-   builds the new text from scratch rather than trying to map old
-   letters onto new ones position-for-position.
+   V...). Once it lands, the rest of the title "decodes" into that
+   letter's themed word — e.g. landing on C decodes into
+   "CyberAI-Lab". The decode is diff-aware: it compares the old and
+   new suffix from the END backward, and any trailing characters
+   that already match (e.g. "-Lab", or "AI-Lab" whenever both the
+   old and new word end that way) are left completely untouched —
+   no rebuild, no flicker. Only the leading part that actually
+   changes gets the scramble treatment. This is what keeps "-Lab"
+   permanently static, and keeps "AI-Lab" static too across every
+   transition except the one into/out of X's own irregular word.
 
    TO EDIT THE LETTER SET: change DEFAULT_LETTERS/DEFAULT_SUFFIXES
    below, or set data-letters="X,C,H" and data-suffixes="AIber-Lab,..."
    on the element to override just for that element. The two lists
-   must be the same length and line up index-for-index.
+   must be the same length and line up index-for-index. Keep new
+   suffixes ending in "AI-Lab" (except X, which is a deliberate
+   exception) so that shared tail keeps benefiting from the
+   no-flicker treatment.
    ========================================================= */
 
 (function () {
 
   var DEFAULT_LETTERS = ["X", "C", "H", "V"];
-  var DEFAULT_SUFFIXES = ["AIber-Lab", "yber-Lab", "uman-Centered Lab", "isual-Lab"];
+  var DEFAULT_SUFFIXES = ["AIber-Lab", "yberAI-Lab", "umanAI-Lab", "isualAI-Lab"];
 
   var HOLD_MS = 2400;              // how long the finished word stays put
   var ROLL_MS = 500;               // the existing single-letter roll duration
@@ -27,29 +34,48 @@
   var SCRAMBLE_LOCK_MS = 220;      // how long a character flickers before locking in
   var SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-  function scrambleTo(el, targetText, onComplete) {
+  // How many trailing characters of `oldText` and `newText` are
+  // identical — that many characters at the end of newText don't
+  // need to animate at all.
+  function commonSuffixLength(oldText, newText) {
+    var maxLen = Math.min(oldText.length, newText.length);
+    var i = 0;
+    while (i < maxLen && oldText[oldText.length - 1 - i] === newText[newText.length - 1 - i]) {
+      i++;
+    }
+    return i;
+  }
+
+  function scrambleTo(el, oldText, newText, onComplete) {
+    var staticLen = commonSuffixLength(oldText, newText);
+    var changeLen = newText.length - staticLen; // leading characters that actually need to animate
+
     el.innerHTML = "";
     var spans = [];
-    for (var i = 0; i < targetText.length; i++) {
+    for (var i = 0; i < newText.length; i++) {
       var span = document.createElement("span");
-      span.textContent = targetText[i];
       el.appendChild(span);
       spans.push(span);
     }
 
-    var remaining = targetText.length;
+    var remaining = newText.length;
     function settle() {
       remaining--;
       if (remaining === 0 && onComplete) onComplete();
     }
 
     spans.forEach(function (span, i) {
-      var ch = targetText[i];
-      if (!/[a-zA-Z]/.test(ch)) {
-        // Punctuation/space/hyphen appears immediately — only letters decode.
+      var ch = newText[i];
+      var alreadyMatches = i >= changeLen; // part of the unchanged trailing run
+      if (alreadyMatches || !/[a-zA-Z]/.test(ch)) {
+        // Unchanged tail, or punctuation/space/hyphen — set once, no animation.
+        span.textContent = ch;
         settle();
         return;
       }
+      // Show some character immediately (never a blank gap) before this
+      // position's staggered lock-in begins.
+      span.textContent = SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
       setTimeout(function () {
         var ticks = 0;
         var maxTicks = Math.round(SCRAMBLE_LOCK_MS / SCRAMBLE_TICK_MS);
@@ -140,7 +166,9 @@
 
       if (hasSuffixEl) {
         setTimeout(function () {
-          scrambleTo(suffixEl, suffixes[targetIndex], function () {
+          var oldText = suffixEl.textContent;
+          var newText = suffixes[targetIndex];
+          scrambleTo(suffixEl, oldText, newText, function () {
             if (isLoopReset) {
               setTimeout(function () {
                 track.style.transition = "none";
