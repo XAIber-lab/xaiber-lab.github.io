@@ -647,6 +647,20 @@ p { margin: 0 0 1em; }
 .card-timespan { font-family: var(--font-mono); font-size: 0.78rem; color: var(--slate); }
 .card-keywords { margin: 10px 0 14px; }
 
+.flag-row { display: flex; gap: 8px; margin: 10px 0; }
+.flag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--slate);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px 3px 6px;
+}
+.flag-badge .flag-emoji { font-size: 0.95rem; line-height: 1; }
+
 .funding-line { font-size: 0.95rem; color: var(--slate); margin-bottom: 14px; }
 .funding-line strong { color: var(--ink); }
 

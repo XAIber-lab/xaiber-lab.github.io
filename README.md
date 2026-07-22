@@ -67,7 +67,7 @@ Import `publications-template.csv` into a new Google Sheet (File → Import).
 It has the exact header row the sync script expects:
 `Title, Authors, Date, Venue, URL, Abstract, Type, Conference Name,
 Conference Date, Conference Location, Thumbnail URL, BibTeX, Repository URL,
-Member Slugs`.
+Member Slugs, PDF URL, APA Citation`.
 
 **Member Slugs** is what links a publication to a member's own personal
 page: a comma-separated list of member page filenames without the
@@ -76,6 +76,21 @@ member's slug automatically shows up in a compact version of the same
 box on that member's page — nothing is duplicated by hand, and it stays
 current whenever the sheet updates. Leave it blank for anyone without a
 page yet.
+
+**PDF URL** adds a "Download PDF" button. Host the PDF either in this
+repo's `papers/` folder (see `papers/README.md` for the exact steps) or
+on Google Drive. **Must be a full URL** (`https://...`), never a
+relative path — these cards render both on the Publications page (site
+root) and embedded on member pages (one folder down), so a relative
+link that works from one breaks on the other.
+
+**APA Citation** adds an "APA Citation" button, same collapsible-with-
+copy-button pattern as BibTeX. This is a plain text field you paste a
+verified citation into — it's deliberately not auto-generated from the
+other fields, since real APA formatting has enough special cases
+(conference vs. journal, author-initial style) that a computed version
+risks looking correct while being subtly wrong.
+
 Everything except `Title, Authors, Date, Venue, URL, Abstract` is optional —
 leave a cell blank and that piece just won't render for that row.
 
@@ -154,7 +169,7 @@ PhD Topic Title, PhD Topic Description`.
   simply omitted rather than shown broken.
 
 **Member Activities sheet columns:** `Member Slug, Section, Date Range,
-Title, Org Line, Description, Bullets`.
+Title, Org Line, Description, Bullets, Project Slug`.
 
 - **Section** must be exactly `projects`, `teaching`, or `hobbies`.
 - **Bullets** holds multiple bullet points in one cell — put each on
@@ -162,9 +177,21 @@ Title, Org Line, Description, Bullets`.
   without leaving the cell).
 - **Date Range**, **Org Line**, and **Description** can all be left
   blank for a simple entry that's just a title.
+- **Project Slug** links the entry's title to a real project page —
+  set it to that project's filename without `.html` (e.g. `faradai`
+  for `projects/faradai.html`) and the title becomes a clickable link
+  to it. Leave blank for entries with no matching project page, and
+  the title just renders as plain text.
 - If a member has no rows at all for a given section, that section
   shows a small placeholder telling you exactly which Member
   Slug/Section to add a row for — rather than an empty-looking gap.
+
+**Funding-region flags on project pages:** a small `.flag-row` of
+`.flag-badge` elements (flag emoji + label) shown near a project's
+status/timespan, on both its card in `projects.html` and its own page.
+These are hand-added to each project's HTML (Projects isn't
+sheet-generated) — see `projects/project-template.html` for the
+pattern to copy.
 
 **One-time setup:**
 1. Import `members-template.csv` into one new Google Sheet tab, and

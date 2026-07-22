@@ -129,6 +129,11 @@ def normalize_activity_row(raw):
         "orgline": out.get("orgline", ""),
         "description": out.get("description", ""),
         "bullets": bullets,
+        # If set to a real project's slug (e.g. "faradai"), the title
+        # becomes a link to that project's page in the Projects
+        # section of the site. Leave blank for entries with no
+        # matching project page.
+        "projectslug": out.get("projectslug", ""),
     }
 
 
@@ -248,10 +253,15 @@ def render_activity_entry(a):
         items = "\n            ".join("<li>" + esc(b) + "</li>" for b in a["bullets"])
         bullets_html = "\n          <ul>\n            " + items + "\n          </ul>"
 
+    title_html = (
+        '<a href="../projects/' + esc(a["projectslug"]) + '.html">' + esc(a["title"]) + "</a>"
+        if a["projectslug"] else esc(a["title"])
+    )
+
     return ('''      <div class="timeline-item">
         <div class="timeline-meta">''' + date_html + '''</div>
         <div>
-          <h4>''' + esc(a["title"]) + '''</h4>
+          <h4>''' + title_html + '''</h4>
           ''' + org_html + '''
           ''' + desc_html + bullets_html + '''
         </div>

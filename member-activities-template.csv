@@ -1,8 +1,4 @@
-Member Slug,Section,Date Range,Title,Org Line,Description,Bullets
+Member Slug,Section,Date Range,Title,Org Line,Description,Bullets,Project Slug
 tiziano-sammarone,projects,May 2025 – Nov 2025,Research Fellow — FARADAI Project,Link Campus University · Supervisor: Prof. Marco Angelini,EDF 20/21 FARADAI: Frugal and Robust AI for Defence Advanced Intelligence.,"Development of robust and efficient AI systems for advanced intelligence applications in the defense sector
 Frugal AI systems capable of operating effectively with limited training data
-Transparent and explainable AI (XAI) systems applied to complex and dynamic contexts"
-tiziano-sammarone,projects,May 2025 – Nov 2025,XAIber-Lab Research Center,Università degli Studi di Roma Link · Director: Prof. Marco Angelini,,"Applications of AI systems on attack graphs
-Neural networks and generative AI for attack path generation based on specific requirements
-AI agent systems for automated generation and management of queries for attack graph path generation
-Generative AI assistance for attack graph path analysis and mitigation prioritization"
+Transparent and explainable AI (XAI) systems applied to complex and dynamic contexts",faradai
