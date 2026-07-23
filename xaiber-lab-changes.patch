@@ -1,0 +1,233 @@
+diff --git a/README.md b/README.md
+index a35f30f..554e36e 100644
+--- a/README.md
++++ b/README.md
+@@ -157,12 +157,26 @@ box on that member's page — nothing is duplicated by hand, and it stays
+ current whenever the sheet updates. Leave it blank for anyone without a
+ page yet.
+ 
+-**PDF URL** adds a "Download PDF" button. Host the PDF either in this
+-repo's `papers/` folder (see `papers/README.md` for the exact steps) or
+-on Google Drive. **Must be a full URL** (`https://...`), never a
+-relative path — these cards render both on the Publications page (site
+-root) and embedded on member pages (one folder down), so a relative
+-link that works from one breaks on the other.
++**PDF URL** adds two buttons: "View PDF" (opens the PDF in a new tab)
++and "Download PDF" (forces a direct save-as instead of just viewing).
++Host the PDF either in this repo's `papers/` folder (see
++`papers/README.md` for the exact steps) or on Google Drive. **Must be a
++full URL** (`https://...`), never a relative path — these cards render
++both on the Publications page (site root) and embedded on member pages
++(one folder down), so a relative link that works from one breaks on
++the other.
++
++**Important for a real forced download:** if the PDF is hosted in this
++repo's `papers/` folder, the URL in the sheet **must** be the live
++`https://xaiber-lab.github.io/papers/<filename>.pdf` page (same domain
++as the site) — not a `https://github.com/XAIber-lab/...blob/main/...`
++link. The `blob/...` URL is GitHub's file-preview *webpage*, not the
++file itself, so both buttons would just open that GitHub page instead
++of the PDF. The "Download PDF" button specifically only forces an
++actual download when the URL is same-origin with the site (true for
++the `xaiber-lab.github.io/papers/...` URL); a Google Drive
++`uc?export=download&id=...` URL (see `papers/README.md`) also triggers
++a real download, since Google's server itself sends the right headers.
+ 
+ **APA Citation** adds an "APA Citation" button, same collapsible-with-
+ copy-button pattern as BibTeX. This is a plain text field you paste a
+@@ -233,7 +247,7 @@ any change in the sheets instead.
+ **Members sheet columns:** `Name, Slug, Rank, Role, Institution, Bio,
+ Bio Snippet, Avatar Initials, Photo URL, Badge Word, Email, LinkedIn,
+ Google Scholar, ResearchGate, Personal Site, Keywords, Research Summary,
+-PhD Topic Title, PhD Topic Description`.
++PhD Date, PhD Topic Title, PhD Topic Description`.
+ 
+ - **Slug** becomes the filename (`members/<slug>.html`) and is what
+   Publications' "Member Slugs" column matches against, and what Member
+@@ -244,9 +258,18 @@ PhD Topic Title, PhD Topic Description`.
+ - **Bio** is the long version on the personal page; **Bio Snippet** is
+   the short version on the members-list card.
+ - **Keywords** is comma-separated; the card shows only the first three.
+-- **PhD Topic Title/Description** only render when Rank is `phd`.
++- **PhD Date** is free text shown as a small line above the PhD Topic
++  title (e.g. `Since November 2023`, or a range like `Nov 2023 – 2026`)
++  — write it however you'd like it displayed. Leave blank to omit it.
++- **PhD Topic Title/Description/Date** only render when Rank is `phd`,
++  and the PhD Topic section is the first thing shown on the page after
++  the profile header, above Research Interests.
+ - Any blank field (Photo URL, Badge Word, social links, PhD Topic) is
+   simply omitted rather than shown broken.
++- **Email** also drives the plain-text "Contact:" line shown near the
++  bottom of the profile header (e.g. `Contact: tiziano dot sammarone at
++  linkstudents dot it`) — the same de-spam-bot obfuscation as before,
++  just now labeled.
+ 
+ **Member Activities sheet columns:** `Member Slug, Section, Date Range,
+ Title, Org Line, Description, Bullets, Project Slug`.
+diff --git a/data/publications.json b/data/publications.json
+index 4ae6a26..aa266cf 100644
+--- a/data/publications.json
++++ b/data/publications.json
+@@ -18,7 +18,7 @@
+       "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
+       "memberslugs": "tiziano-sammarone",
+       "projectslugs": "",
+-      "pdfurl": "https://github.com/XAIber-lab/xaiber-lab.github.io/blob/main/papers/Sammarone_Paper_IEEE_CH.pdf",
++      "pdfurl": "https://xaiber-lab.github.io/papers/Sammarone_Paper_IEEE_CH.pdf",
+       "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
+     },
+     {
+diff --git a/js/pub-card-shared.js b/js/pub-card-shared.js
+index 00e99b0..760ba93 100644
+--- a/js/pub-card-shared.js
++++ b/js/pub-card-shared.js
+@@ -93,8 +93,18 @@ window.PubCard = (function () {
+       ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository ↗</a>'
+       : "";
+ 
+-    var pdfChip = pub.pdfurl
+-      ? '<a class="link-chip" href="' + escapeHTML(normalizeUrl(pub.pdfurl)) + '" target="_blank" rel="noopener" download>Download PDF ⬇</a>'
++    var pdfUrlFixed = pub.pdfurl ? escapeHTML(normalizeUrl(pub.pdfurl)) : "";
++    var pdfViewChip = pub.pdfurl
++      ? '<a class="link-chip" href="' + pdfUrlFixed + '" target="_blank" rel="noopener">View PDF ↗</a>'
++      : "";
++    // The `download` attribute only forces an actual save-as (rather than
++    // just navigating to the file) for same-origin URLs — which is true
++    // for PDFs hosted in this repo's papers/ folder (served from
++    // xaiber-lab.github.io, same origin as the site itself). For a
++    // cross-origin PDF URL, browsers ignore `download` and this behaves
++    // the same as View PDF.
++    var pdfDownloadChip = pub.pdfurl
++      ? '<a class="link-chip" href="' + pdfUrlFixed + '" download>Download PDF ⬇</a>'
+       : "";
+ 
+     var abstractToggle = pub.abstract
+@@ -136,7 +146,8 @@ window.PubCard = (function () {
+       apaToggle +
+       '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
+       repoChip +
+-      pdfChip +
++      pdfViewChip +
++      pdfDownloadChip +
+       "</div>" +
+       abstractBlock +
+       bibtexBlock +
+diff --git a/members-template.csv b/members-template.csv
+index 78cb156..c4613c0 100644
+--- a/members-template.csv
++++ b/members-template.csv
+@@ -1,6 +1,6 @@
+-Name,Slug,Rank,Role,Institution,Bio,Bio Snippet,Avatar Initials,Photo URL,Badge Word,Email,LinkedIn,Google Scholar,ResearchGate,Personal Site,Keywords,Research Summary,PhD Topic Title,PhD Topic Description
+-Marco Angelini,marco-angelini,director,Director,Università degli Studi di Roma Link,Directs XAIber-Lab and supervises the group's PhD and postgraduate research.,Directs XAIber-Lab and supervises the group's PhD and postgraduate research.,MA,,,,,,,,,,,
+-Full Name,full-name-professor,professor,Full Professor,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,
+-Tiziano Sammarone,tiziano-sammarone,phd,PhD Candidate,"Università degli Studi Link — Human Sciences for Innovation, Inclusion & Sustainability, 41st Cycle","Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD, funded by ACN (Italy's National Cybersecurity Agency) and supervised by Prof. Marco Angelini, develops a framework for applying generative AI across the full cyber risk management lifecycle — from identifying and assessing risk through to mitigation and continuous monitoring. A central thread of the work is a bidirectional methodology that maps controls from high-level policy down to technical implementation and traces back up again, paired with a formal notation system built to support that translation. He holds a Master's degree in Cybersecurity (110/110) from Università degli Studi di Roma ""La Sapienza"", and is a member of XAIber-Lab, where his work spans attack-graph analysis, generative AI tooling, and human-AI collaboration in security decision-making.","Researcher at the intersection of AI, cybersecurity, and risk management, focused on human-AI collaboration across the risk management lifecycle.",TS,,Cyber-Lab,tiziano.sammarone@linkstudents.it,https://www.linkedin.com/in/tiziano-sammarone-5b03373ab/,,,,"generative ai for cybersecurity, explainable ai (xai), frugal ai, attack graph analysis, human-ai collaboration, ai governance & ethics","Working across generative AI, explainable AI, and risk governance, with a focus on methodologies that keep human oversight central to security decision-making.",Integrating Generative AI into the Cyber Risk Management Process: A Human-AI Collaboration Approach,"Tiziano's PhD develops a bidirectional methodology for mapping cybersecurity controls from high-level policy down to technical implementation and back, integrating generative AI throughout the cyber risk management lifecycle while keeping a human decision-maker central to the process."
+-Full Name,full-name-phd,phd,PhD Candidate,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,
+-Full Name,full-name-collaborator,collaborator,Collaborator,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,
++Name,Slug,Rank,Role,Institution,Bio,Bio Snippet,Avatar Initials,Photo URL,Badge Word,Email,LinkedIn,Google Scholar,ResearchGate,Personal Site,Keywords,Research Summary,PhD Date,PhD Topic Title,PhD Topic Description
++Marco Angelini,marco-angelini,director,Director,Università degli Studi di Roma Link,Directs XAIber-Lab and supervises the group's PhD and postgraduate research.,Directs XAIber-Lab and supervises the group's PhD and postgraduate research.,MA,,,,,,,,,,,,
++Full Name,full-name-professor,professor,Full Professor,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,,
++Tiziano Sammarone,tiziano-sammarone,phd,PhD Candidate,"Università degli Studi Link — Human Sciences for Innovation, Inclusion & Sustainability, 41st Cycle","Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD, funded by ACN (Italy's National Cybersecurity Agency) and supervised by Prof. Marco Angelini, develops a framework for applying generative AI across the full cyber risk management lifecycle — from identifying and assessing risk through to mitigation and continuous monitoring. A central thread of the work is a bidirectional methodology that maps controls from high-level policy down to technical implementation and traces back up again, paired with a formal notation system built to support that translation. He holds a Master's degree in Cybersecurity (110/110) from Università degli Studi di Roma ""La Sapienza"", and is a member of XAIber-Lab, where his work spans attack-graph analysis, generative AI tooling, and human-AI collaboration in security decision-making.","Researcher at the intersection of AI, cybersecurity, and risk management, focused on human-AI collaboration across the risk management lifecycle.",TS,,Cyber-Lab,tiziano.sammarone@linkstudents.it,https://www.linkedin.com/in/tiziano-sammarone-5b03373ab/,,,,"generative ai for cybersecurity, explainable ai (xai), frugal ai, attack graph analysis, human-ai collaboration, ai governance & ethics","Working across generative AI, explainable AI, and risk governance, with a focus on methodologies that keep human oversight central to security decision-making.",,Integrating Generative AI into the Cyber Risk Management Process: A Human-AI Collaboration Approach,"Tiziano's PhD develops a bidirectional methodology for mapping cybersecurity controls from high-level policy down to technical implementation and back, integrating generative AI throughout the cyber risk management lifecycle while keeping a human decision-maker central to the process."
++Full Name,full-name-phd,phd,PhD Candidate,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,,
++Full Name,full-name-collaborator,collaborator,Collaborator,,One or two sentence placeholder bio describing this member's role and focus.,One or two sentence placeholder bio describing this member's role and focus.,FN,,,,,,,,"keyword one, keyword two",,,,
+diff --git a/members/tiziano-sammarone.html b/members/tiziano-sammarone.html
+index 0969091..5d72cf9 100644
+--- a/members/tiziano-sammarone.html
++++ b/members/tiziano-sammarone.html
+@@ -50,7 +50,7 @@
+ 
+         <p>Based in Rome, Tiziano works at the intersection of artificial intelligence, cybersecurity, and risk management. His PhD, funded by ACN (Italy&#039;s National Cybersecurity Agency) and supervised by Prof. Marco Angelini, develops a framework for applying generative AI across the full cyber risk management lifecycle — from identifying and assessing risk through to mitigation and continuous monitoring. A central thread of the work is a bidirectional methodology that maps controls from high-level policy down to technical implementation and traces back up again, paired with a formal notation system built to support that translation. He holds a Master&#039;s degree in Cybersecurity (110/110) from Università degli Studi di Roma &quot;La Sapienza&quot;, and is a member of XAIber-Lab, where his work spans attack-graph analysis, generative AI tooling, and human-AI collaboration in security decision-making.</p>
+ 
+-        <p class="email-plain">tiziano dot sammarone at linkstudents dot it</p>
++        <p class="email-plain"><strong>Contact:</strong> tiziano dot sammarone at linkstudents dot it</p>
+ 
+         <!-- PLACEHOLDER: add personal website link --><a class="profile-primary-link" href="#" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V10"/><path d="M9 2h5v5"/><path d="M14 2L7 9"/></svg>Personal site</a>
+ 
+@@ -64,6 +64,15 @@
+     </div>
+   </section>
+ 
++  <section class="teaser alt">
++    <div class="wrap">
++      <p class="section-tag">[phd topic]</p>
++      <h2>PhD Topic</h2>
++      <p class="profile-theme" style="margin-bottom: 14px;">Integrating Generative AI into the Cyber Risk Management Process: A Human-AI Collaboration Approach</p>
++      <p>Tiziano&#039;s PhD develops a bidirectional methodology for mapping cybersecurity controls from high-level policy down to technical implementation and back, integrating generative AI throughout the cyber risk management lifecycle while keeping a human decision-maker central to the process.</p>
++    </div>
++  </section>
++
+   <section class="teaser">
+     <div class="wrap">
+       <p class="section-tag">[research interests]</p>
+@@ -90,15 +99,6 @@
+     </div>
+   </section>
+ 
+-  <section class="teaser">
+-    <div class="wrap">
+-      <p class="section-tag">[phd topic]</p>
+-      <h2>PhD Topic</h2>
+-      <p class="profile-theme" style="margin-bottom: 14px;">Integrating Generative AI into the Cyber Risk Management Process: A Human-AI Collaboration Approach</p>
+-      <p>Tiziano&#039;s PhD develops a bidirectional methodology for mapping cybersecurity controls from high-level policy down to technical implementation and back, integrating generative AI throughout the cyber risk management lifecycle while keeping a human decision-maker central to the process.</p>
+-    </div>
+-  </section>
+-
+   <!-- ============ PROJECTS ============ -->
+   <section class="teaser alt">
+     <div class="wrap">
+diff --git a/scripts/sync_members.py b/scripts/sync_members.py
+index 78ac90f..d1bb826 100644
+--- a/scripts/sync_members.py
++++ b/scripts/sync_members.py
+@@ -116,6 +116,7 @@ def normalize_member_row(raw):
+         "keywords": keywords,
+         "researchsummary": out.get("researchsummary", ""),
+         "phdtopictitle": out.get("phdtopictitle", ""),
++        "phddate": out.get("phddate", ""),
+         "phdtopicdescription": out.get("phdtopicdescription", ""),
+     }
+ 
+@@ -159,7 +160,7 @@ def render_profile_block(m):
+     badge_html = '<p class="identity-badge">' + esc(m["badgeword"]) + "</p>" if m["badgeword"] else ""
+ 
+     obf = obfuscate_email(m["email"])
+-    email_line = '<p class="email-plain">' + esc(obf) + "</p>" if obf else ""
++    email_line = '<p class="email-plain"><strong>Contact:</strong> ' + esc(obf) + "</p>" if obf else ""
+ 
+     if m["personalsite"]:
+         primary_link = ('<a class="profile-primary-link" href="' + esc(m["personalsite"]) +
+@@ -185,11 +186,16 @@ def render_profile_block(m):
+ 
+     research_summary = ('<p>' + esc(m["researchsummary"]) + "</p>") if m["researchsummary"] else ""
+ 
++    phd_date_html = (
++        '      <p class="timeline-meta" style="margin-bottom: 10px;">' + esc(m["phddate"]) + '</p>\n'
++    ) if m["phddate"] else ""
++
+     phd_section = ""
+     if m["rank"] == "phd" and (m["phdtopictitle"] or m["phdtopicdescription"]):
+         phd_section = (
+-            '\n\n  <section class="teaser">\n    <div class="wrap">\n'
++            '\n\n  <section class="teaser alt">\n    <div class="wrap">\n'
+             '      <p class="section-tag">[phd topic]</p>\n      <h2>PhD Topic</h2>\n'
++            + phd_date_html +
+             '      <p class="profile-theme" style="margin-bottom: 14px;">' + esc(m["phdtopictitle"]) + '</p>\n'
+             '      <p>' + esc(m["phdtopicdescription"]) + '</p>\n    </div>\n  </section>'
+         )
+@@ -222,7 +228,7 @@ def render_profile_block(m):
+         </div>
+       </div>
+     </div>
+-  </section>
++  </section>''' + phd_section + '''
+ 
+   <section class="teaser">
+     <div class="wrap">
+@@ -243,7 +249,7 @@ def render_profile_block(m):
+         <p class="pub-loading">Loading publications&hellip;</p>
+       </div>
+     </div>
+-  </section>''' + phd_section
++  </section>'''
+ 
+ 
+ def render_activity_entry(a):

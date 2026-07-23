@@ -157,12 +157,26 @@ box on that member's page — nothing is duplicated by hand, and it stays
 current whenever the sheet updates. Leave it blank for anyone without a
 page yet.
 
-**PDF URL** adds a "Download PDF" button. Host the PDF either in this
-repo's `papers/` folder (see `papers/README.md` for the exact steps) or
-on Google Drive. **Must be a full URL** (`https://...`), never a
-relative path — these cards render both on the Publications page (site
-root) and embedded on member pages (one folder down), so a relative
-link that works from one breaks on the other.
+**PDF URL** adds two buttons: "View PDF" (opens the PDF in a new tab)
+and "Download PDF" (forces a direct save-as instead of just viewing).
+Host the PDF either in this repo's `papers/` folder (see
+`papers/README.md` for the exact steps) or on Google Drive. **Must be a
+full URL** (`https://...`), never a relative path — these cards render
+both on the Publications page (site root) and embedded on member pages
+(one folder down), so a relative link that works from one breaks on
+the other.
+
+**Important for a real forced download:** if the PDF is hosted in this
+repo's `papers/` folder, the URL in the sheet **must** be the live
+`https://xaiber-lab.github.io/papers/<filename>.pdf` page (same domain
+as the site) — not a `https://github.com/XAIber-lab/...blob/main/...`
+link. The `blob/...` URL is GitHub's file-preview *webpage*, not the
+file itself, so both buttons would just open that GitHub page instead
+of the PDF. The "Download PDF" button specifically only forces an
+actual download when the URL is same-origin with the site (true for
+the `xaiber-lab.github.io/papers/...` URL); a Google Drive
+`uc?export=download&id=...` URL (see `papers/README.md`) also triggers
+a real download, since Google's server itself sends the right headers.
 
 **APA Citation** adds an "APA Citation" button, same collapsible-with-
 copy-button pattern as BibTeX. This is a plain text field you paste a
@@ -233,7 +247,7 @@ any change in the sheets instead.
 **Members sheet columns:** `Name, Slug, Rank, Role, Institution, Bio,
 Bio Snippet, Avatar Initials, Photo URL, Badge Word, Email, LinkedIn,
 Google Scholar, ResearchGate, Personal Site, Keywords, Research Summary,
-PhD Topic Title, PhD Topic Description`.
+PhD Date, PhD Topic Title, PhD Topic Description`.
 
 - **Slug** becomes the filename (`members/<slug>.html`) and is what
   Publications' "Member Slugs" column matches against, and what Member
@@ -244,9 +258,18 @@ PhD Topic Title, PhD Topic Description`.
 - **Bio** is the long version on the personal page; **Bio Snippet** is
   the short version on the members-list card.
 - **Keywords** is comma-separated; the card shows only the first three.
-- **PhD Topic Title/Description** only render when Rank is `phd`.
+- **PhD Date** is free text shown as a small line above the PhD Topic
+  title (e.g. `Since November 2023`, or a range like `Nov 2023 – 2026`)
+  — write it however you'd like it displayed. Leave blank to omit it.
+- **PhD Topic Title/Description/Date** only render when Rank is `phd`,
+  and the PhD Topic section is the first thing shown on the page after
+  the profile header, above Research Interests.
 - Any blank field (Photo URL, Badge Word, social links, PhD Topic) is
   simply omitted rather than shown broken.
+- **Email** also drives the plain-text "Contact:" line shown near the
+  bottom of the profile header (e.g. `Contact: tiziano dot sammarone at
+  linkstudents dot it`) — the same de-spam-bot obfuscation as before,
+  just now labeled.
 
 **Member Activities sheet columns:** `Member Slug, Section, Date Range,
 Title, Org Line, Description, Bullets, Project Slug`.

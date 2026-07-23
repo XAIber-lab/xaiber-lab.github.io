@@ -93,8 +93,18 @@ window.PubCard = (function () {
       ? '<a class="link-chip" href="' + escapeHTML(pub.repositoryurl) + '" target="_blank" rel="noopener">Repository ↗</a>'
       : "";
 
-    var pdfChip = pub.pdfurl
-      ? '<a class="link-chip" href="' + escapeHTML(normalizeUrl(pub.pdfurl)) + '" target="_blank" rel="noopener" download>Download PDF ⬇</a>'
+    var pdfUrlFixed = pub.pdfurl ? escapeHTML(normalizeUrl(pub.pdfurl)) : "";
+    var pdfViewChip = pub.pdfurl
+      ? '<a class="link-chip" href="' + pdfUrlFixed + '" target="_blank" rel="noopener">View PDF ↗</a>'
+      : "";
+    // The `download` attribute only forces an actual save-as (rather than
+    // just navigating to the file) for same-origin URLs — which is true
+    // for PDFs hosted in this repo's papers/ folder (served from
+    // xaiber-lab.github.io, same origin as the site itself). For a
+    // cross-origin PDF URL, browsers ignore `download` and this behaves
+    // the same as View PDF.
+    var pdfDownloadChip = pub.pdfurl
+      ? '<a class="link-chip" href="' + pdfUrlFixed + '" download>Download PDF ⬇</a>'
       : "";
 
     var abstractToggle = pub.abstract
@@ -136,7 +146,8 @@ window.PubCard = (function () {
       apaToggle +
       '<a class="link-chip" href="' + escapeHTML(fixedUrl) + '" target="_blank" rel="noopener">View publication ↗</a>' +
       repoChip +
-      pdfChip +
+      pdfViewChip +
+      pdfDownloadChip +
       "</div>" +
       abstractBlock +
       bibtexBlock +

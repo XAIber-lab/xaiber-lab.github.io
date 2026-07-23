@@ -116,6 +116,7 @@ def normalize_member_row(raw):
         "keywords": keywords,
         "researchsummary": out.get("researchsummary", ""),
         "phdtopictitle": out.get("phdtopictitle", ""),
+        "phddate": out.get("phddate", ""),
         "phdtopicdescription": out.get("phdtopicdescription", ""),
     }
 
@@ -159,7 +160,7 @@ def render_profile_block(m):
     badge_html = '<p class="identity-badge">' + esc(m["badgeword"]) + "</p>" if m["badgeword"] else ""
 
     obf = obfuscate_email(m["email"])
-    email_line = '<p class="email-plain">' + esc(obf) + "</p>" if obf else ""
+    email_line = '<p class="email-plain"><strong>Contact:</strong> ' + esc(obf) + "</p>" if obf else ""
 
     if m["personalsite"]:
         primary_link = ('<a class="profile-primary-link" href="' + esc(m["personalsite"]) +
@@ -185,11 +186,16 @@ def render_profile_block(m):
 
     research_summary = ('<p>' + esc(m["researchsummary"]) + "</p>") if m["researchsummary"] else ""
 
+    phd_date_html = (
+        '      <p class="timeline-meta" style="margin-bottom: 10px;">' + esc(m["phddate"]) + '</p>\n'
+    ) if m["phddate"] else ""
+
     phd_section = ""
     if m["rank"] == "phd" and (m["phdtopictitle"] or m["phdtopicdescription"]):
         phd_section = (
-            '\n\n  <section class="teaser">\n    <div class="wrap">\n'
+            '\n\n  <section class="teaser alt">\n    <div class="wrap">\n'
             '      <p class="section-tag">[phd topic]</p>\n      <h2>PhD Topic</h2>\n'
+            + phd_date_html +
             '      <p class="profile-theme" style="margin-bottom: 14px;">' + esc(m["phdtopictitle"]) + '</p>\n'
             '      <p>' + esc(m["phdtopicdescription"]) + '</p>\n    </div>\n  </section>'
         )
@@ -222,7 +228,7 @@ def render_profile_block(m):
         </div>
       </div>
     </div>
-  </section>
+  </section>''' + phd_section + '''
 
   <section class="teaser">
     <div class="wrap">
@@ -243,7 +249,7 @@ def render_profile_block(m):
         <p class="pub-loading">Loading publications&hellip;</p>
       </div>
     </div>
-  </section>''' + phd_section
+  </section>'''
 
 
 def render_activity_entry(a):
