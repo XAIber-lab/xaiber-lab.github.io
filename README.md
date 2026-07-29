@@ -3,6 +3,13 @@
 Static site (plain HTML/CSS/JS, no build step) for the XAIber-Lab showcase
 website. Built to run directly on GitHub Pages.
 
+> **Sei un membro del laboratorio e devi aggiungere te stesso, un progetto o
+> una pubblicazione?** Non serve leggere il resto di questo file — vai
+> direttamente a **[GUIDA_MEMBRI.md](GUIDA_MEMBRI.md)**, la guida pratica
+> pensata per chi compila i fogli Google, senza bisogno di conoscenze
+> tecniche. Il resto di questo README è documentazione tecnica per chi
+> mantiene il sito.
+
 ## Structure
 
 ```

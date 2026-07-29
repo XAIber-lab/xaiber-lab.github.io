@@ -153,10 +153,11 @@ p { margin: 0 0 1em; }
 .logo:hover { text-decoration: none; }
 .logo .accent { color: var(--teal); }
 .logo-mark { flex-shrink: 0; }
-.logo-mark .node { fill: var(--teal); }
-.logo-mark .node-highlight { fill: var(--amber); }
-.logo-mark .edge { stroke: var(--line); stroke-width: 1.6; }
-.logo-mark .edge-active { stroke: var(--amber); stroke-width: 1.8; }
+img.logo-mark {
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
 
 .site-nav ul {
   list-style: none;

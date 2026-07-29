@@ -47,18 +47,9 @@ RANK_SECTION_TITLES = {
 ACTIVITY_SECTIONS = ["projects", "teaching", "hobbies"]
 ACTIVITY_SECTION_TITLES = {"projects": "Projects", "teaching": "Teaching", "hobbies": "Hobbies"}
 
-LOGO_MARK = (
-    '<svg class="logo-mark" viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">'
-    '<line class="edge" x1="8" y1="10" x2="28" y2="8"/>'
-    '<line class="edge-active" x1="28" y1="8" x2="20" y2="28"/>'
-    '<line class="edge" x1="8" y1="10" x2="10" y2="30"/>'
-    '<line class="edge" x1="20" y1="28" x2="10" y2="30"/>'
-    '<circle class="node" cx="8" cy="10" r="3"/>'
-    '<circle class="node" cx="28" cy="8" r="2.6"/>'
-    '<circle class="node-highlight" cx="20" cy="28" r="4"/>'
-    '<circle class="node" cx="10" cy="30" r="2.6"/>'
-    '</svg>'
-)
+def logo_mark(prefix=""):
+    return ('<img class="logo-mark" src="' + prefix + 'images/xaiberlab-logo.png" '
+            'width="28" height="28" alt="">')
 
 SCHOLAR_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>'
 RESEARCHGATE_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.227.35-.545 0-.901-.15-1.21-.353-.306-.203-.517-.454-.67-.915a3.136 3.136 0 0 1-.147-.762 17.366 17.367 0 0 1-.034-.656c-.01-.26-.014-.572-.014-.939a26.401 26.403 0 0 1 .014-.938 15.821 15.822 0 0 1 .035-.656 3.19 3.19 0 0 1 .148-.76 1.89 1.89 0 0 1 .742-1.01c.344-.244.593-.352 1.137-.352.508 0 .815.096 1.144.303.33.207.528.492.764.925.047.094.111.118.198.07l1.044-.43c.075-.048.09-.115.042-.199a3.549 3.549 0 0 0-.466-.742 3 3 0 0 0-.679-.607 3.313 3.313 0 0 0-.903-.41A4.068 4.068 0 0 0 19.586 0zM8.217 5.836c-1.69 0-3.036.086-4.297.086-1.146 0-2.291 0-3.007-.029v.831l1.088.2c.744.144 1.174.488 1.174 2.264v11.288c0 1.777-.43 2.12-1.174 2.263l-1.088.2v.832c.773-.029 2.12-.086 3.465-.086 1.29 0 2.951.057 3.667.086v-.831l-1.49-.2c-.773-.115-1.174-.487-1.174-2.264v-4.784c.688.057 1.29.057 2.206.057 1.748 3.123 3.41 5.472 4.355 6.56.86 1.032 2.177 1.691 3.839 1.691.487 0 1.003-.086 1.318-.23v-.744c-1.031 0-2.063-.716-2.808-1.518-1.26-1.376-2.95-3.582-4.355-6.074 2.32-.545 4.04-2.722 4.04-4.9 0-3.208-2.492-4.698-5.758-4.698zm-.515 1.29c2.406 0 3.839 1.26 3.839 3.552 0 2.263-1.547 3.782-4.097 3.782-.974 0-1.404-.03-2.063-.086v-7.19c.66-.059 1.547-.059 2.32-.059z"/></svg>'
@@ -325,6 +316,8 @@ def render_member_page(m, activities_by_key):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/png" href="../images/xaiberlab-favicon.png">
+<link rel="apple-touch-icon" href="../images/xaiberlab-apple-touch-icon.png">
 </head>
 <body>
 
@@ -332,7 +325,7 @@ def render_member_page(m, activities_by_key):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="../index.html" class="logo">''' + LOGO_MARK + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="../index.html" class="logo">''' + logo_mark("../") + '''XAIber<span class="accent">-Lab</span></a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">
@@ -424,6 +417,8 @@ def render_members_html(members):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/xaiberlab-favicon.png">
+<link rel="apple-touch-icon" href="images/xaiberlab-apple-touch-icon.png">
 </head>
 <body>
 
@@ -431,7 +426,7 @@ def render_members_html(members):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="index.html" class="logo">''' + LOGO_MARK + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="index.html" class="logo">''' + logo_mark("") + '''XAIber<span class="accent">-Lab</span></a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">

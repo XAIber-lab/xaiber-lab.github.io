@@ -3,7 +3,27 @@
 Host member photos, project thumbnails, and other site imagery here,
 the same way `papers/` works for publication PDFs.
 
-## Naming convention
+## The site logo — fixed filenames, don't rename
+
+Three files are the exception to the "anything readable" rule below,
+because their filenames are hardcoded directly in the HTML/CSS/Python
+(not typed into a Google Sheet cell), so the name must stay exact:
+
+```
+images/xaiberlab-logo.png              — the small circular mark in the header, every page
+images/xaiberlab-favicon.png           — browser tab / bookmark icon
+images/xaiberlab-apple-touch-icon.png  — iOS "add to home screen" icon
+```
+
+To update the logo in the future: replace these three files with the
+new artwork, **keeping the exact same filenames**, then commit/push. No
+HTML, CSS, or script edit needed anywhere — every page picks it up
+automatically. If you ever want to size them freshly from a source
+image, keep `xaiberlab-logo.png` roughly square (it's displayed at
+28×28 and clipped to a circle via CSS), `xaiberlab-favicon.png` at
+512×512, and `xaiberlab-apple-touch-icon.png` at 180×180.
+
+## Naming convention (everything else)
 
 Anything readable and unique, e.g.:
 ```

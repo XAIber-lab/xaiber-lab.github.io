@@ -43,18 +43,9 @@ PROJECTS_DIR = os.path.join(ROOT, "projects")
 PROJECTS_HTML_PATH = os.path.join(ROOT, "projects.html")
 PROJECTS_JSON_PATH = os.path.join(ROOT, "data", "projects.json")
 
-LOGO_MARK = (
-    '<svg class="logo-mark" viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">'
-    '<line class="edge" x1="8" y1="10" x2="28" y2="8"/>'
-    '<line class="edge-active" x1="28" y1="8" x2="20" y2="28"/>'
-    '<line class="edge" x1="8" y1="10" x2="10" y2="30"/>'
-    '<line class="edge" x1="20" y1="28" x2="10" y2="30"/>'
-    '<circle class="node" cx="8" cy="10" r="3"/>'
-    '<circle class="node" cx="28" cy="8" r="2.6"/>'
-    '<circle class="node-highlight" cx="20" cy="28" r="4"/>'
-    '<circle class="node" cx="10" cy="30" r="2.6"/>'
-    '</svg>'
-)
+def logo_mark(prefix=""):
+    return ('<img class="logo-mark" src="' + prefix + 'images/xaiberlab-logo.png" '
+            'width="28" height="28" alt="">')
 
 EXTLINK_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V10"/><path d="M9 2h5v5"/><path d="M14 2L7 9"/></svg>'
 
@@ -206,6 +197,8 @@ def render_project_page(p, team_members):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/png" href="../images/xaiberlab-favicon.png">
+<link rel="apple-touch-icon" href="../images/xaiberlab-apple-touch-icon.png">
 </head>
 <body>
 
@@ -213,7 +206,7 @@ def render_project_page(p, team_members):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="../index.html" class="logo">''' + LOGO_MARK + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="../index.html" class="logo">''' + logo_mark("../") + '''XAIber<span class="accent">-Lab</span></a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">
@@ -347,6 +340,8 @@ def render_projects_html(projects):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/xaiberlab-favicon.png">
+<link rel="apple-touch-icon" href="images/xaiberlab-apple-touch-icon.png">
 </head>
 <body>
 
@@ -354,7 +349,7 @@ def render_projects_html(projects):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="index.html" class="logo">''' + LOGO_MARK + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="index.html" class="logo">''' + logo_mark("") + '''XAIber<span class="accent">-Lab</span></a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">
