@@ -158,6 +158,10 @@ img.logo-mark {
   object-fit: cover;
   display: block;
 }
+.logo-title {
+  display: block;
+  flex-shrink: 0;
+}
 
 .site-nav ul {
   list-style: none;

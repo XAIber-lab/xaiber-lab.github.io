@@ -47,6 +47,10 @@ def logo_mark(prefix=""):
     return ('<img class="logo-mark" src="' + prefix + 'images/xaiberlab-logo.png" '
             'width="28" height="28" alt="">')
 
+def logo_title(prefix=""):
+    return ('<img class="logo-title" src="' + prefix + 'images/xaiberlab-title.png" '
+            'width="126" height="48" alt="XAIber-Lab">')
+
 EXTLINK_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V10"/><path d="M9 2h5v5"/><path d="M14 2L7 9"/></svg>'
 
 # Known funding-region flags. Add more here (as {region: svg}) to
@@ -206,7 +210,7 @@ def render_project_page(p, team_members):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="../index.html" class="logo">''' + logo_mark("../") + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="../index.html" class="logo">''' + logo_mark("../") + '''''' + logo_title("../") + '''</a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">
@@ -349,7 +353,7 @@ def render_projects_html(projects):
 
 <header class="site-header">
   <div class="wrap">
-    <a href="index.html" class="logo">''' + logo_mark("") + '''XAIber<span class="accent">-Lab</span></a>
+    <a href="index.html" class="logo">''' + logo_mark("") + '''''' + logo_title("") + '''</a>
     <nav class="site-nav">
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
       <ul id="nav-menu">
