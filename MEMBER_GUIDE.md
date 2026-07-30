@@ -4,11 +4,11 @@ The site is **never edited by hand**: it rebuilds itself automatically from thre
 
 ## Sheet links
 
-*(to be filled in — direct links to the three sheets, so you don't have to go looking for them)*
+*(Direct links to the three sheets, so you don't have to go looking for them)*
 
-- **Members**: [insert link]
-- **Projects**: [insert link]
-- **Publications**: [insert link]
+- **Members**: https://docs.google.com/spreadsheets/d/1m6zwvs0swBjTT5KSHF-WQX3pSJ5nJgYR2bkpRxtotrU/edit?usp=sharing
+- **Projects**: https://docs.google.com/spreadsheets/d/1uJC-1-OFxcEg9G3SuwDjhkGJrK2se7t26dRJG-1BC-I/edit?usp=sharing
+- **Publications**: https://docs.google.com/spreadsheets/d/1vqvnrsT2FN2isnVSNm1tnDLvzpqRLZuaSpIwzYDlGLE/edit?usp=sharing
 
 The Hub sheet (the one with the Rank, Status, Funding Regions, etc. lists) is deliberately not linked here — you never need to open it, the dropdown menus in the three sheets above already read from it automatically.
 

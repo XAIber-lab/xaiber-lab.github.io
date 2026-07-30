@@ -4,11 +4,11 @@ Il sito **non si modifica mai a mano**: si aggiorna da solo leggendo tre Google 
 
 ## Link ai fogli
 
-*(da compilare — link diretti ai tre fogli, per aprirli senza doverli cercare)*
+*(Link diretti ai tre fogli, per aprirli senza doverli cercare)*
 
-- **Members**: [inserire link]
-- **Projects**: [inserire link]
-- **Publications**: [inserire link]
+- **Members**: https://docs.google.com/spreadsheets/d/1m6zwvs0swBjTT5KSHF-WQX3pSJ5nJgYR2bkpRxtotrU/edit?usp=sharing
+- **Projects**: https://docs.google.com/spreadsheets/d/1uJC-1-OFxcEg9G3SuwDjhkGJrK2se7t26dRJG-1BC-I/edit?usp=sharing
+- **Publications**: https://docs.google.com/spreadsheets/d/1vqvnrsT2FN2isnVSNm1tnDLvzpqRLZuaSpIwzYDlGLE/edit?usp=sharing
 
 Il foglio Hub (quello con le liste di Rank, Status, Funding Regions, ecc.) non è linkato qui apposta: non serve aprirlo, i menu a discesa nei tre fogli sopra lo leggono già in automatico.
 
