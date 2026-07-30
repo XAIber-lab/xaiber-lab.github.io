@@ -1,0 +1,726 @@
+diff --git a/GUIDA_MEMBRI.md b/GUIDA_MEMBRI.md
+index 734c607..f646a43 100644
+--- a/GUIDA_MEMBRI.md
++++ b/GUIDA_MEMBRI.md
+@@ -18,6 +18,34 @@ Il foglio Hub (quello con le liste di Rank, Status, Funding Regions, ecc.) non 
+ - **Colonne con un menu a tendina** (Rank, Status, Funding Regions, Section, Publication Type, e i campi "…Slug" che collegano a membri/progetti): scegli solo tra le opzioni proposte nel menu, non scrivere a mano un valore nuovo — verrebbe rifiutato. Se il valore che ti serve non è nell'elenco (es. una nuova regione di finanziamento), **non inventare una variante simile**: fai richiesta al Professor Angelini, che gestisce quella lista nel foglio Hub — in un attimo il nuovo valore compare selezionabile ovunque.
+ - **Colonne "Keywords"** (parole chiave di ricerca): qui invece scrivi pure liberamente, separate da virgola — non sono un elenco chiuso, il numero e la varietà dei concetti sono normali.
+ 
++## Come caricare foto e immagini
++
++Le foto profilo e le immagini dei progetti **non vanno caricate su GitHub** — l'accesso al repository del sito è di sola lettura per i membri, quindi non potresti comunque farlo. Usa invece Google Drive:
++
++1. Carica l'immagine sul tuo Google Drive.
++2. Clic destro sul file → **Condividi** → cambia l'accesso in **"Chiunque abbia il link"** (senza questo passaggio l'immagine non sarà visibile a chi visita il sito).
++3. Copia il link di condivisione — ha un formato tipo `https://drive.google.com/file/d/AbCdEfGhIjKlMnOp/view?usp=sharing`. L'unica parte che ti serve è il codice lungo in mezzo (`AbCdEfGhIjKlMnOp` in questo esempio).
++4. Costruisci il link da incollare nel foglio così:
++   ```
++   https://drive.google.com/uc?export=view&id=AbCdEfGhIjKlMnOp
++   ```
++   (sostituisci solo il codice, tenendo `export=view` esattamente com'è — è diverso dal formato usato per i PDF, vedi sotto).
++5. Incolla questo link nella cella giusta (Photo URL per il tuo profilo, Image 1/2/3 URL per un progetto).
++
++## Caricare il PDF di una pubblicazione
++
++Anche qui il PDF **non va caricato su GitHub** direttamente da te — stesso motivo delle immagini. Hai due strade, e sono deliberatamente diverse tra loro.
++
++**Subito, da solo — Google Drive (soluzione temporanea).** Stessa procedura delle immagini: carica il PDF su Drive, Condividi → "Chiunque abbia il link", poi costruisci il link così:
++```
++https://drive.google.com/uc?export=download&id=IL-TUO-CODICE
++```
++(nota: qui è `export=download`, non `export=view` come per le immagini). Incollalo nella cella **PDF URL** — la pubblicazione è subito online.
++
++**La soluzione definitiva — un amministratore lo aggiunge su GitHub.** Un PDF ospitato su Drive ha un limite tecnico reale, non solo teorico: i due pulsanti del sito "View PDF" e "Download PDF" finiscono per comportarsi allo stesso modo (entrambi scaricano subito il file), invece di restare distinti come sono pensati. La sistemazione corretta è avere il file nella cartella `papers/` del repository — cosa che solo chi ha accesso in scrittura può fare.
++
++**Cosa fare in pratica**: pubblica pure subito su Drive per non perdere tempo, poi scrivi una email a **[nome/email amministratore]** allegando il PDF, chiedendo di spostarlo nella posizione definitiva. Non è urgente, ma è la cosa giusta da fare per una pubblicazione che deve restare online a lungo termine.
++
+ ---
+ 
+ ## 1. Aggiungersi come membro (foglio **Members**, tab "Members")
+@@ -34,7 +62,7 @@ Aggiungi una nuova riga in fondo e compila:
+ | Bio | Testo lungo per la tua pagina personale |
+ | Bio Snippet | Versione breve, per la card nell'elenco membri |
+ | Avatar Initials | Le tue iniziali, usate solo se non carichi una foto |
+-| Photo URL | Link diretto a una tua foto (vedi `images/README.md` nel repo per come caricarla) |
++| Photo URL | Link diretto a una tua foto — vedi la sezione "Come caricare foto e immagini" più sotto |
+ | Badge Word | Una parola/etichetta breve mostrata sulla tua card |
+ | Email | Il tuo indirizzo normale (es. `nome.cognome@linkstudents.it`) — il sito lo trasforma da solo in formato anti-spam per la visualizzazione, non serve scriverlo già "offuscato" |
+ | LinkedIn / Google Scholar / ResearchGate / Personal Site | Link diretti ai tuoi profili, uno per colonna |
+@@ -51,7 +79,7 @@ Una riga per ogni voce del tuo percorso — un progetto a cui collabori, un inca
+ 
+ | Colonna | Come compilarla |
+ |---|---|
+-| Member Slug | Il tuo Slug esatto, copialo dalla tua riga nella tab "Members" (**qui non c'è ancora un menu a discesa**, quindi copia-incolla invece di riscriverlo a mano, per evitare refusi) |
++| Member Slug | Menu a discesa: scegli il tuo nome dalla lista, invece di scriverlo a mano |
+ | Section | Menu a discesa: `projects` / `teaching` / `hobbies` |
+ | Date Range | Testo libero (es. "2024 – oggi") |
+ | Title | Titolo della voce |
+@@ -76,7 +104,7 @@ Una riga per ogni voce del tuo percorso — un progetto a cui collabori, un inca
+ | Description / About | Descrizioni lunga e "about" del progetto |
+ | Official Site / Repository URL | Link diretti |
+ | Keywords | Parole chiave libere, separate da virgola |
+-| Image 1/2/3 URL | Link alle immagini (vedi `images/README.md`) |
++| Image 1/2/3 URL | Link alle immagini — stessa procedura descritta in "Come caricare foto e immagini" più sotto |
+ 
+ Il "Team" del progetto **non si scrive qui**: compare da solo, derivato automaticamente da chi ha collegato quel progetto tramite "Project Slug" nella tab Member Activities.
+ 
+@@ -98,7 +126,7 @@ Il "Team" del progetto **non si scrive qui**: compare da solo, derivato automati
+ | Repository URL | Link a codice/dati collegati, se esiste |
+ | Member Slugs | Menu a discesa **multi-selezione**: gli autori che sono membri del laboratorio |
+ | Project Slugs | Menu a discesa **multi-selezione**: i progetti collegati a questa pubblicazione |
+-| PDF URL | **Importante**: se il PDF è nella cartella `papers/` del repository, usa il link `https://xaiber-lab.github.io/papers/nome-file.pdf` — **non** il link della pagina GitHub (`github.com/.../blob/...`), altrimenti il pulsante "Download PDF" non funziona correttamente, resta solo "View PDF" |
++| PDF URL | Per pubblicare subito, usa Google Drive — vedi "Caricare il PDF di una pubblicazione" più sotto per la procedura e per capire quando conviene chiedere la sistemazione definitiva |
+ 
+ Le **parole chiave della pubblicazione stessa** (se un domani verranno aggiunte) non passano da nessun menu a discesa: restano quelle esatte con cui è stata pubblicata, anche se leggermente diverse da un paper all'altro sullo stesso argomento — è voluto, per fedeltà alla pubblicazione originale.
+ 
+diff --git a/MEMBER_GUIDE.md b/MEMBER_GUIDE.md
+new file mode 100644
+index 0000000..3bebf06
+--- /dev/null
++++ b/MEMBER_GUIDE.md
+@@ -0,0 +1,155 @@
++# Quick Guide — Adding Yourself, a Project, or a Publication to the XAIber-Lab Site
++
++The site is **never edited by hand**: it rebuilds itself automatically from three Google Sheets (Members, Projects, Publications). Just fill in the right row in the right sheet — the site rebuilds itself once a day, at the times listed at the bottom of this guide.
++
++## Sheet links
++
++*(to be filled in — direct links to the three sheets, so you don't have to go looking for them)*
++
++- **Members**: [insert link]
++- **Projects**: [insert link]
++- **Publications**: [insert link]
++
++The Hub sheet (the one with the Rank, Status, Funding Regions, etc. lists) is deliberately not linked here — you never need to open it, the dropdown menus in the three sheets above already read from it automatically.
++
++## General rules, valid across all sheets
++
++- **The "Slug" column**: never type over it by hand. It fills itself in automatically the moment you type the Name/Title on that row. If you do change it by mistake, a warning will pop up — read it, it explains what you risk (anything already linking to that row will stop working until you fix it).
++- **Columns with a dropdown menu** (Rank, Status, Funding Regions, Section, Publication Type, and the "…Slug" fields that link to members/projects): only pick from the options offered, don't type a new value by hand — it would be rejected. If the value you need isn't in the list (e.g. a new funding region), **don't invent a similar-looking variant**: ask Professor Angelini, who manages that list in the Hub sheet — the new value will be selectable everywhere within moments.
++- **"Keywords" columns** (research keywords): here you can write freely, comma-separated — this isn't a closed list, having a varied and growing number of terms is normal.
++
++## How to upload photos and images
++
++Profile photos and project images **cannot be uploaded to GitHub** — members only have read access to the site's repository, so you wouldn't be able to do this anyway. Use Google Drive instead:
++
++1. Upload the image to your Google Drive.
++2. Right-click the file → **Share** → change access to **"Anyone with the link"** (without this step the image won't be visible to site visitors).
++3. Copy the share link — it looks like `https://drive.google.com/file/d/AbCdEfGhIjKlMnOp/view?usp=sharing`. The only part you need is the long code in the middle (`AbCdEfGhIjKlMnOp` in this example).
++4. Build the link to paste into the sheet like this:
++   ```
++   https://drive.google.com/uc?export=view&id=AbCdEfGhIjKlMnOp
++   ```
++   (only replace the code, keep `export=view` exactly as it is — it's different from the format used for PDFs, see below).
++5. Paste this link into the right cell (Photo URL for your profile, Image 1/2/3 URL for a project).
++
++## Uploading a publication's PDF
++
++Here too, the PDF **cannot be uploaded to GitHub** directly by you — same reason as the images. You have two routes, and they're deliberately different from each other.
++
++**Right away, on your own — Google Drive (temporary solution).** Same procedure as images: upload the PDF to Drive, Share → "Anyone with the link", then build the link like this:
++```
++https://drive.google.com/uc?export=download&id=YOUR-CODE
++```
++(note: here it's `export=download`, not `export=view` like for images). Paste it into the **PDF URL** cell — the publication is live right away.
++
++**The permanent solution — an admin adds it on GitHub.** A PDF hosted on Drive has a real technical limitation, not just a theoretical one: the site's two buttons "View PDF" and "Download PDF" end up behaving identically (both trigger an immediate download), instead of staying distinct as they're designed to. The correct fix is having the file live in the repository's `papers/` folder — which only someone with write access can do.
++
++**What to do in practice**: go ahead and publish on Drive right away so you don't lose time, then send an email to **[admin name/email]** with the PDF attached, asking for it to be moved to its permanent location. It's not urgent, but it's the right thing to do for a publication meant to stay online long-term.
++
++---
++
++## 1. Adding yourself as a member (**Members** sheet, "Members" tab)
++
++Add a new row at the bottom and fill in:
++
++| Column | How to fill it in |
++|---|---|
++| Name | Your full name |
++| Slug | **Leave blank**, it fills itself in |
++| Rank | Dropdown: `director` / `professor` / `phd` / `collaborator` |
++| Role | Fills itself in automatically based on the Rank you choose (e.g. `professor` → "Professor"). You can leave it as is, or customize it if you want a more specific title — e.g. "Director and Full Professor of [subject]" instead of the generic "Director" — once you edit it by hand it stays that way |
++| Institution | Institutional affiliation |
++| Bio | Long-form text for your personal page |
++| Bio Snippet | Short version, for your card in the members list |
++| Avatar Initials | Your initials, used only if you don't upload a photo |
++| Photo URL | Direct link to a photo of you — see the "How to upload photos and images" section above |
++| Badge Word | A short word/label shown on your card |
++| Email | Your normal address (e.g. `name.surname@linkstudents.it`) — the site automatically converts it to an anti-spam format for display, you don't need to type it already "obfuscated" |
++| LinkedIn / Google Scholar / ResearchGate / Personal Site | Direct links to your profiles, one per column |
++| Keywords | Research keywords, comma-separated, free text |
++| Research Summary | Short paragraph about your research interests |
++| PhD Date | PhD candidates only: free text, write it however you want it to appear (e.g. "Since November 2023" or "41st Cycle") |
++| PhD Topic Title / PhD Topic Description | PhD candidates only: title and description of your PhD topic |
++
++---
++
++## 2. Adding your activities (same Members sheet, "Member Activities" tab)
++
++One row per entry in your timeline — a project you work on, a teaching role, a hobby.
++
++| Column | How to fill it in |
++|---|---|
++| Member Slug | Dropdown: pick your name from the list, rather than typing it by hand |
++| Section | Dropdown: `projects` / `teaching` / `hobbies` |
++| Date Range | Free text (e.g. "2024 – present") |
++| Title | Title of the entry |
++| Org Line | Line with the organization/course/context |
++| Description | Short description |
++| Bullets | Bullet points: one per line within the same cell — press **Alt+Enter** (Option+Enter on Mac) to start a new line without leaving the cell |
++| Project Slug | Only if this activity relates to a project on the site: dropdown, pick the project |
++
++---
++
++## 3. Adding a project (**Projects** sheet)
++
++| Column | How to fill it in |
++|---|---|
++| Title | Project title |
++| Slug | **Leave blank**, it fills itself in |
++| Status | Dropdown: `Active` / `Completed` |
++| Time Span | Free text (e.g. "2024–2027") |
++| Tagline | Short introductory sentence |
++| Funding Regions | **Multi-select** dropdown: pick one or more regions from the list |
++| Funding Line | Text naming the funding body |
++| Description / About | Long description and "about" section for the project |
++| Official Site / Repository URL | Direct links |
++| Keywords | Free keywords, comma-separated |
++| Image 1/2/3 URL | Image links — same procedure described in "How to upload photos and images" above |
++
++The project's "Team" **is not entered here**: it appears on its own, derived automatically from whoever has linked that project via "Project Slug" in the Member Activities tab.
++
++---
++
++## 4. Adding a publication (**Publications** sheet)
++
++| Column | How to fill it in |
++|---|---|
++| Title | Exact title of the publication |
++| Slug | **Leave blank**, it fills itself in |
++| Authors / Date / Venue | As they appear on the publication |
++| URL | Link to the publication's page/DOI |
++| Abstract | Paper abstract |
++| Type | Dropdown (e.g. `Conference paper` / `Journal article`) |
++| Conference Name / Date / Location | Only if relevant |
++| Thumbnail URL | Preview image |
++| BibTeX / APA Citation | Citations in both formats |
++| Repository URL | Link to associated code/data, if any |
++| Member Slugs | **Multi-select** dropdown: the authors who are lab members |
++| Project Slugs | **Multi-select** dropdown: the projects linked to this publication |
++| PDF URL | To publish right away, use Google Drive — see "Uploading a publication's PDF" above for the procedure and for when it's worth asking for the permanent setup |
++
++The **publication's own keywords** (if added in the future) don't go through any dropdown: they stay exactly as published, even if slightly different from one paper to another on the same topic — this is intentional, to stay faithful to the original publication.
++
++---
++
++## Frequently asked questions
++
++**Why is Rank a mandatory dropdown, but Role can be edited freely?**
++They're two different things. Rank decides which section you appear in on the members list (Director/Professors/PhD Candidates/Collaborators) — it must be exactly one of the four proposed values, otherwise that logic breaks, which is why it's closed. Role, on the other hand, is just the text shown on your card and your page — it doesn't drive any site logic, so you can make it more specific than the generic Rank value, with no risk. You don't have to write anything if you don't want to: as soon as you pick a Rank, Role fills itself in with a sensible default (e.g. "Professor", "PhD Candidate"). If you'd rather have a more precise title — e.g. "Director and Full Professor of [subject]" instead of the plain "Director" — you can type it yourself, and from then on it stays that way, even if your Rank changes later.
++
++**The value I need isn't in the dropdown (e.g. a new funding region)?**
++Ask Professor Angelini — he's the only one who can add it to the Hub sheet. Once added, it becomes selectable everywhere, with nothing else needed.
++
++**I mistyped my Slug/a project's Slug and corrected the cell by hand — is that a problem?**
++A warning pops up when you do this: it means any publications/activities that pointed at the old Slug will stop linking correctly. If that Slug was already in use somewhere, update those references yourself, or flag it to Professor Angelini if you're not sure where to look.
++
++**How long does the site take to update after I edit a sheet?**
++The site rebuilds itself automatically once a day, at roughly these times (Italian time, one hour earlier in winter):
++
++| Sheet | Update time |
++|---|---|
++| Publications | around 8:00 AM |
++| Members | around 9:00 AM |
++| Projects | around 10:00 AM |
++
++If you edit the sheet after that day's run, the change appears on the site the following day. There's nothing you need to do to trigger it — it's automatic, just wait for the next run.
+diff --git a/README.md b/README.md
+index 5766249..2d43fa9 100644
+--- a/README.md
++++ b/README.md
+@@ -5,7 +5,8 @@ website. Built to run directly on GitHub Pages.
+ 
+ > **Sei un membro del laboratorio e devi aggiungere te stesso, un progetto o
+ > una pubblicazione?** Non serve leggere il resto di questo file — vai
+-> direttamente a **[GUIDA_MEMBRI.md](GUIDA_MEMBRI.md)**, la guida pratica
++> direttamente a **[GUIDA_MEMBRI.md](GUIDA_MEMBRI.md)** (o
++> **[MEMBER_GUIDE.md](MEMBER_GUIDE.md)** in English), la guida pratica
+ > pensata per chi compila i fogli Google, senza bisogno di conoscenze
+ > tecniche. Il resto di questo README è documentazione tecnica per chi
+ > mantiene il sito.
+@@ -13,12 +14,16 @@ website. Built to run directly on GitHub Pages.
+ ## Structure
+ 
+ ```
+-index.html          → landing page (done)
+-projects.html        → stub, to be built next
+-members.html          → stub, to be built next
+-publications.html      → stub, to be built next
+-css/style.css        → shared design tokens & styles
+-js/main.js           → shared behavior (mobile nav toggle)
++index.html              → homepage (hero, image carousel, teasers fed live from the sheets)
++about.html              → long-form About page (hand-edited, not sheet-driven)
++members.html            → generated by scripts/sync_members.py
++projects.html           → generated by scripts/sync_projects.py
++publications.html       → publications list, JS-rendered from data/publications.json
++members/*.html          → generated, one page per member
++projects/*.html         → generated, one page per project
++css/style.css           → shared design tokens & styles
++js/main.js              → shared behavior (mobile nav toggle)
++js/homepage-feed.js     → populates the homepage teasers from data/*.json
+ ```
+ 
+ ## Deploying on GitHub Pages
+@@ -31,19 +36,18 @@ js/main.js           → shared behavior (mobile nav toggle)
+ No build tools, package.json, or dependencies are required — it's just
+ static files.
+ 
+-## Where the placeholders are
++## Static vs. sheet-driven content
+ 
+-Everything that needs real content is either:
+-- wrapped in an HTML comment `<!-- PLACEHOLDER: ... -->`, or
+-- visually marked with the amber left-border "placeholder" style (the lab
+-  description paragraph on the homepage).
+-
+-On `index.html` specifically:
+-- Hero description paragraph (lab mission/affiliation)
+-- 3 project teaser cards (title, one-line description, thumbnail)
+-- 4 member teaser cards (name, role, avatar)
+-- 3 publication teaser entries (title, authors, venue/year)
+-- Footer affiliation text and contact email
++Most of the site regenerates itself from the three Google Sheets (see
++the sync sections below and `GUIDA_MEMBRI.md`). A few things don't,
++and are meant to be hand-edited directly in the HTML by whoever owns
++the lab's public messaging:
++- `index.html`'s hero description paragraph and the 4 hero carousel
++  slides (currently no real photos wired in — see "Where images go"
++  below for how to add them).
++- `about.html`, in full.
++- The footer block (affiliation line + contact email), repeated
++  identically at the bottom of all 5 top-level pages.
+ 
+ ## Design notes
+ 
+@@ -58,63 +62,35 @@ On `index.html` specifically:
+ 
+ ## Where images go
+ 
+-Every image on the site right now is a placeholder (a gray box, or a
+-generic icon). Here's exactly where to add a real one for each type,
+-and whether it goes through a sheet or needs direct HTML editing.
+-
+-**First, host the actual image file.** Two options, same as PDFs:
+-- Add it to the `images/` folder in this repo (see `images/README.md`)
+-  — simplest, no external accounts needed.
+-- Or use Google Drive with the `export=view` URL format (also covered
+-  in `images/README.md` — note this is different from the
+-  `export=download` format used for PDFs).
+-
+-Either way, you end up with one **full URL** per image. What you do
+-with that URL depends on where it's going:
+-
+-**Member photos** — sheet-driven, no HTML editing.
+-Paste the URL into that member's **Photo URL** cell in the Members
+-sheet, then run "Sync Members." It replaces the initials-circle with
+-the real photo automatically, both on `members.html` and on their own
+-page — nothing to touch by hand.
+-
+-**Publication thumbnails** — sheet-driven, no HTML editing.
+-Same idea: paste the URL into that publication's **Thumbnail URL**
+-cell in the Publications sheet, then run "Sync Publications."
+-
+-**Homepage hero carousel** — hand-edited HTML.
+-Open `index.html`, find the `.hero-carousel-slide` divs (there are 4).
+-Each one currently has no `background-image` of its own (it inherits
+-the placeholder icon from CSS). Add a real one directly on the
+-element, e.g.:
+-```html
+-<div class="hero-carousel-slide active" data-caption="Lab workshop"
+-     style="background-image:url('https://xaiber-lab.github.io/images/workshop.jpg'); background-size:cover; background-position:center;"></div>
+-```
+-Do this for each of the 4 slides you want to replace (or delete extra
+-`<div>`s if you have fewer than 4 real photos, or copy the block for
+-more).
+-
+-**Project thumbnails & mini-gallery** — sheet-driven, no HTML editing.
+-Paste URLs into the **Image 1/2/3 URL** columns on that project's row
+-in the Projects sheet, then run "Sync Projects." Image 1 doubles as
+-the card thumbnail on `projects.html`; all three (if filled in) appear
+-in the mini-gallery on the project's own page. These use `contain`
+-rather than `cover` — project images are more often screenshots or
+-diagrams where cropping would cut off something that matters, so the
+-whole image shows, letterboxed against the placeholder background if
+-the proportions don't match exactly.
+-
+-**Logo / favicon** — the small network-graph mark in the header is
+-hand-drawn SVG, not a photo; there's nothing to swap in unless you want
+-to replace the mark itself, which would mean editing the inline `<svg>`
+-in each page's header (or asking me to help redesign it).
+-
+-## Next steps (in order)
+-
+-1. ~~Build out `members.html`~~ done.
+-2. ~~Build out `projects.html`~~ done.
+-3. ~~Build out `publications.html`~~ done — see setup below.
++**Host the actual image file first** — either in this repo's
++`images/` folder, or on Google Drive (both formats, and which to use
++when, are covered in `images/README.md`; same idea for PDFs in
++`papers/README.md`). Either way you end up with one full URL, which
++then goes:
++
++- **Member photos** -> that member's **Photo URL** cell in the Members
++  sheet. Sheet-driven, no HTML editing -- the next "Sync Members" run
++  picks it up automatically, on both `members.html` and their own page.
++- **Publication thumbnails** -> that publication's **Thumbnail URL**
++  cell in the Publications sheet, same way.
++- **Project thumbnails & mini-gallery** -> the **Image 1/2/3 URL**
++  columns on that project's row in the Projects sheet. Image 1 doubles
++  as the card thumbnail on `projects.html`; all three (if filled in)
++  appear on the project's own page. These use `contain` rather than
++  `cover`, since project images are often screenshots/diagrams where
++  cropping would cut off something that matters.
++- **Homepage hero carousel** -- hand-edited HTML, not sheet-driven. Open
++  `index.html`, find the 4 `.hero-carousel-slide` divs, and add a
++  `background-image` directly on the element, e.g.:
++  ```html
++  <div class="hero-carousel-slide active" data-caption="Lab workshop"
++       style="background-image:url('https://xaiber-lab.github.io/images/workshop.jpg'); background-size:cover; background-position:center;"></div>
++  ```
++  Do this per slide (delete extra `<div>`s for fewer than 4 photos, or
++  copy the block for more).
++- **Logo / favicon** -- see the "fixed filenames" section in
++  `images/README.md`: replace those three files directly, no HTML edit
++  needed anywhere.
+ 
+ ## The homepage teasers update themselves
+ 
+@@ -377,3 +353,85 @@ site** now that projects.html is fully generated — it stays in the
+ repo purely as a structural reference for the HTML/CSS patterns this
+ script produces, not linked from anywhere real.
+ 
++
++## Tag & Slug governance (the Hub spreadsheet)
++
++Several fields across the three sheets are deliberately closed to free
++text, to avoid a typo silently breaking a link or fragmenting a
++category (e.g. one project saying "European" and another "Europe").
++This is governed by a fourth, separate Google Sheet — the **Tag & Slug
++Hub** — plus a small Apps Script trigger in each of the three main
++spreadsheets.
++
++**The Hub has 8 tabs.** Director-edited word lists (single source of
++truth, edited only by whoever owns each list — today, Prof. Angelini):
++- `Funding Regions` — used by Projects, multi-select
++- `Project Status` — used by Projects
++- `Member Rank` — used by Members
++- `Activity Section` — used by Member Activities
++- `Publication Type` — used by Publications
++
++Auto-mirrored — nobody edits these directly, see "Slug auto-generation" below:
++- `Member Slugs`, `Project Slugs`, `Publication Slugs`
++
++**How a value gets from the Hub into a dropdown — two `IMPORTRANGE`
++hops, not one.** Data Validation can only pull from a range in the
++*same* spreadsheet file, so:
++1. Each of the 3 main spreadsheets has a hidden `_TagRef` tab that
++   mirrors the relevant Hub tab(s) via `IMPORTRANGE`.
++2. The actual column (e.g. Members' Rank column) has Data Validation
++   ("Dropdown from a range") pointing at that local `_TagRef` tab, not
++   at the Hub directly.
++3. Slugs flow the other way first: Members/Projects/Publications each
++   generate their own slug locally (see "Slug auto-generation"), the
++   Hub mirrors those into its own `Member Slugs`/`Project Slugs`/
++   `Publication Slugs` tabs, and *those* get mirrored back out to
++   whichever sheet needs to link to them — e.g. Publications'
++   `_TagRef` tab pulls both Member Slugs and Project Slugs from the Hub.
++
++IMPORTRANGE needs a one-time "Allow access" click (by anyone with edit
++rights on the destination and at least view rights on the source) the
++first time each pair of sheets is connected. After that it's automatic
++for everyone with access to the destination sheet — they never need
++direct access to the Hub itself.
++
++Adding a new allowed value (e.g. a new Funding Region) means adding one
++row to the relevant Hub tab, nothing else — it propagates on its own.
++
++## Slug auto-generation
++
++`Slug` columns (Members, Projects, Publications) are never typed by
++hand. Each of those three spreadsheets has an Apps Script `onEdit`
++trigger (Extensions → Apps Script, inside that spreadsheet) that:
++
++- Watches the Name/Title column. The moment it's filled in, it writes
++  a slugified version into the Slug column — but only if Slug is
++  still empty. Once set, it is never recalculated again, even if the
++  Name/Title changes later, which protects existing links from
++  Publications/Member Activities that already point at that slug.
++- Separately watches the Slug column itself: if someone directly
++  overwrites an existing (non-blank) slug, it shows a warning
++  explaining that anything already linking to the old slug will break.
++- (Members only) also watches Rank: the moment Rank is chosen, if
++  Role is still empty, it fills Role with a sensible default for that
++  rank (e.g. "PhD Candidate") — editable afterwards, and once Role has
++  any value it's never auto-overwritten again.
++
++**These scripts live only inside each spreadsheet's own Apps Script
++editor — they are not deployed from this repo, and Google Sheets keeps
++no version history for them.** Reference copies are kept in
++`apps-script/` in this repo purely so the logic survives if a script
++project is ever accidentally cleared. If you change a live script,
++copy the final version back into the matching file here so the two
++don't drift apart — see `apps-script/README.md`.
++
++**Why an Apps Script trigger instead of a plain spreadsheet formula:**
++an earlier version tried a self-referencing formula
++(`=IF(B2="",SLUGIFY(A2),B2)` with iterative calculation turned on) to
++get the same "compute once, then freeze" behavior without any script.
++Two real Google Sheets quirks broke it: calling a custom Apps Script
++function from inside a circular-reference formula can hang
++indefinitely on "Loading data…", and a fresh circular reference's very
++first evaluation treats the cell as numeric `0` rather than empty,
++which broke the "still empty" check. The `onEdit` trigger sidesteps
++both issues entirely.
+diff --git a/apps-script/README.md b/apps-script/README.md
+new file mode 100644
+index 0000000..b07c049
+--- /dev/null
++++ b/apps-script/README.md
+@@ -0,0 +1,26 @@
++# Apps Script reference copies
++
++The three Google Sheets behind this site (Members, Projects,
++Publications) each have a small `onEdit` trigger installed directly in
++their own Apps Script editor (open the spreadsheet -> Extensions ->
++Apps Script). These files are **not executed from here** — Google
++Sheets has no mechanism to pull script code from a GitHub repo, or
++anywhere else outside the spreadsheet itself.
++
++They're kept in this folder purely as a version-controlled backup and
++reference, since the live Apps Script project inside each spreadsheet
++has no history of its own — if someone accidentally clears or
++overwrites it, there is nothing to recover it from except this folder.
++
++**If you edit the live script in a spreadsheet, copy the final version
++back into the matching file here** so the two don't drift apart:
++
++| File here | Paste into |
++|---|---|
++| `members-onedit.gs` | Members spreadsheet |
++| `projects-onedit.gs` | Projects spreadsheet |
++| `publications-onedit.gs` | Publications spreadsheet |
++
++See the main `README.md`'s "Slug auto-generation" section for what
++this trigger actually does and why it's a script rather than a plain
++spreadsheet formula.
+diff --git a/apps-script/members-onedit.gs b/apps-script/members-onedit.gs
+new file mode 100644
+index 0000000..eb19059
+--- /dev/null
++++ b/apps-script/members-onedit.gs
+@@ -0,0 +1,81 @@
++// Lives in: Members spreadsheet -> Extensions -> Apps Script.
++// Reference copy only -- see apps-script/README.md and the main
++// README's "Slug auto-generation" section for what this does.
++
++function onEdit(e) {
++  var SHEET_NAME = "Members";
++  var SOURCE_COL = 1;  // Name
++  var SLUG_COL = 2;    // Slug
++  var RANK_COL = 3;    // Rank
++  var ROLE_COL = 4;    // Role
++  var HEADER_ROW = 1;
++
++  var ROLE_DEFAULTS = {
++    "director": "Director",
++    "professor": "Professor",
++    "phd": "PhD Candidate",
++    "collaborator": "Collaborator"
++  };
++
++  var range = e.range;
++  var sheet = range.getSheet();
++  if (sheet.getName() !== SHEET_NAME) return;
++  if (range.getRow() <= HEADER_ROW) return;
++
++  var touchesSource = range.getColumn() <= SOURCE_COL && range.getLastColumn() >= SOURCE_COL;
++  var touchesSlug = range.getColumn() <= SLUG_COL && range.getLastColumn() >= SLUG_COL;
++  var touchesRank = range.getColumn() <= RANK_COL && range.getLastColumn() >= RANK_COL;
++
++  // Case 1: Name edited -> generate the slug if it's still empty
++  if (touchesSource) {
++    var startRow = Math.max(range.getRow(), HEADER_ROW + 1);
++    var endRow = range.getLastRow();
++    for (var row = startRow; row <= endRow; row++) {
++      var nameCell = sheet.getRange(row, SOURCE_COL);
++      var slugCell = sheet.getRange(row, SLUG_COL);
++      var name = nameCell.getValue();
++      var currentSlug = slugCell.getValue();
++      if (name !== "" && (currentSlug === "" || currentSlug === null)) {
++        slugCell.setValue(slugify(name));
++      }
++    }
++  }
++
++  // Case 2: Slug edited by hand -> warn, single-cell edits only
++  if (touchesSlug && range.getNumRows() === 1 && range.getNumColumns() === 1) {
++    var oldValue = e.oldValue;
++    var newValue = range.getValue();
++    if (oldValue && oldValue !== newValue) {
++      SpreadsheetApp.getUi().alert(
++        "Warning: you changed an existing Slug, from \"" + oldValue + "\" to \"" +
++        (newValue || "(empty)") + "\". If this slug was already used elsewhere " +
++        "(publications, activities, external links), those links will stop " +
++        "working until you update them manually."
++      );
++    }
++  }
++
++  // Case 3: Rank chosen -> suggest a default Role, only if Role is still empty
++  if (touchesRank) {
++    var startRow2 = Math.max(range.getRow(), HEADER_ROW + 1);
++    var endRow2 = range.getLastRow();
++    for (var row2 = startRow2; row2 <= endRow2; row2++) {
++      var rankCell = sheet.getRange(row2, RANK_COL);
++      var roleCell = sheet.getRange(row2, ROLE_COL);
++      var rank = rankCell.getValue();
++      var currentRole = roleCell.getValue();
++      if (rank && ROLE_DEFAULTS[rank] && (currentRole === "" || currentRole === null)) {
++        roleCell.setValue(ROLE_DEFAULTS[rank]);
++      }
++    }
++  }
++}
++
++function slugify(text) {
++  return text.toString()
++    .normalize("NFD")
++    .replace(/[\u0300-\u036f]/g, "")
++    .toLowerCase()
++    .replace(/[^a-z0-9]+/g, "-")
++    .replace(/^-+|-+$/g, "");
++}
+diff --git a/apps-script/projects-onedit.gs b/apps-script/projects-onedit.gs
+new file mode 100644
+index 0000000..82d0b1f
+--- /dev/null
++++ b/apps-script/projects-onedit.gs
+@@ -0,0 +1,56 @@
++// Lives in: Projects spreadsheet -> Extensions -> Apps Script.
++// Reference copy only -- see apps-script/README.md and the main
++// README's "Slug auto-generation" section for what this does.
++
++function onEdit(e) {
++  var SHEET_NAME = "Projects"; // exact tab name -- verify against the live sheet
++  var SOURCE_COL = 1;  // Title
++  var SLUG_COL = 2;    // Slug
++  var HEADER_ROW = 1;
++
++  var range = e.range;
++  var sheet = range.getSheet();
++  if (sheet.getName() !== SHEET_NAME) return;
++  if (range.getRow() <= HEADER_ROW) return;
++
++  var touchesSource = range.getColumn() <= SOURCE_COL && range.getLastColumn() >= SOURCE_COL;
++  var touchesSlug = range.getColumn() <= SLUG_COL && range.getLastColumn() >= SLUG_COL;
++
++  // Case 1: Title edited -> generate the slug if it's still empty
++  if (touchesSource) {
++    var startRow = Math.max(range.getRow(), HEADER_ROW + 1);
++    var endRow = range.getLastRow();
++    for (var row = startRow; row <= endRow; row++) {
++      var titleCell = sheet.getRange(row, SOURCE_COL);
++      var slugCell = sheet.getRange(row, SLUG_COL);
++      var title = titleCell.getValue();
++      var currentSlug = slugCell.getValue();
++      if (title !== "" && (currentSlug === "" || currentSlug === null)) {
++        slugCell.setValue(slugify(title));
++      }
++    }
++  }
++
++  // Case 2: Slug edited by hand -> warn, single-cell edits only
++  if (touchesSlug && range.getNumRows() === 1 && range.getNumColumns() === 1) {
++    var oldValue = e.oldValue;
++    var newValue = range.getValue();
++    if (oldValue && oldValue !== newValue) {
++      SpreadsheetApp.getUi().alert(
++        "Warning: you changed an existing Slug, from \"" + oldValue + "\" to \"" +
++        (newValue || "(empty)") + "\". If this slug was already used elsewhere " +
++        "(publications, activities, external links), those links will stop " +
++        "working until you update them manually."
++      );
++    }
++  }
++}
++
++function slugify(text) {
++  return text.toString()
++    .normalize("NFD")
++    .replace(/[\u0300-\u036f]/g, "")
++    .toLowerCase()
++    .replace(/[^a-z0-9]+/g, "-")
++    .replace(/^-+|-+$/g, "");
++}
+diff --git a/apps-script/publications-onedit.gs b/apps-script/publications-onedit.gs
+new file mode 100644
+index 0000000..2eb8552
+--- /dev/null
++++ b/apps-script/publications-onedit.gs
+@@ -0,0 +1,56 @@
++// Lives in: Publications spreadsheet -> Extensions -> Apps Script.
++// Reference copy only -- see apps-script/README.md and the main
++// README's "Slug auto-generation" section for what this does.
++
++function onEdit(e) {
++  var SHEET_NAME = "Publications"; // exact tab name -- verify against the live sheet
++  var SOURCE_COL = 1;  // Title
++  var SLUG_COL = 2;    // Slug
++  var HEADER_ROW = 1;
++
++  var range = e.range;
++  var sheet = range.getSheet();
++  if (sheet.getName() !== SHEET_NAME) return;
++  if (range.getRow() <= HEADER_ROW) return;
++
++  var touchesSource = range.getColumn() <= SOURCE_COL && range.getLastColumn() >= SOURCE_COL;
++  var touchesSlug = range.getColumn() <= SLUG_COL && range.getLastColumn() >= SLUG_COL;
++
++  // Case 1: Title edited -> generate the slug if it's still empty
++  if (touchesSource) {
++    var startRow = Math.max(range.getRow(), HEADER_ROW + 1);
++    var endRow = range.getLastRow();
++    for (var row = startRow; row <= endRow; row++) {
++      var titleCell = sheet.getRange(row, SOURCE_COL);
++      var slugCell = sheet.getRange(row, SLUG_COL);
++      var title = titleCell.getValue();
++      var currentSlug = slugCell.getValue();
++      if (title !== "" && (currentSlug === "" || currentSlug === null)) {
++        slugCell.setValue(slugify(title));
++      }
++    }
++  }
++
++  // Case 2: Slug edited by hand -> warn, single-cell edits only
++  if (touchesSlug && range.getNumRows() === 1 && range.getNumColumns() === 1) {
++    var oldValue = e.oldValue;
++    var newValue = range.getValue();
++    if (oldValue && oldValue !== newValue) {
++      SpreadsheetApp.getUi().alert(
++        "Warning: you changed an existing Slug, from \"" + oldValue + "\" to \"" +
++        (newValue || "(empty)") + "\". If this slug was already used elsewhere " +
++        "(publications, activities, external links), those links will stop " +
++        "working until you update them manually."
++      );
++    }
++  }
++}
++
++function slugify(text) {
++  return text.toString()
++    .normalize("NFD")
++    .replace(/[\u0300-\u036f]/g, "")
++    .toLowerCase()
++    .replace(/[^a-z0-9]+/g, "-")
++    .replace(/^-+|-+$/g, "");
++}

@@ -18,6 +18,34 @@ Il foglio Hub (quello con le liste di Rank, Status, Funding Regions, ecc.) non �
 - **Colonne con un menu a tendina** (Rank, Status, Funding Regions, Section, Publication Type, e i campi "…Slug" che collegano a membri/progetti): scegli solo tra le opzioni proposte nel menu, non scrivere a mano un valore nuovo — verrebbe rifiutato. Se il valore che ti serve non è nell'elenco (es. una nuova regione di finanziamento), **non inventare una variante simile**: fai richiesta al Professor Angelini, che gestisce quella lista nel foglio Hub — in un attimo il nuovo valore compare selezionabile ovunque.
 - **Colonne "Keywords"** (parole chiave di ricerca): qui invece scrivi pure liberamente, separate da virgola — non sono un elenco chiuso, il numero e la varietà dei concetti sono normali.
 
+## Come caricare foto e immagini
+
+Le foto profilo e le immagini dei progetti **non vanno caricate su GitHub** — l'accesso al repository del sito è di sola lettura per i membri, quindi non potresti comunque farlo. Usa invece Google Drive:
+
+1. Carica l'immagine sul tuo Google Drive.
+2. Clic destro sul file → **Condividi** → cambia l'accesso in **"Chiunque abbia il link"** (senza questo passaggio l'immagine non sarà visibile a chi visita il sito).
+3. Copia il link di condivisione — ha un formato tipo `https://drive.google.com/file/d/AbCdEfGhIjKlMnOp/view?usp=sharing`. L'unica parte che ti serve è il codice lungo in mezzo (`AbCdEfGhIjKlMnOp` in questo esempio).
+4. Costruisci il link da incollare nel foglio così:
+   ```
+   https://drive.google.com/uc?export=view&id=AbCdEfGhIjKlMnOp
+   ```
+   (sostituisci solo il codice, tenendo `export=view` esattamente com'è — è diverso dal formato usato per i PDF, vedi sotto).
+5. Incolla questo link nella cella giusta (Photo URL per il tuo profilo, Image 1/2/3 URL per un progetto).
+
+## Caricare il PDF di una pubblicazione
+
+Anche qui il PDF **non va caricato su GitHub** direttamente da te — stesso motivo delle immagini. Hai due strade, e sono deliberatamente diverse tra loro.
+
+**Subito, da solo — Google Drive (soluzione temporanea).** Stessa procedura delle immagini: carica il PDF su Drive, Condividi → "Chiunque abbia il link", poi costruisci il link così:
+```
+https://drive.google.com/uc?export=download&id=IL-TUO-CODICE
+```
+(nota: qui è `export=download`, non `export=view` come per le immagini). Incollalo nella cella **PDF URL** — la pubblicazione è subito online.
+
+**La soluzione definitiva — un amministratore lo aggiunge su GitHub.** Un PDF ospitato su Drive ha un limite tecnico reale, non solo teorico: i due pulsanti del sito "View PDF" e "Download PDF" finiscono per comportarsi allo stesso modo (entrambi scaricano subito il file), invece di restare distinti come sono pensati. La sistemazione corretta è avere il file nella cartella `papers/` del repository — cosa che solo chi ha accesso in scrittura può fare.
+
+**Cosa fare in pratica**: pubblica pure subito su Drive per non perdere tempo, poi scrivi una email a **[nome/email amministratore]** allegando il PDF, chiedendo di spostarlo nella posizione definitiva. Non è urgente, ma è la cosa giusta da fare per una pubblicazione che deve restare online a lungo termine.
+
 ---
 
 ## 1. Aggiungersi come membro (foglio **Members**, tab "Members")
@@ -34,7 +62,7 @@ Aggiungi una nuova riga in fondo e compila:
 | Bio | Testo lungo per la tua pagina personale |
 | Bio Snippet | Versione breve, per la card nell'elenco membri |
 | Avatar Initials | Le tue iniziali, usate solo se non carichi una foto |
-| Photo URL | Link diretto a una tua foto (vedi `images/README.md` nel repo per come caricarla) |
+| Photo URL | Link diretto a una tua foto — vedi la sezione "Come caricare foto e immagini" più sotto |
 | Badge Word | Una parola/etichetta breve mostrata sulla tua card |
 | Email | Il tuo indirizzo normale (es. `nome.cognome@linkstudents.it`) — il sito lo trasforma da solo in formato anti-spam per la visualizzazione, non serve scriverlo già "offuscato" |
 | LinkedIn / Google Scholar / ResearchGate / Personal Site | Link diretti ai tuoi profili, uno per colonna |
@@ -51,7 +79,7 @@ Una riga per ogni voce del tuo percorso — un progetto a cui collabori, un inca
 
 | Colonna | Come compilarla |
 |---|---|
-| Member Slug | Il tuo Slug esatto, copialo dalla tua riga nella tab "Members" (**qui non c'è ancora un menu a discesa**, quindi copia-incolla invece di riscriverlo a mano, per evitare refusi) |
+| Member Slug | Menu a discesa: scegli il tuo nome dalla lista, invece di scriverlo a mano |
 | Section | Menu a discesa: `projects` / `teaching` / `hobbies` |
 | Date Range | Testo libero (es. "2024 – oggi") |
 | Title | Titolo della voce |
@@ -76,7 +104,7 @@ Una riga per ogni voce del tuo percorso — un progetto a cui collabori, un inca
 | Description / About | Descrizioni lunga e "about" del progetto |
 | Official Site / Repository URL | Link diretti |
 | Keywords | Parole chiave libere, separate da virgola |
-| Image 1/2/3 URL | Link alle immagini (vedi `images/README.md`) |
+| Image 1/2/3 URL | Link alle immagini — stessa procedura descritta in "Come caricare foto e immagini" più sotto |
 
 Il "Team" del progetto **non si scrive qui**: compare da solo, derivato automaticamente da chi ha collegato quel progetto tramite "Project Slug" nella tab Member Activities.
 
@@ -98,7 +126,7 @@ Il "Team" del progetto **non si scrive qui**: compare da solo, derivato automati
 | Repository URL | Link a codice/dati collegati, se esiste |
 | Member Slugs | Menu a discesa **multi-selezione**: gli autori che sono membri del laboratorio |
 | Project Slugs | Menu a discesa **multi-selezione**: i progetti collegati a questa pubblicazione |
-| PDF URL | **Importante**: se il PDF è nella cartella `papers/` del repository, usa il link `https://xaiber-lab.github.io/papers/nome-file.pdf` — **non** il link della pagina GitHub (`github.com/.../blob/...`), altrimenti il pulsante "Download PDF" non funziona correttamente, resta solo "View PDF" |
+| PDF URL | Per pubblicare subito, usa Google Drive — vedi "Caricare il PDF di una pubblicazione" più sotto per la procedura e per capire quando conviene chiedere la sistemazione definitiva |
 
 Le **parole chiave della pubblicazione stessa** (se un domani verranno aggiunte) non passano da nessun menu a discesa: restano quelle esatte con cui è stata pubblicata, anche se leggermente diverse da un paper all'altro sullo stesso argomento — è voluto, per fedeltà alla pubblicazione originale.
 
