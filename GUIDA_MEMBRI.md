@@ -1,6 +1,16 @@
 # Guida rapida — Aggiungere te stesso, un progetto o una pubblicazione al sito XAIber-Lab
 
-Il sito **non si modifica mai a mano**: si aggiorna da solo leggendo tre Google Sheet (Members, Projects, Publications). Basta compilare la riga giusta nel foglio giusto — il sito si ricostruisce automaticamente una volta al giorno. Se vuoi che la modifica compaia subito, puoi avviare l'aggiornamento tu stesso (vedi in fondo alla guida).
+Il sito **non si modifica mai a mano**: si aggiorna da solo leggendo tre Google Sheet (Members, Projects, Publications). Basta compilare la riga giusta nel foglio giusto — il sito si ricostruisce automaticamente una volta al giorno, agli orari indicati più sotto in fondo alla guida.
+
+## Link ai fogli
+
+*(da compilare — link diretti ai tre fogli, per aprirli senza doverli cercare)*
+
+- **Members**: [inserire link]
+- **Projects**: [inserire link]
+- **Publications**: [inserire link]
+
+Il foglio Hub (quello con le liste di Rank, Status, Funding Regions, ecc.) non è linkato qui apposta: non serve aprirlo, i menu a discesa nei tre fogli sopra lo leggono già in automatico.
 
 ## Regole generali, valide su tutti i fogli
 
@@ -106,10 +116,12 @@ Fai richiesta al Professor Angelini — è l'unico che può aggiungerlo nel fogl
 Compare un avviso quando lo fai: significa che eventuali pubblicazioni/attività che puntavano al vecchio Slug smettono di collegarsi correttamente. Se lo Slug era già in uso da qualche parte, aggiorna a mano anche quei riferimenti tu stesso, o segnalalo al Professor Angelini se non sei sicuro di dove cercarli.
 
 **Quanto ci mette il sito ad aggiornarsi dopo che ho modificato il foglio?**
-Fino a un giorno (il sito si ricostruisce automaticamente una volta al giorno). Se ti serve prima, ogni membro del laboratorio ha accesso al GitHub del sito e può avviare l'aggiornamento da solo, ecco come:
+Il sito si ricostruisce da solo una volta al giorno, in automatico, a questi orari indicativi (ora italiana, un'ora prima in inverno):
 
-1. Vai sulla pagina GitHub del sito (il repository `xaiber-lab.github.io`).
-2. Clicca sulla scheda **Actions** in alto.
-3. Nella lista a sinistra scegli il workflow giusto in base a cosa hai modificato: **Sync Members**, **Sync Projects**, oppure **Sync Publications**.
-4. In alto a destra clicca **Run workflow**, poi conferma cliccando di nuovo il pulsante verde **Run workflow** che compare.
-5. Aspetta un minuto o due, poi ricarica il sito — la modifica dovrebbe essere visibile.
+| Foglio | Orario di aggiornamento |
+|---|---|
+| Publications | verso le 8:00 |
+| Members | verso le 9:00 |
+| Projects | verso le 10:00 |
+
+Se modifichi il foglio dopo l'orario del giorno, la modifica compare sul sito il giorno successivo. Non serve fare nulla per avviarlo: è automatico, basta aspettare il prossimo passaggio.
