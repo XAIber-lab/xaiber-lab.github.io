@@ -46,6 +46,15 @@
       "photourl": ""
     },
     {
+      "name": "Matteo Filosa",
+      "slug": "matteo-filosa",
+      "rank": "phd",
+      "role": "PhD Candidate",
+      "biosnippet": "Researcher in the User-Centered Design Methodology at the intersection of three domains: Human-Computer Interaction, Data Visualization, and Artificial Intelligence.",
+      "avatarinitials": "MF",
+      "photourl": "https://www.linkedin.com/in/matteo-filosa-84b028246/"
+    },
+    {
       "name": "Full Name",
       "slug": "full-name-collaborator",
       "rank": "collaborator",
