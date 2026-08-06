@@ -28,13 +28,13 @@
       "photourl": "https://xaiber-lab.github.io/images/tiziano-sammarone.jpg"
     },
     {
-      "name": "Full Name",
-      "slug": "full-name-phd",
+      "name": "Matteo Filosa",
+      "slug": "matteo-filosa",
       "rank": "phd",
       "role": "PhD Candidate",
-      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
-      "avatarinitials": "FN",
-      "photourl": ""
+      "biosnippet": "Researcher in the User-Centered Design Methodology at the intersection of three domains: Human-Computer Interaction, Data Visualization, and Artificial Intelligence.",
+      "avatarinitials": "MF",
+      "photourl": "https://drive.google.com/file/d/1kdt-Ashz9hctbFY97WyDdOM7M7RaCGFU/view?usp=sharing"
     },
     {
       "name": "Davide Bazzana",
@@ -46,13 +46,13 @@
       "photourl": ""
     },
     {
-      "name": "Matteo Filosa",
-      "slug": "matteo-filosa",
+      "name": "Full Name",
+      "slug": "full-name-phd",
       "rank": "phd",
       "role": "PhD Candidate",
-      "biosnippet": "Researcher in the User-Centered Design Methodology at the intersection of three domains: Human-Computer Interaction, Data Visualization, and Artificial Intelligence.",
-      "avatarinitials": "MF",
-      "photourl": "https://www.linkedin.com/in/matteo-filosa-84b028246/"
+      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
+      "avatarinitials": "FN",
+      "photourl": ""
     },
     {
       "name": "Full Name",
