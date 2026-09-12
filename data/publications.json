@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T10:03:47.560658+00:00",
+  "generatedAt": "2026-09-12T09:39:29.449304+00:00",
   "source": "google-sheets",
   "publications": [
     {
@@ -16,7 +16,7 @@
       "thumbnailurl": "https://xaiber-lab.github.io/images/sammarone-IEEE-paper.png",
       "bibtex": "@inproceedings{sammarone2025humanai,\n  author = {Sammarone, Tiziano and Angelini, Marco},\n  title = {A Human-AI Assisted Methodology for the Generation of a Cybersecurity Controls Library},\n  booktitle = {IEEE International Conference on Cyber Humanities (IEEE CH)},\n  year = {2025},\n  address = {Florence, Italy},\n  doi = {10.1109/IEEE-CH65308.2025.11279411}\n}",
       "repositoryurl": "https://github.com/XAIber-lab/Human-AI-Assisted-Cybersecurity-Controls-Library-Generation.git",
-      "memberslugs": "tiziano-sammarone",
+      "memberslugs": "tiziano-sammarone, marco-angelini",
       "projectslugs": "",
       "pdfurl": "https://xaiber-lab.github.io/papers/Sammarone_Paper_IEEE_CH.pdf",
       "apacitation": "Sammarone, T., & Angelini, M. (2025). A human-AI assisted methodology for the generation of a cybersecurity controls library. In 2025 IEEE International Conference on Cyber Humanities (IEEE-CH) (pp. 1–7). https://doi.org/10.1109/IEEE-CH65308.2025.11279411"
