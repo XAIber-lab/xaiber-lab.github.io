@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T11:01:44.614173+00:00",
+  "generatedAt": "2026-09-15T10:31:54.086024+00:00",
   "source": "google-sheets",
   "publications": [
     {
@@ -39,6 +39,25 @@
       "projectslugs": "",
       "pdfurl": "https://iris.uniroma1.it/retrieve/71b63859-0999-448d-aabd-b1ba119ad626/Filosa_preprint_TraVIS_2025.pdf",
       "apacitation": "Filosa, M., Plexousaki, A., Di Stadio, M., Bovi, F., Benvenuti, D., Catarci, T., & Angelini, M. (2025). TraVIS: A User Trace Analyzer to Support User-Centered Design of Visual Analytics Solutions. IEEE Transactions on Visualization and Computer Graphics, 31(10), 7614–7631. doi.org"
+    },
+    {
+      "title": "GlideRX: Enhancing Situation Awareness for Collision Prevention in Glider Flight through Extended Reality",
+      "authors": "Bazzana, D., Beraldi, R., Angelini, M.",
+      "date": "2025-03-24",
+      "venue": "IUI '25: Proceedings of the 30th International Conference on Intelligent User Interfac",
+      "url": "https://doi.org/10.1145/3708359.3712127",
+      "abstract": "Gliders are a specific type of aircraft made for soaring. The principle behind soaring is to stay afloat using only the energy the atmosphere provides. Glider pilots are confronted with several challenges specific to this kind of flight, the major one being the need to maintain adequate separation from other gliders while still operating the aircraft effectively and safely. In this paper, we present an XR intelligent interface, GlideRX, to help pilots manage traffic awareness and prevent mid-air collisions. It allows for better support of situational awareness with respect to current collision warning systems currently available for gliders. The integration of data readings about surrounding aircraft, coupled with predictive algorithms on their trajectories and directions and a morphable representation of visual aids to help identify threats, enhances the situational awareness of the pilot and the management of risky conditions. We tested GlideRX efficacy and effectiveness through multiple evaluation activities, from a usage scenario to a quantitative task-driven experiment with real pilots in simulated conditions. Results show that GlideRX can effectively support a glider pilot in safely managing their flight during the increasing presence of air traffic. GlideRX is publicly available at: https://github.com/XAIber-lab/GlideRX.",
+      "type": "Conference paper",
+      "conferencename": "IUI '25: Intelligent User Interfaces",
+      "conferencedate": "March 24-27 2025",
+      "conferencelocation": "Cagliari, Italy",
+      "thumbnailurl": "https://dl.acm.org/doi/10.1145/3708359.3712127",
+      "bibtex": "@inproceedings{10.1145/3708359.3712127,\nauthor = {Bazzana, Davide and Beraldi, Roberto and Angelini, Marco},\ntitle = {GlideRX: Enhancing Situation Awareness for Collision Prevention in Glider Flight through Extended Reality},\nyear = {2025},\nisbn = {9798400713064},\npublisher = {Association for Computing Machinery},\naddress = {New York, NY, USA},\nurl = {https://doi.org/10.1145/3708359.3712127},\ndoi = {10.1145/3708359.3712127},\nabstract = {Gliders are a specific type of aircraft made for soaring. The principle behind soaring is to stay afloat using only the energy the atmosphere provides. Glider pilots are confronted with several challenges specific to this kind of flight, the major one being the need to maintain adequate separation from other gliders while still operating the aircraft effectively and safely. In this paper, we present an XR intelligent interface, GlideRX, to help pilots manage traffic awareness and prevent mid-air collisions. It allows for better support of situational awareness with respect to current collision warning systems currently available for gliders. The integration of data readings about surrounding aircraft, coupled with predictive algorithms on their trajectories and directions and a morphable representation of visual aids to help identify threats, enhances the situational awareness of the pilot and the management of risky conditions. We tested GlideRX efficacy and effectiveness through multiple evaluation activities, from a usage scenario to a quantitative task-driven experiment with real pilots in simulated conditions. Results show that GlideRX can effectively support a glider pilot in safely managing their flight during the increasing presence of air traffic. GlideRX is publicly available at: https://github.com/XAIber-lab/GlideRX.},\nbooktitle = {Proceedings of the 30th International Conference on Intelligent User Interfaces},\npages = {771–788},\nnumpages = {18},\nkeywords = {Air traffic, collision warning system, visual guidance techniques, augmented reality, head-mounted display},\nlocation = {\n},\nseries = {IUI '25}\n}",
+      "repositoryurl": "https://github.com/XAIber-lab/GlideRX",
+      "memberslugs": "davide-bazzana",
+      "projectslugs": "",
+      "pdfurl": "https://dl.acm.org/doi/epdf/10.1145/3708359.3712127",
+      "apacitation": "Bazzana, D., Beraldi, R., & Angelini, M. (2025, March). GlideRX: Enhancing situation awareness for collision prevention in glider flight through extended reality. In Proceedings of the 30th International Conference on Intelligent User Interfaces (pp. 771-788)."
     }
   ]
 }
