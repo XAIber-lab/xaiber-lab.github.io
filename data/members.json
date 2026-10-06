@@ -10,15 +10,6 @@
       "photourl": "https://drive.google.com/thumbnail?id=1O1k8USuxh-r-B5SKIW9Tdn1vRVVW8Qr7&sz=w1000"
     },
     {
-      "name": "Full Name",
-      "slug": "full-name-professor",
-      "rank": "professor",
-      "role": "Full Professor",
-      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
-      "avatarinitials": "FN",
-      "photourl": ""
-    },
-    {
       "name": "Tiziano Sammarone",
       "slug": "tiziano-sammarone",
       "rank": "phd",
@@ -34,7 +25,7 @@
       "role": "PhD Candidate",
       "biosnippet": "Researcher in the User-Centered Design Methodology at the intersection of three domains: Human-Computer Interaction, Data Visualization, and Artificial Intelligence.",
       "avatarinitials": "MF",
-      "photourl": "https://drive.google.com/file/d/1kdt-Ashz9hctbFY97WyDdOM7M7RaCGFU/view?usp=sharing"
+      "photourl": "https://drive.google.com/thumbnail?id=1kdt-Ashz9hctbFY97WyDdOM7M7RaCGFU&sz=w1000"
     },
     {
       "name": "Davide Bazzana",
@@ -43,25 +34,7 @@
       "role": "PhD Candidate",
       "biosnippet": "Researcher in Human-AI Interaction in contextualized, collaborative, and Extended Reality applications.",
       "avatarinitials": "DB",
-      "photourl": "https://drive.google.com/uc?export=view&id=1VYWpJkEmrocjo3Zs5Fm0PHZUWjfZ3M6v"
-    },
-    {
-      "name": "Full Name",
-      "slug": "full-name-phd",
-      "rank": "phd",
-      "role": "PhD Candidate",
-      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
-      "avatarinitials": "FN",
-      "photourl": ""
-    },
-    {
-      "name": "Full Name",
-      "slug": "full-name-collaborator",
-      "rank": "collaborator",
-      "role": "Collaborator",
-      "biosnippet": "One or two sentence placeholder bio describing this member's role and focus.",
-      "avatarinitials": "FN",
-      "photourl": ""
+      "photourl": "https://drive.google.com/thumbnail?id=1VYWpJkEmrocjo3Zs5Fm0PHZUWjfZ3M6v&sz=w1000"
     }
   ]
 }
