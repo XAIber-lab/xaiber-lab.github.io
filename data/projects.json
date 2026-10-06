@@ -24,18 +24,6 @@
         "keyword two"
       ],
       "image1url": ""
-    },
-    {
-      "title": "Project Title Three",
-      "slug": "project-title-three",
-      "status": "active",
-      "timespan": "2026–present",
-      "tagline": "One-line placeholder description of the project and its aim.",
-      "keywords": [
-        "keyword one",
-        "keyword two"
-      ],
-      "image1url": ""
     }
   ]
 }
