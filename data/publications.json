@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T12:16:20.428247+00:00",
+  "generatedAt": "2026-10-07T12:07:32.170339+00:00",
   "source": "google-sheets",
   "publications": [
     {
@@ -58,6 +58,63 @@
       "projectslugs": "",
       "pdfurl": "https://dl.acm.org/doi/epdf/10.1145/3708359.3712127",
       "apacitation": "Bazzana, D., Beraldi, R., & Angelini, M. (2025, March). GlideRX: Enhancing situation awareness for collision prevention in glider flight through extended reality. In Proceedings of the 30th International Conference on Intelligent User Interfaces (pp. 771-788)."
+    },
+    {
+      "title": "Human Factors in Data Preparation",
+      "authors": "Marco Angelini, Matteo Filosa, Tiziana Catarci",
+      "date": "2026-09-26",
+      "venue": "Discount Quality for Responsible Data Science. SpringerBriefs in Applied Sciences and Technology. Springer, Cham.",
+      "url": "https://doi.org/10.1007/978-3-032-29481-4_6",
+      "abstract": "Data preparation is a cornerstone of the data science lifecycle, yet it remains one of the most time-consuming and human-dependent stages. Human factors are critical here, shaping how users interact with tools, perceive data quality, and make trade-offs under uncertainty. At the crossroads of Human–Computer Interaction (HCI), Visualization, and human-in/over-the-loop paradigms, recent research highlights new opportunities to make data preparation more usable, transparent, and trustworthy. Interactive interfaces and visual analytics systems allow users to iteratively refine transformations, explore provenance, and detect anomalies, while cognitive aspects such as workload, bias, and trust determine the reliability of human interventions. Automation increasingly complements these workflows: human-in-the-loop methods leverage user feedback to guide cleaning, labeling, or schema alignment, and over-the-loop frameworks provide oversight mechanisms to prevent over-reliance on automation. At the same time, modern generative AI introduces powerful new capabilities, such as automatically suggesting transformations, synthesizing metadata or documentation, and even generating realistic synthetic datasets. These advances promise efficiency and creativity but raise concerns about reliability, explainability, and provenance, reinforcing the need for careful human oversight. This chapter reviews these possibilities and the research challenges in developing a new class of hybrid, adaptive data-preparation solutions that blend human expertise with automated intelligence. Key challenges include balancing scalability with user effort, ensuring transparency in automated suggestions, preventing loss of situational awareness, and developing evaluation metrics that reflect both human experience and technical accuracy. Addressing these challenges will enable more robust, human-aware data preparation practices across domains.",
+      "type": "Journal article",
+      "conferencename": "",
+      "conferencedate": "",
+      "conferencelocation": "",
+      "thumbnailurl": "https://link.springer.com/chapter/10.1007/978-3-032-29481-4_6/figures/3",
+      "bibtex": "@Inbook{Angelini2027,\nauthor=\"Angelini, Marco\nand Filosa, Matteo\nand Catarci, Tiziana\",\neditor=\"Pernici, Barbara\nand Catarci, Tiziana\nand Palmonari, Matteo\nand Simonini, Giovanni\",\ntitle=\"Human Factors in Data Preparation\",\nbookTitle=\"Discount Quality for Responsible Data Science: Human-in-the-Loop for Quality Data\",\nyear=\"2027\",\npublisher=\"Springer Nature Switzerland\",\naddress=\"Cham\",\npages=\"71--95\",\nabstract=\"Data preparation is a cornerstone of the data science lifecycle, yet it remains one of the most time-consuming and human-dependent stages. Human factors are critical here, shaping how users interact with tools, perceive data quality, and make trade-offs under uncertainty. At the crossroads of Human--Computer Interaction (HCI), Visualization, and human-in/over-the-loop paradigms, recent research highlights new opportunities to make data preparation more usable, transparent, and trustworthy. Interactive interfaces and visual analytics systems allow users to iteratively refine transformations, explore provenance, and detect anomalies, while cognitive aspects such as workload, bias, and trust determine the reliability of human interventions. Automation increasingly complements these workflows: human-in-the-loop methods leverage user feedback to guide cleaning, labeling, or schema alignment, and over-the-loop frameworks provide oversight mechanisms to prevent over-reliance on automation. At the same time, modern generative AI introduces powerful new capabilities, such as automatically suggesting transformations, synthesizing metadata or documentation, and even generating realistic synthetic datasets. These advances promise efficiency and creativity but raise concerns about reliability, explainability, and provenance, reinforcing the need for careful human oversight. This chapter reviews these possibilities and the research challenges in developing a new class of hybrid, adaptive data-preparation solutions that blend human expertise with automated intelligence. Key challenges include balancing scalability with user effort, ensuring transparency in automated suggestions, preventing loss of situational awareness, and developing evaluation metrics that reflect both human experience and technical accuracy. Addressing these challenges will enable more robust, human-aware data preparation practices across domains.\",\nisbn=\"978-3-032-29481-4\",\ndoi=\"10.1007/978-3-032-29481-4_6\",\nurl=\"https://doi.org/10.1007/978-3-032-29481-4_6\"\n}",
+      "repositoryurl": "",
+      "memberslugs": "marco-angelini, matteo-filosa",
+      "projectslugs": "",
+      "pdfurl": "https://link.springer.com/chapter/10.1007/978-3-032-29481-4_6#Abs1",
+      "apacitation": "Angelini, M., Filosa, M., Catarci, T. (2027). Human Factors in Data Preparation. In: Pernici, B., Catarci, T., Palmonari, M., Simonini, G. (eds) Discount Quality for Responsible Data Science. SpringerBriefs in Applied Sciences and Technology(). Springer, Cham. https://doi.org/10.1007/978-3-032-29481-4_6"
+    },
+    {
+      "title": "Exploring Human Trust in Software Robots for Robotic Process Automation",
+      "authors": "Simone Agostinelli, Piercosma Bisconti, Angelo Casciani, Andrea Marrella, Jana Rebecca Rehse, Marco Angelini, Aleksandre Asatiani, Bernhard Axmann, Christian Czarnecki, Adela del Río Ortega, Andrea Delgado, José González Enríquez, Glenda Hannibal, Christian Janiesch, Andrés Jiménez-Ramírez, Faizan Ahmed Khan, Antonio Martínez-Rojas, Artur Modlinski, Ralf Plattfaut, Hajo Reijers, Manuel Resinas, Michael Rosemann, Flávia Santoro, Stefan Sarkadi, Pnina Soffer, Barbara Weber & Adriana Wilde",
+      "date": "2026-07-14",
+      "venue": "Springer Nature Link,  Business & Information Systems Engineering",
+      "url": "https://doi.org/10.1007/s12599-026-01007-y",
+      "abstract": "This vision paper provides a comprehensive perspective of human trust in software robots used in Robotic Process Automation (RPA) and the associated challenges in establishing RPA systems that foster trust within hybrid workforces of software robots and human employees. Although the increasing technological sophistication of RPA systems enhances the autonomy of software robots, there is no framework for conceptualizing trust in software robots and its impact on human-technology collaboration. This lack of attention could contribute to serious issues remaining unnoticed, as for example the emerging re-manualization phenomenon, wherein tasks revert to manual execution due to a lack of trust in software robots. To address this research gap, this paper proposes a conceptual framework for human-software robot trust in RPA. In addition, the paper discusses five relevant research challenges that need to be tackled to enable a new wave of trusted software robots.",
+      "type": "Journal article",
+      "conferencename": "",
+      "conferencedate": "",
+      "conferencelocation": "",
+      "thumbnailurl": "https://link.springer.com/article/10.1007/s12599-026-01007-y/figures/7",
+      "bibtex": "",
+      "repositoryurl": "",
+      "memberslugs": "marco-angelini",
+      "projectslugs": "",
+      "pdfurl": "https://link.springer.com/article/10.1007/s12599-026-01007-y",
+      "apacitation": "Agostinelli, S., Bisconti, P., Casciani, A. et al. Exploring Human Trust in Software Robots for Robotic Process Automation. Bus Inf Syst Eng (2026). https://doi.org/10.1007/s12599-026-01007-y"
+    },
+    {
+      "title": "An Ethical and Rhetorical Framework to Analyze LLM-generated Texts",
+      "authors": "Raffini, D., Macori, A., Angelini, M., & Catarci, T.",
+      "date": "2026-07-06",
+      "venue": "Umanistica Digitale",
+      "url": "https://doi.org/10.60923/issn.2532-8816/22058",
+      "abstract": "The rapid diffusion of Large Language Models (LLMs) is transforming the production and circulation of textual content, raising important linguistic, cognitive, and ethical questions. As AI-generated texts increasingly populate digital environments, understanding their rhetorical and stylistic characteristics becomes essential to assess their influence on readers and on the broader information ecosystem. This paper proposes an ethical and rhetorical framework for the analysis of LLM-generated texts based on a reader-oriented approach. The framework identifies a set of rhetorical functions (trustworthiness, apologetic, proximity, diversification, ambiguity, emphasis, explanatory, poetic, fairness, structure) and links them to specific rhetorical figures, providing a structured method to evaluate how linguistic strategies shape readers’ perceptions and responses. Methodologically, the study integrates theoretical modeling with qualitative close reading, combining deductive framework construction with inductive textual analysis. The framework is tested through the analysis of two corpora of AI-generated texts, consisting of argumentative essays and narrative short stories. The results highlight recurrent rhetorical patterns, including the overrepresentation of emphatic and structural functions in argumentative texts and the prevalence of figurative language with limited semantic depth in narrative outputs. These findings suggest that LLMs tend to reproduce recognizable rhetorical patterns while often relying on formal persuasion strategies rather than conceptual complexity. The proposed framework is designed as an open, scalable, and integrable model that can be progressively refined and expanded through further empirical applications across different textual typologies and communicative contexts.",
+      "type": "Journal article",
+      "conferencename": "",
+      "conferencedate": "",
+      "conferencelocation": "",
+      "thumbnailurl": "https://umanisticadigitale.unibo.it/article/view/22058/21809",
+      "bibtex": "@article{Raffini_Macori_Angelini_Catarci_2026, title={An Ethical and Rhetorical Framework to Analyze LLM-generated Texts}, volume={10}, url={https://umanisticadigitale.unibo.it/article/view/22058}, DOI={10.60923/issn.2532-8816/22058}, abstractNote={&amp;lt;p&amp;gt;The rapid diffusion of Large Language Models (LLMs) is transforming the production and circulation of textual content, raising important linguistic, cognitive, and ethical questions. As AI-generated texts increasingly populate digital environments, understanding their rhetorical and stylistic characteristics becomes essential to assess their influence on readers and on the broader information ecosystem. This paper proposes an ethical and rhetorical framework for the analysis of LLM-generated texts based on a reader-oriented approach. The framework identifies a set of rhetorical functions (trustworthiness, apologetic, proximity, diversification, ambiguity, emphasis, explanatory, poetic, fairness, structure) and links them to specific rhetorical figures, providing a structured method to evaluate how linguistic strategies shape readers’ perceptions and responses. Methodologically, the study integrates theoretical modeling with qualitative close reading, combining deductive framework construction with inductive textual analysis. The framework is tested through the analysis of two corpora of AI-generated texts, consisting of argumentative essays and narrative short stories. The results highlight recurrent rhetorical patterns, including the overrepresentation of emphatic and structural functions in argumentative texts and the prevalence of figurative language with limited semantic depth in narrative outputs. These findings suggest that LLMs tend to reproduce recognizable rhetorical patterns while often relying on formal persuasion strategies rather than conceptual complexity. The proposed framework is designed as an open, scalable, and integrable model that can be progressively refined and expanded through further empirical applications across different textual typologies and communicative contexts.&amp;lt;/p&amp;gt;}, number={24}, journal={Umanistica Digitale}, author={Raffini, Daniel and Macori, Agnese and Angelini, Marco and Catarci, Tiziana}, year={2026}, month={Jan.}, pages={241–262} }",
+      "repositoryurl": "",
+      "memberslugs": "marco-angelini",
+      "projectslugs": "",
+      "pdfurl": "https://umanisticadigitale.unibo.it/article/view/22058/21809",
+      "apacitation": "Raffini, D., Macori, A., Angelini, M., & Catarci, T. (2026). An Ethical and Rhetorical Framework to Analyze LLM-generated Texts. Umanistica Digitale, 10(24), 241–262. https://doi.org/10.60923/issn.2532-8816/22058"
     }
   ]
 }
