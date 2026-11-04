@@ -34,7 +34,16 @@
       "role": "PhD Candidate",
       "biosnippet": "Researcher in Human-AI Interaction in contextualized, collaborative, and Extended Reality applications.",
       "avatarinitials": "DB",
-      "photourl": "https://drive.google.com/thumbnail?id=1VYWpJkEmrocjo3Zs5Fm0PHZUWjfZ3M6v&sz=w1000"
+      "photourl": "foto_profilo.png"
+    },
+    {
+      "name": "Xiaoyi Zhao",
+      "slug": "xiaoyi-zhao",
+      "rank": "phd",
+      "role": "PhD Candidate",
+      "biosnippet": "Researcher in human-computer interaction, Artificial Intelligence, industrial design for medical and rehabilitation, and ergonomics.",
+      "avatarinitials": "XZ",
+      "photourl": "https://drive.google.com/file/d/12X_ODH49IfMvCqL5mYofchnVzRQqjzhM/view?usp=sharing"
     }
   ]
 }
