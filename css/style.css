@@ -772,7 +772,7 @@ a.member-mini:hover h3 { color: var(--teal); }
    whole against a soft background instead of being cropped. */
 .pub-card-thumb {
   width: 100%;
-  align-self: start;
+  align-self: center;
 }
 .pub-card-thumb img {
   display: block;
